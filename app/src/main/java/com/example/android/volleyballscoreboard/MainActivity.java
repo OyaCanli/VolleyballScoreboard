@@ -11,8 +11,8 @@ public class MainActivity extends AppCompatActivity {
     int scoreTeamRight = 0;
     int setsWonLeft = 0;
     int setsWonRight = 0;
-    String teamNameLeft = "Team A";
-    String teamNameRight = "Team B";
+    String teamNameLeft = getString(R.string.teamNameRight);
+    String teamNameRight = getString(R.string.teamNameRight);
     String message = "";
     int setNumber = 1;
     boolean switched = false;
@@ -311,10 +311,10 @@ public class MainActivity extends AppCompatActivity {
                 setsWonLeft++;
                 displaySetsForTeamOnLeft(setsWonLeft);
                 if (setsWonLeft == 3) { //if it a match winning set
-                    String winner = "Team A won the match!";
+                    String winner = teamNameLeft + getString(R.string.wonMatch);
                     displayMessage(winner);
                 } else { //if it is not a match winning set
-                    String message = "Team A won the set!";
+                    String message = teamNameLeft + getString(R.string.wonSet);
                     displayMessage(message);
                     setNumber++;
                     scoreTeamLeft = 0;
@@ -323,12 +323,12 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnRight(scoreTeamRight);
                 }
             } else { //if it is not a set winning point
-                String message = teamNameLeft + " will serve the ball.";
+                String message = teamNameLeft + getString(R.string.serve);
                 displayMessage(message);
             }
         } else { // if it is the fifth set; it will switch to a tie break: the final set will be up to 15 points.
             if ((scoreTeamLeft >= 15) && ((scoreTeamLeft - scoreTeamRight) >= 2)) {
-                String message = "Team A won the match! Congradulations!";
+                String message = teamNameLeft + getString(R.string.wonMatch);
                 displayMessage(message);
                 setsWonLeft++;
                 displaySetsForTeamOnLeft(setsWonLeft);
@@ -337,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
                 displayScoreForTeamOnLeft(scoreTeamLeft);
                 displayScoreForTeamOnRight(scoreTeamRight);
             } else {
-                String tieBreak = "Tie break!";
+                String tieBreak = getString(R.string.tieBreaker);
                 displayMessage(tieBreak);
             }
         }
@@ -465,7 +465,7 @@ public class MainActivity extends AppCompatActivity {
                 setsWonRight++;
                 displaySetsForTeamOnRight(setsWonRight);
                 if (setsWonRight == 3) {
-                    String winner = "Team B won the match!";
+                    String winner = teamNameRight + getString(R.string.wonMatch);
                     displayMessage(winner);
                     setNumber++;
                     scoreTeamLeft = 0;
@@ -473,7 +473,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     displayScoreForTeamOnRight(scoreTeamRight);
                 } else {
-                    String message = "Team B won the set!";
+                    String message = teamNameRight + getString(R.string.wonSet);
                     displayMessage(message);
                     setNumber++;
                     scoreTeamLeft = 0;
@@ -482,12 +482,12 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnRight(scoreTeamRight);
                 }
             } else {
-                String message = teamNameRight + " will serve the ball.";
+                String message = teamNameRight + getString(R.string.serve);
                 displayMessage(message);
             }
         } else {
             if ((scoreTeamRight >= 15) && ((scoreTeamRight - scoreTeamLeft) >= 2)) {
-                String message = "Team B won the match! Congratulations!";
+                String message = teamNameRight + getString(R.string.wonMatch);
                 displayMessage(message);
                 setsWonRight++;
                 displaySetsForTeamOnLeft(setsWonRight);
@@ -496,7 +496,7 @@ public class MainActivity extends AppCompatActivity {
                 displayScoreForTeamOnLeft(scoreTeamLeft);
                 displayScoreForTeamOnRight(scoreTeamRight);
             } else {
-                String tieBreak = "Tie break!";
+                String tieBreak = getString(R.string.tieBreaker);
                 displayMessage(tieBreak);
             }
         }

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Volleyball Scoreboard</string>
+    <string name="teamNameLeft">Team A</string>
+    <string name="teamNameRight">Team B</string>
+    <string name="wonMatch">won the match! Congratulations! </string>
+    <string name="wonSet">won the set!</string>
+    <string name="serve">will serve the ball.</string>
+    <string name="tieBreaker">Tie breaker!</string>
+    <string name="initialTeamNameOnLeft">Team A</string>
+    <string name="initialTeamNameOnRight">Team B</string>
+    <string name="reset">reset</string>
 </resources>

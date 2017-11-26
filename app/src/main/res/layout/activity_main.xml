@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif_medium"
             android:gravity="center"
-            android:text="Team A"
+            android:text="@string/initialTeamNameOnLeft"
             android:textColor="#000000"
             android:textSize="24sp"
             android:background="@drawable/cellborder"
@@ -41,7 +41,7 @@
             android:fontFamily="sans-serif_medium"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Team B"
+            android:text="@string/initialTeamNameOnRight"
             android:textColor="#000000"
             android:textSize="24sp"
             android:background="@drawable/blueborder"/>
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="#FF9800" />
+                android:background="@color/background_teamA" />
 
         </LinearLayout>
 
@@ -125,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="#03A9F4" />
+                android:background="@color/background_teamB" />
 
         </LinearLayout>
 
@@ -160,7 +160,7 @@
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#BDBDBD">
+            android:background="@color/grey">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -212,12 +212,12 @@
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#FF9800">
+            android:background="@color/background_teamA">
             <TextView
                 android:id="@+id/TeamA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "Team A"
+                android:text = "@string/initialTeamNameOnLeft"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:padding="5dp" />
@@ -261,12 +261,12 @@
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#03A9F4">
+            android:background="@color/background_teamB">
             <TextView
                 android:id="@+id/TeamB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "Team B"
+                android:text = "@string/initialTeamNameOnRight"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:padding="5dp"/>
@@ -336,7 +336,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
         android:onClick="reset"
-        android:text="reset"
+        android:text="@string/reset"
         android:background="@drawable/buttonborders"/>
 
     <Button
