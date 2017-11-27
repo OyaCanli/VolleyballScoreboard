@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
         scoreTeamRight = 0;
         setsWonLeft = 0;
         setsWonRight = 0;
-        String message = " ";
-        String teamNameLeft = getString(R.string.initialTeamNameOnLeft);
-        String teamNameRight = getString(R.string.initialTeamNameOnRight);
+        message = " ";
+        teamNameLeft = getString(R.string.initialTeamNameOnLeft);
+        teamNameRight = getString(R.string.initialTeamNameOnRight);
         setNumber = 1;
         switched = false;
         firstSetScoreLeft = 0;
