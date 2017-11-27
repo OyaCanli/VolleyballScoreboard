@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="140dp"
         android:orientation="horizontal"
-        android:layout_below="@+id/teamNames">
+        android:layout_below="@id/teamNames">
 
         <Button
             android:id="@+id/team_left_score"
