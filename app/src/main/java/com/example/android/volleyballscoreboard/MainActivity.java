@@ -7,31 +7,52 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    int scoreTeamLeft = 0;
-    int scoreTeamRight = 0;
-    int setsWonLeft = 0;
-    int setsWonRight = 0;
-    String teamNameLeft = getString(R.string.teamNameRight);
-    String teamNameRight = getString(R.string.teamNameRight);
-    String message = "";
-    int setNumber = 1;
-    boolean switched = false;
-    int firstSetScoreLeft = 0;
-    int secondSetScoreLeft = 0;
-    int thirdSetScoreLeft = 0;
-    int fourthSetScoreLeft = 0;
-    int fifthSetScoreLeft = 0;
-    int firstSetScoreRight = 0;
-    int secondSetScoreRight = 0;
-    int thirdSetScoreRight = 0;
-    int fourthSetScoreRight = 0;
-    int fifthSetScoreRight = 0;
+    int scoreTeamLeft;
+    int scoreTeamRight;
+    int setsWonLeft;
+    int setsWonRight;
+    String teamNameLeft;
+    String teamNameRight;
+    String message;
+    int setNumber;
+    boolean switched;
+    int firstSetScoreLeft;
+    int secondSetScoreLeft;
+    int thirdSetScoreLeft;
+    int fourthSetScoreLeft;
+    int fifthSetScoreLeft;
+    int firstSetScoreRight;
+    int secondSetScoreRight;
+    int thirdSetScoreRight;
+    int fourthSetScoreRight;
+    int fifthSetScoreRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        scoreTeamLeft = 0;
+        scoreTeamRight = 0;
+        setsWonLeft = 0;
+        setsWonRight = 0;
+        String teamNameLeft = getString(R.string.initialTeamNameOnLeft);
+        String teamNameRight = getString(R.string.initialTeamNameOnRight);
+        String message = " ";
+        setNumber = 1;
+        switched = false;
+        firstSetScoreLeft = 0;
+        secondSetScoreLeft = 0;
+        thirdSetScoreLeft = 0;
+        fourthSetScoreLeft = 0;
+        fifthSetScoreLeft = 0;
+        firstSetScoreRight = 0;
+        secondSetScoreRight = 0;
+        thirdSetScoreRight = 0;
+        fourthSetScoreRight = 0;
+        fifthSetScoreRight = 0;
     }
+
+
 //This methods saves an instance of the variable values during rotation
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -311,10 +332,10 @@ public class MainActivity extends AppCompatActivity {
                 setsWonLeft++;
                 displaySetsForTeamOnLeft(setsWonLeft);
                 if (setsWonLeft == 3) { //if it a match winning set
-                    String winner = teamNameLeft + getString(R.string.wonMatch);
+                    String winner = teamNameLeft + " " + getString(R.string.wonMatch);
                     displayMessage(winner);
                 } else { //if it is not a match winning set
-                    String message = teamNameLeft + getString(R.string.wonSet);
+                    String message = teamNameLeft + " " + getString(R.string.wonSet);
                     displayMessage(message);
                     setNumber++;
                     scoreTeamLeft = 0;
@@ -323,12 +344,12 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnRight(scoreTeamRight);
                 }
             } else { //if it is not a set winning point
-                String message = teamNameLeft + getString(R.string.serve);
+                String message = teamNameLeft +  " " + getString(R.string.serve);
                 displayMessage(message);
             }
         } else { // if it is the fifth set; it will switch to a tie break: the final set will be up to 15 points.
             if ((scoreTeamLeft >= 15) && ((scoreTeamLeft - scoreTeamRight) >= 2)) {
-                String message = teamNameLeft + getString(R.string.wonMatch);
+                String message = teamNameLeft +  " " + getString(R.string.wonMatch);
                 displayMessage(message);
                 setsWonLeft++;
                 displaySetsForTeamOnLeft(setsWonLeft);
@@ -465,7 +486,7 @@ public class MainActivity extends AppCompatActivity {
                 setsWonRight++;
                 displaySetsForTeamOnRight(setsWonRight);
                 if (setsWonRight == 3) {
-                    String winner = teamNameRight + getString(R.string.wonMatch);
+                    String winner = teamNameRight +  " " + getString(R.string.wonMatch);
                     displayMessage(winner);
                     setNumber++;
                     scoreTeamLeft = 0;
@@ -473,7 +494,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     displayScoreForTeamOnRight(scoreTeamRight);
                 } else {
-                    String message = teamNameRight + getString(R.string.wonSet);
+                    String message = teamNameRight +  " " + getString(R.string.wonSet);
                     displayMessage(message);
                     setNumber++;
                     scoreTeamLeft = 0;
@@ -482,12 +503,12 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnRight(scoreTeamRight);
                 }
             } else {
-                String message = teamNameRight + getString(R.string.serve);
+                String message = teamNameRight +  " " + getString(R.string.serve);
                 displayMessage(message);
             }
         } else {
             if ((scoreTeamRight >= 15) && ((scoreTeamRight - scoreTeamLeft) >= 2)) {
-                String message = teamNameRight + getString(R.string.wonMatch);
+                String message = teamNameRight +  " " + getString(R.string.wonMatch);
                 displayMessage(message);
                 setsWonRight++;
                 displaySetsForTeamOnLeft(setsWonRight);
@@ -511,15 +532,15 @@ public class MainActivity extends AppCompatActivity {
             setsWonRight = temporary;
             displaySetsForTeamOnLeft(setsWonLeft);
             displaySetsForTeamOnRight(setsWonRight);
-            if (teamNameLeft.equals("Team A")) {
-                teamNameLeft = "Team B";
+            if (teamNameLeft.equals(getString(R.string.initialTeamNameOnLeft))) {
+                teamNameLeft = getString(R.string.initialTeamNameOnRight);;
                 displayTeamNameonLeft(teamNameLeft);
-                teamNameRight = "Team A";
+                teamNameRight = getString(R.string.initialTeamNameOnLeft);;
                 displayTeamNameonRight(teamNameRight);
             } else {
-                teamNameLeft = "Team A";
+                teamNameLeft = getString(R.string.initialTeamNameOnLeft);;
                 displayTeamNameonLeft(teamNameLeft);
-                teamNameRight = "Team B";
+                teamNameRight = getString(R.string.initialTeamNameOnRight);;
                 displayTeamNameonRight(teamNameRight);
             }
         }
@@ -529,7 +550,7 @@ public class MainActivity extends AppCompatActivity {
         if (scoreTeamLeft > 0) {
             scoreTeamLeft--;
             displayScoreForTeamOnLeft(scoreTeamLeft);
-            String message = "Oops! Sorry, that was an error.";
+            String message = getString(R.string.error);
             displayMessage(message);
         }
     }
@@ -538,7 +559,7 @@ public class MainActivity extends AppCompatActivity {
         if (scoreTeamRight > 0) {
             scoreTeamRight--;
             displayScoreForTeamOnRight(scoreTeamRight);
-            String message = "Oops! Sorry, that was an error.";
+            String message = getString(R.string.error);
             displayMessage(message);
         }
     }
@@ -556,9 +577,9 @@ public class MainActivity extends AppCompatActivity {
         displaySetsForTeamOnRight(setsWonRight);
         String message = "";
         displayMessage(message);
-        teamNameLeft = "Team A";
+        teamNameLeft = getString(R.string.initialTeamNameOnLeft);;
         displayTeamNameonLeft(teamNameLeft);
-        teamNameRight = "Team B";
+        teamNameRight = getString(R.string.initialTeamNameOnRight);;
         displayTeamNameonRight(teamNameRight);
         displayOnTableS1_TA(0);
         displayOnTableS1_TB(0);
