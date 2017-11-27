@@ -62,7 +62,7 @@
             android:layout_weight="3"
             android:fontFamily="sans-serif_light"
             android:gravity="center"
-            android:text="0"
+            android:text="@string/zero"
             android:textColor="#000000"
             android:textSize="100sp"
             android:onClick="add1pointToTeamOnLeft"
@@ -83,7 +83,7 @@
                 android:fontFamily="sans-serif_medium"
                 android:gravity="center_horizontal"
                 android:padding="10dp"
-                android:text="0"
+                android:text="@string/zero"
                 android:textColor="@android:color/white"
                 android:textSize="40sp"
                 android:background="@android:color/black"/>
@@ -116,7 +116,7 @@
                 android:fontFamily="sans-serif_medium"
                 android:gravity="center_horizontal"
                 android:padding="10dp"
-                android:text="0"
+                android:text="@string/zero"
                 android:textColor="@android:color/white"
                 android:textSize="40sp"
                 android:background="@android:color/black"/>
@@ -136,7 +136,7 @@
             android:layout_weight="3"
             android:fontFamily="sans-serif_light"
             android:gravity="center"
-            android:text="0"
+            android:text="@string/zero"
             android:textColor="#000000"
             android:textSize="100sp"
             android:onClick="add1pointToTeamOnRight"
@@ -170,35 +170,35 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "S1"
+                android:text = "@string/s1"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:padding="5dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "S2"
+                android:text = "@string/s2"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:padding="5dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "S3"
+                android:text = "@string/s3"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:padding="5dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "S4"
+                android:text = "@string/s4"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:padding="5dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "S5"
+                android:text = "@string/s5"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:padding="5dp" />
@@ -225,31 +225,31 @@
                 android:id="@+id/s1_tA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "0"
+                android:text = "@string/zero"
                 android:padding="5dp" />
             <TextView
                 android:id="@+id/s2_tA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "0"
+                android:text = "@string/zero"
                 android:padding="5dp" />
             <TextView
                 android:id="@+id/s3_tA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "0"
+                android:text = "@string/zero"
                 android:padding="5dp" />
             <TextView
                 android:id="@+id/s4_tA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "0"
+                android:text = "@string/zero"
                 android:padding="5dp" />
             <TextView
                 android:id="@+id/s5_tA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "0"
+                android:text = "@string/zero"
                 android:padding="5dp" />
         </TableRow>
 
@@ -274,13 +274,13 @@
                 android:id="@+id/s1_tB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "0"
+                android:text = "@string/zero"
                 android:padding="5dp"/>
             <TextView
                 android:id="@+id/s2_tB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "0"
+                android:text = "@string/zero"
                 android:padding="5dp"/>
             <TextView
                 android:id="@+id/s3_tB"
@@ -292,13 +292,13 @@
                 android:id="@+id/s4_tB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "0"
+                android:text = "@string/zero"
                 android:padding="5dp"/>
             <TextView
                 android:id="@+id/s5_tB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "0"
+                android:text = "@string/zero"
                 android:padding="5dp"/>
         </TableRow>
         <View
