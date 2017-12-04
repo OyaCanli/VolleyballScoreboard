@@ -135,27 +135,27 @@ public class MainActivity extends AppCompatActivity {
     public void startGame(View view) {
         started = true;
         EditText eText1 = (EditText) findViewById(R.id.usersTeamName1);
-        if(eText1.getText().toString()!= null){
-            initialTeamNameOnLeft = eText1.getText().toString();
-            teamNameLeft = initialTeamNameOnLeft;
+        initialTeamNameOnLeft = eText1.getText().toString();
+        if (initialTeamNameOnLeft.equals("")) {
+            initialTeamNameOnLeft = getString(R.string.defaultTeamNameOnLeft);
         }
-        else teamNameLeft = getString(R.string.defaultTeamNameOnLeft);
+        teamNameLeft = initialTeamNameOnLeft;
         displayOnTableTeamA(teamNameLeft);
         displayTeamNameonLeft(teamNameLeft);
         EditText eText2 = (EditText) findViewById(R.id.usersTeamName2);
-        if(eText1.getText().toString()!= null) {
-            initialTeamNameOnRight = eText2.getText().toString();
-            teamNameRight = initialTeamNameOnRight;
+        initialTeamNameOnRight = eText2.getText().toString();
+        if (initialTeamNameOnRight.equals("")) {
+            initialTeamNameOnRight = getString(R.string.defaultTeamNameOnRight);
         }
-        else teamNameRight = getString(R.string.defaultTeamNameOnRight);
+        teamNameRight = initialTeamNameOnRight;
         displayOnTableTeamB(teamNameRight);
         displayTeamNameonRight(teamNameRight);
         RadioGroup starter = (RadioGroup) findViewById(R.id.whoStarts);
-        if(starter.getCheckedRadioButtonId() == R.id.optionOrange){
+        if (starter.getCheckedRadioButtonId() == R.id.optionOrange) {
             String message = teamNameLeft + " " + getString(com.example.android.volleyballscoreboard.R.string.serve);
             displayMessage(message);
         }
-        if(starter.getCheckedRadioButtonId() == R.id.optionBlue){
+        if (starter.getCheckedRadioButtonId() == R.id.optionBlue) {
             String message = teamNameRight + " " + getString(com.example.android.volleyballscoreboard.R.string.serve);
             displayMessage(message);
         }
@@ -163,14 +163,13 @@ public class MainActivity extends AppCompatActivity {
         startView.setVisibility(View.GONE);
     }
 
-    public void flipCoin (View view) {
+    public void flipCoin(View view) {
         double chance = Math.random();
         chance *= 2;
-        if (chance<1){ //heads
+        if (chance < 1) { //heads
             ImageView coin = (ImageView) findViewById(R.id.coin);
             coin.setImageResource(R.drawable.heads);
-        }
-        else{ //tails
+        } else { //tails
             ImageView coin = (ImageView) findViewById(R.id.coin);
             coin.setImageResource(R.drawable.one_euro);
         }
@@ -391,18 +390,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                     setsWonLeft++;
                     displaySetsForTeamOnLeft(setsWonLeft);
-                    switch(setNumber){
+                    switch (setNumber) {
                         case 1: {
                             TextView tw = (TextView) findViewById(R.id.s1_tA);
                             tw.setBackgroundColor(Color.YELLOW);
                             break;
                         }
-                        case 2:{
+                        case 2: {
                             TextView tw = (TextView) findViewById(R.id.s2_tA);
                             tw.setBackgroundColor(Color.YELLOW);
                             break;
                         }
-                        case 3:{
+                        case 3: {
                             TextView tw2 = (TextView) findViewById(R.id.s3_tA);
                             tw2.setBackgroundColor(Color.YELLOW);
                             break;
@@ -567,18 +566,18 @@ public class MainActivity extends AppCompatActivity {
                     }
                     setsWonRight++;
                     displaySetsForTeamOnRight(setsWonRight);
-                    switch(setNumber){
+                    switch (setNumber) {
                         case 1: {
                             TextView tw = (TextView) findViewById(R.id.s1_tB);
                             tw.setBackgroundColor(Color.YELLOW);
                             break;
                         }
-                        case 2:{
+                        case 2: {
                             TextView tw = (TextView) findViewById(R.id.s2_tB);
                             tw.setBackgroundColor(Color.YELLOW);
                             break;
                         }
-                        case 3:{
+                        case 3: {
                             TextView tw2 = (TextView) findViewById(R.id.s3_tB);
                             tw2.setBackgroundColor(Color.YELLOW);
                             break;
@@ -673,31 +672,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void pause(View view){
-        Intent intent = new Intent (AlarmClock.ACTION_SET_TIMER);
-        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Time left:" );
+    public void pause(View view) {
+        Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Time left:");
         intent.putExtra(AlarmClock.EXTRA_LENGTH, 60);
-        if(intent.resolveActivity(getPackageManager()) != null){
+        if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
     }
 
     //This is for correcting a point mistakenly given.
     public void correctionLeft(View view) {
-        if(scoreTeamLeft == 0 && setNumber == 1) return;
+        if (scoreTeamLeft == 0 && setNumber == 1) return;
         if (scoreTeamLeft > 0) {
             scoreTeamLeft--;
             displayScoreForTeamOnLeft(scoreTeamLeft);
             String message = getString(R.string.error);
             displayMessage(message);
         }
-        if(scoreTeamLeft == 0 && setNumber > 1){
+        if (scoreTeamLeft == 0 && setNumber > 1) {
             setNumber--;
             setsWonLeft--;
             displaySetsForTeamOnLeft(setsWonLeft);
-            switch (setNumber){
-                case 1:{
-                    scoreTeamLeft = firstSetScoreLeft-1;
+            switch (setNumber) {
+                case 1: {
+                    scoreTeamLeft = firstSetScoreLeft - 1;
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     displayOnTableS1_TA(scoreTeamLeft);
                     scoreTeamRight = firstSetScoreRight;
@@ -706,8 +705,8 @@ public class MainActivity extends AppCompatActivity {
                     tw.setBackgroundColor(Color.TRANSPARENT);
                     break;
                 }
-                case 2:{
-                    scoreTeamLeft = secondSetScoreLeft-1;
+                case 2: {
+                    scoreTeamLeft = secondSetScoreLeft - 1;
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     displayOnTableS2_TA(scoreTeamLeft);
                     scoreTeamRight = secondSetScoreRight;
@@ -716,8 +715,8 @@ public class MainActivity extends AppCompatActivity {
                     tw.setBackgroundColor(Color.TRANSPARENT);
                     break;
                 }
-                case 3:{
-                    scoreTeamLeft = thirdSetScoreLeft-1;
+                case 3: {
+                    scoreTeamLeft = thirdSetScoreLeft - 1;
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     displayOnTableS3_TA(scoreTeamLeft);
                     scoreTeamRight = thirdSetScoreRight;
@@ -726,8 +725,8 @@ public class MainActivity extends AppCompatActivity {
                     tw.setBackgroundColor(Color.TRANSPARENT);
                     break;
                 }
-                case 4:{
-                    scoreTeamLeft = fourthSetScoreLeft-1;
+                case 4: {
+                    scoreTeamLeft = fourthSetScoreLeft - 1;
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     displayOnTableS4_TA(scoreTeamLeft);
                     scoreTeamRight = fourthSetScoreRight;
@@ -736,8 +735,8 @@ public class MainActivity extends AppCompatActivity {
                     tw.setBackgroundColor(Color.TRANSPARENT);
                     break;
                 }
-                case 5:{
-                    scoreTeamLeft = fifthSetScoreLeft-1;
+                case 5: {
+                    scoreTeamLeft = fifthSetScoreLeft - 1;
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     displayOnTableS5_TA(scoreTeamLeft);
                     scoreTeamRight = fifthSetScoreRight;
@@ -752,20 +751,20 @@ public class MainActivity extends AppCompatActivity {
 
     //This is for correcting a point mistakenly given.
     public void correctionRight(View view) {
-        if(scoreTeamRight == 0 && setNumber == 1) return;
+        if (scoreTeamRight == 0 && setNumber == 1) return;
         if (scoreTeamRight > 0) {
             scoreTeamRight--;
             displayScoreForTeamOnRight(scoreTeamRight);
             String message = getString(R.string.error);
             displayMessage(message);
         }
-        if(scoreTeamLeft == 0 && setNumber > 1){
+        if (scoreTeamLeft == 0 && setNumber > 1) {
             setNumber--;
             setsWonRight--;
             displaySetsForTeamOnRight(setsWonRight);
-            switch (setNumber){
-                case 1:{
-                    scoreTeamRight = firstSetScoreRight-1;
+            switch (setNumber) {
+                case 1: {
+                    scoreTeamRight = firstSetScoreRight - 1;
                     displayOnTableS1_TB(scoreTeamRight);
                     displayScoreForTeamOnRight(scoreTeamRight);
                     scoreTeamLeft = firstSetScoreLeft;
@@ -774,8 +773,8 @@ public class MainActivity extends AppCompatActivity {
                     tw.setBackgroundColor(Color.TRANSPARENT);
                     break;
                 }
-                case 2:{
-                    scoreTeamRight = secondSetScoreRight-1;
+                case 2: {
+                    scoreTeamRight = secondSetScoreRight - 1;
                     displayOnTableS2_TB(scoreTeamRight);
                     displayScoreForTeamOnRight(scoreTeamRight);
                     scoreTeamLeft = secondSetScoreLeft;
@@ -784,8 +783,8 @@ public class MainActivity extends AppCompatActivity {
                     tw.setBackgroundColor(Color.TRANSPARENT);
                     break;
                 }
-                case 3:{
-                    scoreTeamRight = thirdSetScoreRight-1;
+                case 3: {
+                    scoreTeamRight = thirdSetScoreRight - 1;
                     displayOnTableS3_TB(scoreTeamRight);
                     displayScoreForTeamOnRight(scoreTeamRight);
                     scoreTeamLeft = thirdSetScoreLeft;
@@ -794,8 +793,8 @@ public class MainActivity extends AppCompatActivity {
                     tw.setBackgroundColor(Color.TRANSPARENT);
                     break;
                 }
-                case 4:{
-                    scoreTeamRight = fourthSetScoreRight-1;
+                case 4: {
+                    scoreTeamRight = fourthSetScoreRight - 1;
                     displayOnTableS4_TB(scoreTeamRight);
                     displayScoreForTeamOnRight(scoreTeamRight);
                     scoreTeamLeft = fourthSetScoreLeft;
@@ -804,8 +803,8 @@ public class MainActivity extends AppCompatActivity {
                     tw.setBackgroundColor(Color.TRANSPARENT);
                     break;
                 }
-                case 5:{
-                    scoreTeamRight = fifthSetScoreRight-1;
+                case 5: {
+                    scoreTeamRight = fifthSetScoreRight - 1;
                     displayOnTableS5_TB(scoreTeamRight);
                     displayScoreForTeamOnRight(scoreTeamRight);
                     scoreTeamLeft = fifthSetScoreLeft;
