@@ -455,7 +455,8 @@
                 android:textAllCaps="false"
                 android:onClick="flipCoin"
                 android:background="@drawable/buttonborders"
-                android:layout_marginLeft="16dp"/>
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"/>
             <ImageView
                 android:id="@+id/coin"
                 android:layout_width="50dp"

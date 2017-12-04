@@ -149,12 +149,12 @@ public class MainActivity extends AppCompatActivity {
         displayOnTableTeamB(teamNameRight);
         displayTeamNameonRight(teamNameRight);
         RadioGroup starter = (RadioGroup) findViewById(R.id.whoStarts);
-        if(starter.getCheckedRadioButtonId() == R.id.optionorange){
-            String message = teamNameLeft + "will serve the ball.";
+        if(starter.getCheckedRadioButtonId() == R.id.optionOrange){
+            String message = teamNameLeft + " " + getString(com.example.android.volleyballscoreboard.R.string.serve);
             displayMessage(message);
         }
-        if(starter.getCheckedRadioButtonId() == R.id.optionblue){
-            String message = teamNameRight + "will serve the ball.";
+        if(starter.getCheckedRadioButtonId() == R.id.optionBlue){
+            String message = teamNameRight + " " + getString(com.example.android.volleyballscoreboard.R.string.serve);
             displayMessage(message);
         }
         View startView = findViewById(R.id.startScreen);
@@ -714,11 +714,9 @@ public class MainActivity extends AppCompatActivity {
         displaySetsForTeamOnRight(setsWonRight);
         String message = "";
         displayMessage(message);
-        teamNameLeft = getString(R.string.initialTeamNameOnLeft);
-        ;
+        teamNameLeft = initialTeamNameOnLeft;
         displayTeamNameonLeft(teamNameLeft);
-        teamNameRight = getString(R.string.initialTeamNameOnRight);
-        ;
+        teamNameRight = initialTeamNameOnRight;
         displayTeamNameonRight(teamNameRight);
         displayOnTableS1_TA(0);
         displayOnTableS1_TB(0);
