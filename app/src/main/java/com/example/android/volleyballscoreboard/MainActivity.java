@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         displayOnTableS5_TA(fifthSetScoreLeft);
         displayOnTableS5_TB(fifthSetScoreRight);
     }
-
+    
     public void startGame(View view) {
         started = true;
         EditText eText1 = (EditText) findViewById(R.id.usersTeamName1);
