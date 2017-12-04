@@ -362,7 +362,7 @@
     <Button
         android:id="@+id/reset"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignBottom="@+id/undoLeft"
         android:layout_centerHorizontal="true"
         android:background="@drawable/buttonborders"
@@ -455,12 +455,13 @@
                 android:textAllCaps="false"
                 android:onClick="flipCoin"
                 android:background="@drawable/buttonborders"
-                android:layout_marginLeft="16dp"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"/>
             <ImageView
                 android:id="@+id/coin"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
 
         <Button

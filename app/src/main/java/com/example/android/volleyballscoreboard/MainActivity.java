@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
             initialTeamNameOnLeft = eText1.getText().toString();
             teamNameLeft = initialTeamNameOnLeft;
         }
+        else teamNameLeft = getString(R.string.defaultTeamNameOnLeft);
         displayOnTableTeamA(teamNameLeft);
         displayTeamNameonLeft(teamNameLeft);
         EditText eText2 = (EditText) findViewById(R.id.usersTeamName2);
@@ -146,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             initialTeamNameOnRight = eText2.getText().toString();
             teamNameRight = initialTeamNameOnRight;
         }
+        else teamNameRight = getString(R.string.defaultTeamNameOnRight);
         displayOnTableTeamB(teamNameRight);
         displayTeamNameonRight(teamNameRight);
         RadioGroup starter = (RadioGroup) findViewById(R.id.whoStarts);
