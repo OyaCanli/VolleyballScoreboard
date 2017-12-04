@@ -684,21 +684,138 @@ public class MainActivity extends AppCompatActivity {
 
     //This is for correcting a point mistakenly given.
     public void correctionLeft(View view) {
+        if(scoreTeamLeft == 0 && setNumber == 1) return;
         if (scoreTeamLeft > 0) {
             scoreTeamLeft--;
             displayScoreForTeamOnLeft(scoreTeamLeft);
             String message = getString(R.string.error);
             displayMessage(message);
         }
+        if(scoreTeamLeft == 0 && setNumber > 1){
+            setNumber--;
+            setsWonLeft--;
+            displaySetsForTeamOnLeft(setsWonLeft);
+            switch (setNumber){
+                case 1:{
+                    scoreTeamLeft = firstSetScoreLeft-1;
+                    displayScoreForTeamOnLeft(scoreTeamLeft);
+                    displayOnTableS1_TA(scoreTeamLeft);
+                    scoreTeamRight = firstSetScoreRight;
+                    displayScoreForTeamOnRight(scoreTeamRight);
+                    TextView tw = (TextView) findViewById(R.id.s1_tA);
+                    tw.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                }
+                case 2:{
+                    scoreTeamLeft = secondSetScoreLeft-1;
+                    displayScoreForTeamOnLeft(scoreTeamLeft);
+                    displayOnTableS2_TA(scoreTeamLeft);
+                    scoreTeamRight = secondSetScoreRight;
+                    displayScoreForTeamOnRight(scoreTeamRight);
+                    TextView tw = (TextView) findViewById(R.id.s2_tA);
+                    tw.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                }
+                case 3:{
+                    scoreTeamLeft = thirdSetScoreLeft-1;
+                    displayScoreForTeamOnLeft(scoreTeamLeft);
+                    displayOnTableS3_TA(scoreTeamLeft);
+                    scoreTeamRight = thirdSetScoreRight;
+                    displayScoreForTeamOnRight(scoreTeamRight);
+                    TextView tw = (TextView) findViewById(R.id.s3_tA);
+                    tw.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                }
+                case 4:{
+                    scoreTeamLeft = fourthSetScoreLeft-1;
+                    displayScoreForTeamOnLeft(scoreTeamLeft);
+                    displayOnTableS4_TA(scoreTeamLeft);
+                    scoreTeamRight = fourthSetScoreRight;
+                    displayScoreForTeamOnRight(scoreTeamRight);
+                    TextView tw = (TextView) findViewById(R.id.s4_tA);
+                    tw.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                }
+                case 5:{
+                    scoreTeamLeft = fifthSetScoreLeft-1;
+                    displayScoreForTeamOnLeft(scoreTeamLeft);
+                    displayOnTableS5_TA(scoreTeamLeft);
+                    scoreTeamRight = fifthSetScoreRight;
+                    displayScoreForTeamOnRight(scoreTeamRight);
+                    TextView tw = (TextView) findViewById(R.id.s5_tA);
+                    tw.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                }
+            }
+        }
     }
 
     //This is for correcting a point mistakenly given.
     public void correctionRight(View view) {
+        if(scoreTeamRight == 0 && setNumber == 1) return;
         if (scoreTeamRight > 0) {
             scoreTeamRight--;
             displayScoreForTeamOnRight(scoreTeamRight);
             String message = getString(R.string.error);
             displayMessage(message);
+        }
+        if(scoreTeamLeft == 0 && setNumber > 1){
+            setNumber--;
+            setsWonRight--;
+            displaySetsForTeamOnRight(setsWonRight);
+            switch (setNumber){
+                case 1:{
+                    scoreTeamRight = firstSetScoreRight-1;
+                    displayOnTableS1_TB(scoreTeamRight);
+                    displayScoreForTeamOnRight(scoreTeamRight);
+                    scoreTeamLeft = firstSetScoreLeft;
+                    displayScoreForTeamOnLeft(scoreTeamLeft);
+                    TextView tw = (TextView) findViewById(R.id.s1_tB);
+                    tw.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                }
+                case 2:{
+                    scoreTeamRight = secondSetScoreRight-1;
+                    displayOnTableS2_TB(scoreTeamRight);
+                    displayScoreForTeamOnRight(scoreTeamRight);
+                    scoreTeamLeft = secondSetScoreLeft;
+                    displayScoreForTeamOnLeft(scoreTeamLeft);
+                    TextView tw = (TextView) findViewById(R.id.s2_tB);
+                    tw.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                }
+                case 3:{
+                    scoreTeamRight = thirdSetScoreRight-1;
+                    displayOnTableS3_TB(scoreTeamRight);
+                    displayScoreForTeamOnRight(scoreTeamRight);
+                    scoreTeamLeft = thirdSetScoreLeft;
+                    displayScoreForTeamOnLeft(scoreTeamLeft);
+                    TextView tw = (TextView) findViewById(R.id.s3_tB);
+                    tw.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                }
+                case 4:{
+                    scoreTeamRight = fourthSetScoreRight-1;
+                    displayOnTableS4_TB(scoreTeamRight);
+                    displayScoreForTeamOnRight(scoreTeamRight);
+                    scoreTeamLeft = fourthSetScoreLeft;
+                    displayScoreForTeamOnLeft(scoreTeamLeft);
+                    TextView tw = (TextView) findViewById(R.id.s4_tB);
+                    tw.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                }
+                case 5:{
+                    scoreTeamRight = fifthSetScoreRight-1;
+                    displayOnTableS5_TB(scoreTeamRight);
+                    displayScoreForTeamOnRight(scoreTeamRight);
+                    scoreTeamLeft = fifthSetScoreLeft;
+                    displayScoreForTeamOnLeft(scoreTeamLeft);
+                    TextView tw = (TextView) findViewById(R.id.s5_tB);
+                    tw.setBackgroundColor(Color.TRANSPARENT);
+                    break;
+                }
+            }
+
         }
     }
 
@@ -740,5 +857,25 @@ public class MainActivity extends AppCompatActivity {
         thirdSetScoreRight = 0;
         fourthSetScoreRight = 0;
         fifthSetScoreRight = 0;
+        TextView tw1 = (TextView) findViewById(R.id.s1_tA);
+        tw1.setBackgroundColor(Color.TRANSPARENT);
+        TextView tw2 = (TextView) findViewById(R.id.s2_tA);
+        tw2.setBackgroundColor(Color.TRANSPARENT);
+        TextView tw3 = (TextView) findViewById(R.id.s3_tA);
+        tw3.setBackgroundColor(Color.TRANSPARENT);
+        TextView tw4 = (TextView) findViewById(R.id.s4_tA);
+        tw4.setBackgroundColor(Color.TRANSPARENT);
+        TextView tw5 = (TextView) findViewById(R.id.s5_tA);
+        tw5.setBackgroundColor(Color.TRANSPARENT);
+        TextView tw6 = (TextView) findViewById(R.id.s1_tB);
+        tw6.setBackgroundColor(Color.TRANSPARENT);
+        TextView tw7 = (TextView) findViewById(R.id.s2_tB);
+        tw7.setBackgroundColor(Color.TRANSPARENT);
+        TextView tw8 = (TextView) findViewById(R.id.s3_tB);
+        tw8.setBackgroundColor(Color.TRANSPARENT);
+        TextView tw9 = (TextView) findViewById(R.id.s4_tB);
+        tw9.setBackgroundColor(Color.TRANSPARENT);
+        TextView tw10 = (TextView) findViewById(R.id.s5_tB);
+        tw10.setBackgroundColor(Color.TRANSPARENT);
     }
 }
