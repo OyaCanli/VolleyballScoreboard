@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         displayOnTableS5_TA(fifthSetScoreLeft);
         displayOnTableS5_TB(fifthSetScoreRight);
     }
-    
+
     public void startGame(View view) {
         started = true;
         EditText eText1 = (EditText) findViewById(R.id.usersTeamName1);
@@ -341,9 +341,13 @@ public class MainActivity extends AppCompatActivity {
                             if (!switched) {
                                 firstSetScoreLeft = scoreTeamLeft;
                                 firstSetScoreRight = scoreTeamRight;
+                                TextView tw = (TextView) findViewById(R.id.s1_tA);
+                                tw.setBackgroundColor(Color.YELLOW);
                             } else {
                                 firstSetScoreRight = scoreTeamLeft;
                                 firstSetScoreLeft = scoreTeamRight;
+                                TextView tw = (TextView) findViewById(R.id.s1_tB);
+                                tw.setBackgroundColor(Color.YELLOW);
                             }
                             break;
                         }
@@ -351,9 +355,13 @@ public class MainActivity extends AppCompatActivity {
                             if (!switched) {
                                 secondSetScoreLeft = scoreTeamLeft;
                                 secondSetScoreRight = scoreTeamRight;
+                                TextView tw = (TextView) findViewById(R.id.s2_tA);
+                                tw.setBackgroundColor(Color.YELLOW);
                             } else {
                                 secondSetScoreRight = scoreTeamLeft;
                                 secondSetScoreLeft = scoreTeamRight;
+                                TextView tw = (TextView) findViewById(R.id.s2_tB);
+                                tw.setBackgroundColor(Color.YELLOW);
                             }
                             break;
                         }
@@ -361,9 +369,13 @@ public class MainActivity extends AppCompatActivity {
                             if (!switched) {
                                 thirdSetScoreLeft = scoreTeamLeft;
                                 thirdSetScoreRight = scoreTeamRight;
+                                TextView tw2 = (TextView) findViewById(R.id.s3_tA);
+                                tw2.setBackgroundColor(Color.YELLOW);
                             } else {
                                 thirdSetScoreRight = scoreTeamLeft;
                                 thirdSetScoreLeft = scoreTeamRight;
+                                TextView tw2 = (TextView) findViewById(R.id.s3_tB);
+                                tw2.setBackgroundColor(Color.YELLOW);
                             }
                             break;
                         }
@@ -371,52 +383,21 @@ public class MainActivity extends AppCompatActivity {
                             if (!switched) {
                                 fourthSetScoreLeft = scoreTeamLeft;
                                 fourthSetScoreRight = scoreTeamRight;
+                                TextView tw2 = (TextView) findViewById(R.id.s4_tA);
+                                tw2.setBackgroundColor(Color.YELLOW);
                             } else {
                                 fourthSetScoreRight = scoreTeamLeft;
                                 fourthSetScoreLeft = scoreTeamRight;
+                                TextView tw2 = (TextView) findViewById(R.id.s4_tB);
+                                tw2.setBackgroundColor(Color.YELLOW);
                             }
                             break;
                         }
-                        case 5: {
-                            if (!switched) {
-                                fifthSetScoreLeft = scoreTeamLeft;
-                                fifthSetScoreRight = scoreTeamRight;
-                            } else {
-                                fifthSetScoreRight = scoreTeamLeft;
-                                fifthSetScoreLeft = scoreTeamRight;
-                            }
-                            break;
-                        }
+
                     }
                     setsWonLeft++;
                     displaySetsForTeamOnLeft(setsWonLeft);
-                    switch (setNumber) {
-                        case 1: {
-                            TextView tw = (TextView) findViewById(R.id.s1_tA);
-                            tw.setBackgroundColor(Color.YELLOW);
-                            break;
-                        }
-                        case 2: {
-                            TextView tw = (TextView) findViewById(R.id.s2_tA);
-                            tw.setBackgroundColor(Color.YELLOW);
-                            break;
-                        }
-                        case 3: {
-                            TextView tw2 = (TextView) findViewById(R.id.s3_tA);
-                            tw2.setBackgroundColor(Color.YELLOW);
-                            break;
-                        }
-                        case 4: {
-                            TextView tw2 = (TextView) findViewById(R.id.s4_tA);
-                            tw2.setBackgroundColor(Color.YELLOW);
-                            break;
-                        }
-                        case 5: {
-                            TextView tw2 = (TextView) findViewById(R.id.s5_tA);
-                            tw2.setBackgroundColor(Color.YELLOW);
-                            break;
-                        }
-                    }
+
                     if (setsWonLeft == 3) { //if it a match winning set
                         String winner = teamNameLeft + " " + getString(R.string.wonMatch);
                         displayMessage(winner);
@@ -444,6 +425,17 @@ public class MainActivity extends AppCompatActivity {
                     scoreTeamRight = 0;
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     displayScoreForTeamOnRight(scoreTeamRight);
+                    if (!switched) {
+                        fifthSetScoreLeft = scoreTeamLeft;
+                        fifthSetScoreRight = scoreTeamRight;
+                        TextView tw2 = (TextView) findViewById(R.id.s5_tA);
+                        tw2.setBackgroundColor(Color.YELLOW);
+                    } else {
+                        fifthSetScoreRight = scoreTeamLeft;
+                        fifthSetScoreLeft = scoreTeamRight;
+                        TextView tw2 = (TextView) findViewById(R.id.s5_tB);
+                        tw2.setBackgroundColor(Color.YELLOW);
+                    }
                 } else {
                     String tieBreak = getString(R.string.tieBreaker);
                     displayMessage(tieBreak);
@@ -517,9 +509,13 @@ public class MainActivity extends AppCompatActivity {
                             if (!switched) {
                                 firstSetScoreLeft = scoreTeamLeft;
                                 firstSetScoreRight = scoreTeamRight;
+                                TextView tw = (TextView) findViewById(R.id.s1_tB);
+                                tw.setBackgroundColor(Color.YELLOW);
                             } else {
                                 firstSetScoreRight = scoreTeamLeft;
                                 firstSetScoreLeft = scoreTeamRight;
+                                TextView tw = (TextView) findViewById(R.id.s1_tA);
+                                tw.setBackgroundColor(Color.YELLOW);
                             }
                             break;
                         }
@@ -527,9 +523,13 @@ public class MainActivity extends AppCompatActivity {
                             if (!switched) {
                                 secondSetScoreLeft = scoreTeamLeft;
                                 secondSetScoreRight = scoreTeamRight;
+                                TextView tw = (TextView) findViewById(R.id.s2_tB);
+                                tw.setBackgroundColor(Color.YELLOW);
                             } else {
                                 secondSetScoreRight = scoreTeamLeft;
                                 secondSetScoreLeft = scoreTeamRight;
+                                TextView tw = (TextView) findViewById(R.id.s2_tA);
+                                tw.setBackgroundColor(Color.YELLOW);
                             }
                             break;
                         }
@@ -537,9 +537,13 @@ public class MainActivity extends AppCompatActivity {
                             if (!switched) {
                                 thirdSetScoreLeft = scoreTeamLeft;
                                 thirdSetScoreRight = scoreTeamRight;
+                                TextView tw2 = (TextView) findViewById(R.id.s3_tB);
+                                tw2.setBackgroundColor(Color.YELLOW);
                             } else {
                                 thirdSetScoreRight = scoreTeamLeft;
                                 thirdSetScoreLeft = scoreTeamRight;
+                                TextView tw2 = (TextView) findViewById(R.id.s3_tA);
+                                tw2.setBackgroundColor(Color.YELLOW);
                             }
                             break;
                         }
@@ -547,52 +551,20 @@ public class MainActivity extends AppCompatActivity {
                             if (!switched) {
                                 fourthSetScoreLeft = scoreTeamLeft;
                                 fourthSetScoreRight = scoreTeamRight;
+                                TextView tw2 = (TextView) findViewById(R.id.s4_tB);
+                                tw2.setBackgroundColor(Color.YELLOW);
                             } else {
                                 fourthSetScoreRight = scoreTeamLeft;
                                 fourthSetScoreLeft = scoreTeamRight;
+                                TextView tw2 = (TextView) findViewById(R.id.s4_tA);
+                                tw2.setBackgroundColor(Color.YELLOW);
                             }
                             break;
                         }
-                        case 5: {
-                            if (!switched) {
-                                fifthSetScoreLeft = scoreTeamLeft;
-                                fifthSetScoreRight = scoreTeamRight;
-                            } else {
-                                fifthSetScoreRight = scoreTeamLeft;
-                                fifthSetScoreLeft = scoreTeamRight;
-                            }
-                            break;
-                        }
+
                     }
                     setsWonRight++;
                     displaySetsForTeamOnRight(setsWonRight);
-                    switch (setNumber) {
-                        case 1: {
-                            TextView tw = (TextView) findViewById(R.id.s1_tB);
-                            tw.setBackgroundColor(Color.YELLOW);
-                            break;
-                        }
-                        case 2: {
-                            TextView tw = (TextView) findViewById(R.id.s2_tB);
-                            tw.setBackgroundColor(Color.YELLOW);
-                            break;
-                        }
-                        case 3: {
-                            TextView tw2 = (TextView) findViewById(R.id.s3_tB);
-                            tw2.setBackgroundColor(Color.YELLOW);
-                            break;
-                        }
-                        case 4: {
-                            TextView tw2 = (TextView) findViewById(R.id.s4_tB);
-                            tw2.setBackgroundColor(Color.YELLOW);
-                            break;
-                        }
-                        case 5: {
-                            TextView tw2 = (TextView) findViewById(R.id.s5_tB);
-                            tw2.setBackgroundColor(Color.YELLOW);
-                            break;
-                        }
-                    }
                     if (setsWonRight == 3) {
                         String winner = teamNameRight + " " + getString(R.string.wonMatch);
                         displayMessage(winner);
@@ -624,6 +596,17 @@ public class MainActivity extends AppCompatActivity {
                     scoreTeamRight = 0;
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     displayScoreForTeamOnRight(scoreTeamRight);
+                         if (!switched) {
+                            fifthSetScoreLeft = scoreTeamLeft;
+                            fifthSetScoreRight = scoreTeamRight;
+                            TextView tw2 = (TextView) findViewById(R.id.s5_tB);
+                            tw2.setBackgroundColor(Color.YELLOW);
+                        } else {
+                            fifthSetScoreRight = scoreTeamLeft;
+                            fifthSetScoreLeft = scoreTeamRight;
+                            TextView tw2 = (TextView) findViewById(R.id.s5_tA);
+                            tw2.setBackgroundColor(Color.YELLOW);
+                        }
                 } else {
                     String tieBreak = getString(R.string.tieBreaker);
                     displayMessage(tieBreak);
