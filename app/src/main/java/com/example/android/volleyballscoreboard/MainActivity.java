@@ -39,6 +39,17 @@ public class MainActivity extends AppCompatActivity {
     int thirdSetScoreRight;
     int fourthSetScoreRight;
     int fifthSetScoreRight;
+    boolean s1_tA_is_yellow;
+    boolean s2_tA_is_yellow;
+    boolean s3_tA_is_yellow;
+    boolean s4_tA_is_yellow;
+    boolean s5_tA_is_yellow;
+    boolean s1_tB_is_yellow;
+    boolean s2_tB_is_yellow;
+    boolean s3_tB_is_yellow;
+    boolean s4_tB_is_yellow;
+    boolean s5_tB_is_yellow;
+    int starter_team_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         thirdSetScoreRight = 0;
         fourthSetScoreRight = 0;
         fifthSetScoreRight = 0;
+        starter_team_id = R.id.optionOrange;
     }
 
 
@@ -77,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt("setsWonRight", setsWonRight);
         outState.putString("teamNameLeft", teamNameLeft);
         outState.putString("teamNameRight", teamNameRight);
+        outState.putString("initialTeamNameOnLeft", initialTeamNameOnLeft);
+        outState.putString("initialTeamNameOnRight", initialTeamNameOnRight);
         outState.putString("message", message);
         outState.putInt("firstSetScoreLeft", firstSetScoreLeft);
         outState.putInt("secondSetScoreLeft", secondSetScoreLeft);
@@ -89,6 +103,19 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt("fourthSetScoreRight", fourthSetScoreRight);
         outState.putInt("fifthSetScoreRight", fifthSetScoreRight);
         outState.putInt("setNumber", setNumber);
+        outState.putInt("starter_team_id", starter_team_id);
+        outState.putBoolean("switched", switched);
+        outState.putBoolean("started", started);
+        outState.putBoolean("s1_tA_is_yellow", s1_tA_is_yellow);
+        outState.putBoolean("s2_tA_is_yellow", s2_tA_is_yellow);
+        outState.putBoolean("s3_tA_is_yellow", s3_tA_is_yellow);
+        outState.putBoolean("s4_tA_is_yellow", s4_tA_is_yellow);
+        outState.putBoolean("s5_tA_is_yellow", s5_tA_is_yellow);
+        outState.putBoolean("s1_tB_is_yellow", s1_tB_is_yellow);
+        outState.putBoolean("s2_tB_is_yellow", s2_tB_is_yellow);
+        outState.putBoolean("s3_tB_is_yellow", s3_tB_is_yellow);
+        outState.putBoolean("s4_tB_is_yellow", s4_tB_is_yellow);
+        outState.putBoolean("s5_tB_is_yellow", s5_tB_is_yellow);
     }
 
     //This method assigns back the saved values to variables after rotation
@@ -103,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         message = savedInstanceState.getString("message");
         teamNameLeft = savedInstanceState.getString("teamNameLeft");
         teamNameRight = savedInstanceState.getString("teamNameRight");
+        initialTeamNameOnLeft = savedInstanceState.getString("initialTeamNameOnLeft");
+        initialTeamNameOnRight = savedInstanceState.getString("initialTeamNameOnRight");
         firstSetScoreLeft = savedInstanceState.getInt("firstSetScoreLeft");
         secondSetScoreLeft = savedInstanceState.getInt("secondSetScoreLeft");
         thirdSetScoreLeft = savedInstanceState.getInt("thirdSetScoreLeft");
@@ -130,6 +159,73 @@ public class MainActivity extends AppCompatActivity {
         displayOnTableS4_TB(fourthSetScoreRight);
         displayOnTableS5_TA(fifthSetScoreLeft);
         displayOnTableS5_TB(fifthSetScoreRight);
+        s1_tA_is_yellow = savedInstanceState.getBoolean("s1_tA_is_yellow");
+        if(s1_tA_is_yellow) {
+            TextView tw = (TextView) findViewById(R.id.s1_tA);
+            tw.setBackgroundColor(Color.YELLOW);
+        }
+        s2_tA_is_yellow = savedInstanceState.getBoolean("s2_tA_is_yellow");
+        if(s2_tA_is_yellow) {
+            TextView tw = (TextView) findViewById(R.id.s2_tA);
+            tw.setBackgroundColor(Color.YELLOW);
+        }
+        s3_tA_is_yellow = savedInstanceState.getBoolean("s3_tA_is_yellow");
+        if(s3_tA_is_yellow) {
+            TextView tw = (TextView) findViewById(R.id.s3_tA);
+            tw.setBackgroundColor(Color.YELLOW);
+        }
+        s4_tA_is_yellow = savedInstanceState.getBoolean("s4_tA_is_yellow");
+        if(s4_tA_is_yellow) {
+            TextView tw = (TextView) findViewById(R.id.s4_tA);
+            tw.setBackgroundColor(Color.YELLOW);
+        }
+        s5_tA_is_yellow = savedInstanceState.getBoolean("s5_tA_is_yellow");
+        if(s5_tA_is_yellow) {
+            TextView tw = (TextView) findViewById(R.id.s5_tA);
+            tw.setBackgroundColor(Color.YELLOW);
+        }
+        s1_tB_is_yellow = savedInstanceState.getBoolean("s1_tB_is_yellow");
+        if(s1_tB_is_yellow) {
+            TextView tw = (TextView) findViewById(R.id.s1_tB);
+            tw.setBackgroundColor(Color.YELLOW);
+        }
+        s2_tB_is_yellow = savedInstanceState.getBoolean("s2_tB_is_yellow");
+        if(s2_tB_is_yellow) {
+            TextView tw = (TextView) findViewById(R.id.s2_tB);
+            tw.setBackgroundColor(Color.YELLOW);
+        }
+        s3_tB_is_yellow = savedInstanceState.getBoolean("s3_tB_is_yellow");
+        if(s3_tB_is_yellow) {
+            TextView tw = (TextView) findViewById(R.id.s3_tB);
+            tw.setBackgroundColor(Color.YELLOW);
+        }
+        s4_tB_is_yellow = savedInstanceState.getBoolean("s4_tB_is_yellow");
+        if(s4_tB_is_yellow) {
+            TextView tw = (TextView) findViewById(R.id.s4_tB);
+            tw.setBackgroundColor(Color.YELLOW);
+        }
+        s5_tB_is_yellow = savedInstanceState.getBoolean("s5_tB_is_yellow");
+        if(s5_tB_is_yellow) {
+            TextView tw = (TextView) findViewById(R.id.s5_tB);
+            tw.setBackgroundColor(Color.YELLOW);
+        }
+        started = savedInstanceState.getBoolean("started");
+        if(started) {
+            View startView = findViewById(R.id.startScreen);
+            startView.setVisibility(View.GONE);
+        }
+        switched = savedInstanceState.getBoolean("switched");
+        if(switched){
+            View view1 = findViewById(R.id.viewOrange);
+            view1.setBackgroundColor(Color.parseColor("#03A9F4"));
+            View view2 = findViewById(R.id.viewBlue);
+            view2.setBackgroundColor(Color.parseColor("#FF9800"));
+            TextView tw1 = (TextView) findViewById(R.id.team_on_left);
+            tw1.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blueborder));
+            TextView tw2 = (TextView) findViewById(R.id.team_on_right);
+            tw2.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.cellborder));
+        }
+
     }
 
     public void startGame(View view) {
@@ -154,10 +250,12 @@ public class MainActivity extends AppCompatActivity {
         if (starter.getCheckedRadioButtonId() == R.id.optionOrange) {
             String message = teamNameLeft + " " + getString(com.example.android.volleyballscoreboard.R.string.serve);
             displayMessage(message);
+            starter_team_id = R.id.optionOrange;
         }
         if (starter.getCheckedRadioButtonId() == R.id.optionBlue) {
             String message = teamNameRight + " " + getString(com.example.android.volleyballscoreboard.R.string.serve);
             displayMessage(message);
+            starter_team_id = R.id.optionBlue;
         }
         View startView = findViewById(R.id.startScreen);
         startView.setVisibility(View.GONE);
@@ -343,11 +441,13 @@ public class MainActivity extends AppCompatActivity {
                                 firstSetScoreRight = scoreTeamRight;
                                 TextView tw = (TextView) findViewById(R.id.s1_tA);
                                 tw.setBackgroundColor(Color.YELLOW);
+                                s1_tA_is_yellow = true;
                             } else {
                                 firstSetScoreRight = scoreTeamLeft;
                                 firstSetScoreLeft = scoreTeamRight;
                                 TextView tw = (TextView) findViewById(R.id.s1_tB);
                                 tw.setBackgroundColor(Color.YELLOW);
+                                s1_tB_is_yellow = true;
                             }
                             break;
                         }
@@ -357,11 +457,13 @@ public class MainActivity extends AppCompatActivity {
                                 secondSetScoreRight = scoreTeamRight;
                                 TextView tw = (TextView) findViewById(R.id.s2_tA);
                                 tw.setBackgroundColor(Color.YELLOW);
+                                s2_tA_is_yellow = true;
                             } else {
                                 secondSetScoreRight = scoreTeamLeft;
                                 secondSetScoreLeft = scoreTeamRight;
                                 TextView tw = (TextView) findViewById(R.id.s2_tB);
                                 tw.setBackgroundColor(Color.YELLOW);
+                                s2_tB_is_yellow = true;
                             }
                             break;
                         }
@@ -371,11 +473,13 @@ public class MainActivity extends AppCompatActivity {
                                 thirdSetScoreRight = scoreTeamRight;
                                 TextView tw2 = (TextView) findViewById(R.id.s3_tA);
                                 tw2.setBackgroundColor(Color.YELLOW);
+                                s3_tA_is_yellow = true;
                             } else {
                                 thirdSetScoreRight = scoreTeamLeft;
                                 thirdSetScoreLeft = scoreTeamRight;
                                 TextView tw2 = (TextView) findViewById(R.id.s3_tB);
                                 tw2.setBackgroundColor(Color.YELLOW);
+                                s3_tB_is_yellow = true;
                             }
                             break;
                         }
@@ -385,11 +489,13 @@ public class MainActivity extends AppCompatActivity {
                                 fourthSetScoreRight = scoreTeamRight;
                                 TextView tw2 = (TextView) findViewById(R.id.s4_tA);
                                 tw2.setBackgroundColor(Color.YELLOW);
+                                s4_tA_is_yellow = true;
                             } else {
                                 fourthSetScoreRight = scoreTeamLeft;
                                 fourthSetScoreLeft = scoreTeamRight;
                                 TextView tw2 = (TextView) findViewById(R.id.s4_tB);
                                 tw2.setBackgroundColor(Color.YELLOW);
+                                s4_tB_is_yellow = true;
                             }
                             break;
                         }
@@ -430,15 +536,18 @@ public class MainActivity extends AppCompatActivity {
                         fifthSetScoreRight = scoreTeamRight;
                         TextView tw2 = (TextView) findViewById(R.id.s5_tA);
                         tw2.setBackgroundColor(Color.YELLOW);
+                        s5_tA_is_yellow = true;
                     } else {
                         fifthSetScoreRight = scoreTeamLeft;
                         fifthSetScoreLeft = scoreTeamRight;
                         TextView tw2 = (TextView) findViewById(R.id.s5_tB);
                         tw2.setBackgroundColor(Color.YELLOW);
+                        s5_tB_is_yellow = true;
                     }
                 } else {
-                    String tieBreak = getString(R.string.tieBreaker);
-                    displayMessage(tieBreak);
+                    Toast.makeText(this, getString(R.string.tieBreaker), Toast.LENGTH_SHORT).show();
+                    String message = teamNameLeft + " " + getString(R.string.serve);
+                    displayMessage(message);
                 }
             }
         }
@@ -511,11 +620,13 @@ public class MainActivity extends AppCompatActivity {
                                 firstSetScoreRight = scoreTeamRight;
                                 TextView tw = (TextView) findViewById(R.id.s1_tB);
                                 tw.setBackgroundColor(Color.YELLOW);
+                                s1_tB_is_yellow = true;
                             } else {
                                 firstSetScoreRight = scoreTeamLeft;
                                 firstSetScoreLeft = scoreTeamRight;
                                 TextView tw = (TextView) findViewById(R.id.s1_tA);
                                 tw.setBackgroundColor(Color.YELLOW);
+                                s1_tA_is_yellow = true;
                             }
                             break;
                         }
@@ -525,11 +636,13 @@ public class MainActivity extends AppCompatActivity {
                                 secondSetScoreRight = scoreTeamRight;
                                 TextView tw = (TextView) findViewById(R.id.s2_tB);
                                 tw.setBackgroundColor(Color.YELLOW);
+                                s2_tB_is_yellow = true;
                             } else {
                                 secondSetScoreRight = scoreTeamLeft;
                                 secondSetScoreLeft = scoreTeamRight;
                                 TextView tw = (TextView) findViewById(R.id.s2_tA);
                                 tw.setBackgroundColor(Color.YELLOW);
+                                s2_tA_is_yellow = true;
                             }
                             break;
                         }
@@ -539,11 +652,13 @@ public class MainActivity extends AppCompatActivity {
                                 thirdSetScoreRight = scoreTeamRight;
                                 TextView tw2 = (TextView) findViewById(R.id.s3_tB);
                                 tw2.setBackgroundColor(Color.YELLOW);
+                                s3_tB_is_yellow = true;
                             } else {
                                 thirdSetScoreRight = scoreTeamLeft;
                                 thirdSetScoreLeft = scoreTeamRight;
                                 TextView tw2 = (TextView) findViewById(R.id.s3_tA);
                                 tw2.setBackgroundColor(Color.YELLOW);
+                                s3_tA_is_yellow = true;
                             }
                             break;
                         }
@@ -553,11 +668,13 @@ public class MainActivity extends AppCompatActivity {
                                 fourthSetScoreRight = scoreTeamRight;
                                 TextView tw2 = (TextView) findViewById(R.id.s4_tB);
                                 tw2.setBackgroundColor(Color.YELLOW);
+                                s4_tB_is_yellow = true;
                             } else {
                                 fourthSetScoreRight = scoreTeamLeft;
                                 fourthSetScoreLeft = scoreTeamRight;
                                 TextView tw2 = (TextView) findViewById(R.id.s4_tA);
                                 tw2.setBackgroundColor(Color.YELLOW);
+                                s4_tA_is_yellow = true;
                             }
                             break;
                         }
@@ -601,15 +718,18 @@ public class MainActivity extends AppCompatActivity {
                             fifthSetScoreRight = scoreTeamRight;
                             TextView tw2 = (TextView) findViewById(R.id.s5_tB);
                             tw2.setBackgroundColor(Color.YELLOW);
+                             s5_tB_is_yellow = true;
                         } else {
                             fifthSetScoreRight = scoreTeamLeft;
                             fifthSetScoreLeft = scoreTeamRight;
                             TextView tw2 = (TextView) findViewById(R.id.s5_tA);
                             tw2.setBackgroundColor(Color.YELLOW);
+                             s5_tA_is_yellow = true;
                         }
                 } else {
-                    String tieBreak = getString(R.string.tieBreaker);
-                    displayMessage(tieBreak);
+                    Toast.makeText(this, getString(R.string.tieBreaker), Toast.LENGTH_SHORT).show();
+                    String message = teamNameRight + " " + getString(R.string.serve);
+                    displayMessage(message);
                 }
             }
         }
@@ -686,6 +806,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnRight(scoreTeamRight);
                     TextView tw = (TextView) findViewById(R.id.s1_tA);
                     tw.setBackgroundColor(Color.TRANSPARENT);
+                    s1_tA_is_yellow = false;
                     break;
                 }
                 case 2: {
@@ -696,6 +817,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnRight(scoreTeamRight);
                     TextView tw = (TextView) findViewById(R.id.s2_tA);
                     tw.setBackgroundColor(Color.TRANSPARENT);
+                    s2_tA_is_yellow = false;
                     break;
                 }
                 case 3: {
@@ -706,6 +828,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnRight(scoreTeamRight);
                     TextView tw = (TextView) findViewById(R.id.s3_tA);
                     tw.setBackgroundColor(Color.TRANSPARENT);
+                    s3_tA_is_yellow = false;
                     break;
                 }
                 case 4: {
@@ -716,6 +839,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnRight(scoreTeamRight);
                     TextView tw = (TextView) findViewById(R.id.s4_tA);
                     tw.setBackgroundColor(Color.TRANSPARENT);
+                    s4_tA_is_yellow = false;
                     break;
                 }
                 case 5: {
@@ -726,6 +850,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnRight(scoreTeamRight);
                     TextView tw = (TextView) findViewById(R.id.s5_tA);
                     tw.setBackgroundColor(Color.TRANSPARENT);
+                    s5_tA_is_yellow = false;
                     break;
                 }
             }
@@ -754,6 +879,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     TextView tw = (TextView) findViewById(R.id.s1_tB);
                     tw.setBackgroundColor(Color.TRANSPARENT);
+                    s1_tB_is_yellow = false;
                     break;
                 }
                 case 2: {
@@ -764,6 +890,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     TextView tw = (TextView) findViewById(R.id.s2_tB);
                     tw.setBackgroundColor(Color.TRANSPARENT);
+                    s2_tB_is_yellow = false;
                     break;
                 }
                 case 3: {
@@ -774,6 +901,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     TextView tw = (TextView) findViewById(R.id.s3_tB);
                     tw.setBackgroundColor(Color.TRANSPARENT);
+                    s3_tB_is_yellow = false;
                     break;
                 }
                 case 4: {
@@ -784,6 +912,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     TextView tw = (TextView) findViewById(R.id.s4_tB);
                     tw.setBackgroundColor(Color.TRANSPARENT);
+                    s4_tB_is_yellow = false;
                     break;
                 }
                 case 5: {
@@ -794,6 +923,7 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     TextView tw = (TextView) findViewById(R.id.s5_tB);
                     tw.setBackgroundColor(Color.TRANSPARENT);
+                    s5_tB_is_yellow = false;
                     break;
                 }
             }
