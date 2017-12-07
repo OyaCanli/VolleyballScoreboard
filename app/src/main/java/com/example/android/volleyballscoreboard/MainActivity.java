@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     boolean s4_tB_is_yellow;
     boolean s5_tB_is_yellow;
     int starter_team_id;
+    int timeOffCountLeft;
+    int timeOffCountRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         fourthSetScoreRight = 0;
         fifthSetScoreRight = 0;
         starter_team_id = R.id.optionOrange;
+        timeOffCountLeft = 0;
+        timeOffCountRight = 0;
     }
 
 
@@ -116,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
         outState.putBoolean("s3_tB_is_yellow", s3_tB_is_yellow);
         outState.putBoolean("s4_tB_is_yellow", s4_tB_is_yellow);
         outState.putBoolean("s5_tB_is_yellow", s5_tB_is_yellow);
+        outState.putInt("timeOffCountLeft", timeOffCountLeft);
+        outState.putInt("timeOffCountRight", timeOffCountRight);
     }
 
     //This method assigns back the saved values to variables after rotation
@@ -142,6 +148,8 @@ public class MainActivity extends AppCompatActivity {
         thirdSetScoreRight = savedInstanceState.getInt("thirdSetScoreRight");
         fourthSetScoreRight = savedInstanceState.getInt("fourthSetScoreRight");
         fifthSetScoreRight = savedInstanceState.getInt("fifthSetScoreRight");
+        timeOffCountLeft = savedInstanceState.getInt("timeOffCountLeft");
+        timeOffCountRight = savedInstanceState.getInt("timeOffCountRight");
         displayScoreForTeamOnLeft(scoreTeamLeft);
         displayScoreForTeamOnRight(scoreTeamRight);
         displaySetsForTeamOnLeft(setsWonLeft);
@@ -775,13 +783,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void pause(View view) {
+    public void pauseLeft(View view) {
+        if(timeOffCountLeft==2){
+            Toast.makeText(this, "You have used all your time-offs.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
         intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Time left:");
         intent.putExtra(AlarmClock.EXTRA_LENGTH, 60);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+        timeOffCountLeft++;
+        int rest = 2 - timeOffCountLeft;
+        String message = "You have used " + timeOffCountLeft + "timeoffs. You have " + rest + " time-off left.";
+        Toast.makeText(this, message , Toast.LENGTH_SHORT).show();
+    }
+
+    public void pauseRight(View view) {
+        if(timeOffCountRight==2){
+            Toast.makeText(this, "You have used all your time-offs.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Time left:");
+        intent.putExtra(AlarmClock.EXTRA_LENGTH, 60);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+        timeOffCountRight++;
+        int rest = 2 - timeOffCountRight;
+        String message = "You have used " + timeOffCountRight + "timeoffs. You have " + rest + " time-off left.";
+        Toast.makeText(this, message , Toast.LENGTH_SHORT).show();
     }
 
     //This is for correcting a point mistakenly given.

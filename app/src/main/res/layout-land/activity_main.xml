@@ -359,7 +359,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="20dp"
             android:background="@drawable/alarm"
-            android:onClick="pause"
+            android:onClick="pauseLeft"
             android:textSize="12sp" />
 
         <Button
@@ -371,7 +371,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/alarm"
-            android:onClick="pause"
+            android:onClick="pauseRight"
             android:textSize="12sp" />
 
         <Button
