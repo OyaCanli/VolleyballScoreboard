@@ -168,62 +168,62 @@ public class MainActivity extends AppCompatActivity {
         displayOnTableS5_TA(fifthSetScoreLeft);
         displayOnTableS5_TB(fifthSetScoreRight);
         s1_tA_is_yellow = savedInstanceState.getBoolean("s1_tA_is_yellow");
-        if(s1_tA_is_yellow) {
+        if (s1_tA_is_yellow) {
             TextView tw = (TextView) findViewById(R.id.s1_tA);
             tw.setBackgroundColor(Color.YELLOW);
         }
         s2_tA_is_yellow = savedInstanceState.getBoolean("s2_tA_is_yellow");
-        if(s2_tA_is_yellow) {
+        if (s2_tA_is_yellow) {
             TextView tw = (TextView) findViewById(R.id.s2_tA);
             tw.setBackgroundColor(Color.YELLOW);
         }
         s3_tA_is_yellow = savedInstanceState.getBoolean("s3_tA_is_yellow");
-        if(s3_tA_is_yellow) {
+        if (s3_tA_is_yellow) {
             TextView tw = (TextView) findViewById(R.id.s3_tA);
             tw.setBackgroundColor(Color.YELLOW);
         }
         s4_tA_is_yellow = savedInstanceState.getBoolean("s4_tA_is_yellow");
-        if(s4_tA_is_yellow) {
+        if (s4_tA_is_yellow) {
             TextView tw = (TextView) findViewById(R.id.s4_tA);
             tw.setBackgroundColor(Color.YELLOW);
         }
         s5_tA_is_yellow = savedInstanceState.getBoolean("s5_tA_is_yellow");
-        if(s5_tA_is_yellow) {
+        if (s5_tA_is_yellow) {
             TextView tw = (TextView) findViewById(R.id.s5_tA);
             tw.setBackgroundColor(Color.YELLOW);
         }
         s1_tB_is_yellow = savedInstanceState.getBoolean("s1_tB_is_yellow");
-        if(s1_tB_is_yellow) {
+        if (s1_tB_is_yellow) {
             TextView tw = (TextView) findViewById(R.id.s1_tB);
             tw.setBackgroundColor(Color.YELLOW);
         }
         s2_tB_is_yellow = savedInstanceState.getBoolean("s2_tB_is_yellow");
-        if(s2_tB_is_yellow) {
+        if (s2_tB_is_yellow) {
             TextView tw = (TextView) findViewById(R.id.s2_tB);
             tw.setBackgroundColor(Color.YELLOW);
         }
         s3_tB_is_yellow = savedInstanceState.getBoolean("s3_tB_is_yellow");
-        if(s3_tB_is_yellow) {
+        if (s3_tB_is_yellow) {
             TextView tw = (TextView) findViewById(R.id.s3_tB);
             tw.setBackgroundColor(Color.YELLOW);
         }
         s4_tB_is_yellow = savedInstanceState.getBoolean("s4_tB_is_yellow");
-        if(s4_tB_is_yellow) {
+        if (s4_tB_is_yellow) {
             TextView tw = (TextView) findViewById(R.id.s4_tB);
             tw.setBackgroundColor(Color.YELLOW);
         }
         s5_tB_is_yellow = savedInstanceState.getBoolean("s5_tB_is_yellow");
-        if(s5_tB_is_yellow) {
+        if (s5_tB_is_yellow) {
             TextView tw = (TextView) findViewById(R.id.s5_tB);
             tw.setBackgroundColor(Color.YELLOW);
         }
         started = savedInstanceState.getBoolean("started");
-        if(started) {
+        if (started) {
             View startView = findViewById(R.id.startScreen);
             startView.setVisibility(View.GONE);
         }
         switched = savedInstanceState.getBoolean("switched");
-        if(switched){
+        if (switched) {
             View view1 = findViewById(R.id.viewOrange);
             view1.setBackgroundColor(Color.parseColor("#03A9F4"));
             View view2 = findViewById(R.id.viewBlue);
@@ -721,19 +721,19 @@ public class MainActivity extends AppCompatActivity {
                     scoreTeamRight = 0;
                     displayScoreForTeamOnLeft(scoreTeamLeft);
                     displayScoreForTeamOnRight(scoreTeamRight);
-                         if (!switched) {
-                            fifthSetScoreLeft = scoreTeamLeft;
-                            fifthSetScoreRight = scoreTeamRight;
-                            TextView tw2 = (TextView) findViewById(R.id.s5_tB);
-                            tw2.setBackgroundColor(Color.YELLOW);
-                             s5_tB_is_yellow = true;
-                        } else {
-                            fifthSetScoreRight = scoreTeamLeft;
-                            fifthSetScoreLeft = scoreTeamRight;
-                            TextView tw2 = (TextView) findViewById(R.id.s5_tA);
-                            tw2.setBackgroundColor(Color.YELLOW);
-                             s5_tA_is_yellow = true;
-                        }
+                    if (!switched) {
+                        fifthSetScoreLeft = scoreTeamLeft;
+                        fifthSetScoreRight = scoreTeamRight;
+                        TextView tw2 = (TextView) findViewById(R.id.s5_tB);
+                        tw2.setBackgroundColor(Color.YELLOW);
+                        s5_tB_is_yellow = true;
+                    } else {
+                        fifthSetScoreRight = scoreTeamLeft;
+                        fifthSetScoreLeft = scoreTeamRight;
+                        TextView tw2 = (TextView) findViewById(R.id.s5_tA);
+                        tw2.setBackgroundColor(Color.YELLOW);
+                        s5_tA_is_yellow = true;
+                    }
                 } else {
                     Toast.makeText(this, getString(R.string.tieBreaker), Toast.LENGTH_SHORT).show();
                     String message = teamNameRight + " " + getString(R.string.serve);
@@ -753,6 +753,9 @@ public class MainActivity extends AppCompatActivity {
             setsWonRight = temporary;
             displaySetsForTeamOnLeft(setsWonLeft);
             displaySetsForTeamOnRight(setsWonRight);
+            int temp = timeOffCountLeft;
+            timeOffCountLeft = timeOffCountRight;
+            timeOffCountRight = temp;
             if (teamNameLeft.equals(initialTeamNameOnLeft)) {
                 teamNameLeft = initialTeamNameOnRight;
                 displayTeamNameonLeft(teamNameLeft);
@@ -780,11 +783,13 @@ public class MainActivity extends AppCompatActivity {
                 TextView tw2 = (TextView) findViewById(R.id.team_on_right);
                 tw2.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blueborder));
             }
+        } else {
+            Toast.makeText(this, "You can exchange sides only between the sets.", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void pauseLeft(View view) {
-        if(timeOffCountLeft==2){
+        if (timeOffCountLeft == 2) {
             Toast.makeText(this, "You have used all your time-offs.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -796,12 +801,12 @@ public class MainActivity extends AppCompatActivity {
         }
         timeOffCountLeft++;
         int rest = 2 - timeOffCountLeft;
-        String message = "You have used " + timeOffCountLeft + "timeoffs. You have " + rest + " time-off left.";
-        Toast.makeText(this, message , Toast.LENGTH_SHORT).show();
+        String message = "You have used " + timeOffCountLeft + " timeoffs. You have " + rest + " time-off left.";
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     public void pauseRight(View view) {
-        if(timeOffCountRight==2){
+        if (timeOffCountRight == 2) {
             Toast.makeText(this, "You have used all your time-offs.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -813,8 +818,8 @@ public class MainActivity extends AppCompatActivity {
         }
         timeOffCountRight++;
         int rest = 2 - timeOffCountRight;
-        String message = "You have used " + timeOffCountRight + "timeoffs. You have " + rest + " time-off left.";
-        Toast.makeText(this, message , Toast.LENGTH_SHORT).show();
+        String message = "You have used " + timeOffCountRight + " timeoffs. You have " + rest + " time-off left.";
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     //This is for correcting a point mistakenly given.
@@ -1022,5 +1027,20 @@ public class MainActivity extends AppCompatActivity {
         tw9.setBackgroundColor(Color.TRANSPARENT);
         TextView tw10 = (TextView) findViewById(R.id.s5_tB);
         tw10.setBackgroundColor(Color.TRANSPARENT);
+        View startView = findViewById(R.id.startScreen);
+        startView.setVisibility(View.VISIBLE);
+        started = false;
+        timeOffCountRight = 0;
+        timeOffCountLeft = 0;
+        s1_tA_is_yellow = false;
+        s2_tA_is_yellow = false;
+        s3_tA_is_yellow = false;
+        s4_tA_is_yellow = false;
+        s5_tA_is_yellow = false;
+        s1_tB_is_yellow = false;
+        s2_tB_is_yellow = false;
+        s3_tB_is_yellow = false;
+        s4_tB_is_yellow = false;
+        s5_tB_is_yellow = false;
     }
 }
