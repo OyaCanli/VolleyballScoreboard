@@ -1,239 +1,133 @@
-package com.example.android.volleyballscoreboard;
+package com.example.android.newvolleyballscoreboard;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.provider.AlarmClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.volleyballscoreboard.R;
+
 public class MainActivity extends AppCompatActivity {
 
-    int scoreTeamLeft;
-    int scoreTeamRight;
-    int setsWonLeft;
-    int setsWonRight;
-    String teamNameLeft;
-    String teamNameRight;
-    String initialTeamNameOnLeft;
-    String initialTeamNameOnRight;
+    int scoreLeft, scoreRight, setsWonLeft, setsWonRight, setNumber;
+    String teamNameLeft, teamNameRight, initialTeamNameOnLeft, initialTeamNameOnRight;
     String message;
-    int setNumber;
-    boolean switched;
-    boolean started;
-    int firstSetScoreLeft;
-    int secondSetScoreLeft;
-    int thirdSetScoreLeft;
-    int fourthSetScoreLeft;
-    int fifthSetScoreLeft;
-    int firstSetScoreRight;
-    int secondSetScoreRight;
-    int thirdSetScoreRight;
-    int fourthSetScoreRight;
-    int fifthSetScoreRight;
-    boolean s1_tA_is_yellow;
-    boolean s2_tA_is_yellow;
-    boolean s3_tA_is_yellow;
-    boolean s4_tA_is_yellow;
-    boolean s5_tA_is_yellow;
-    boolean s1_tB_is_yellow;
-    boolean s2_tB_is_yellow;
-    boolean s3_tB_is_yellow;
-    boolean s4_tB_is_yellow;
-    boolean s5_tB_is_yellow;
-    int starter_team_id;
-    int timeOffCountLeft;
-    int timeOffCountRight;
+    boolean switched, started;
+    int timeOffCountLeft, timeOffCountRight, starter_team_id;;
+    int[] orangeCellIds = {R.id.s1_tA, R.id.s2_tA, R.id.s3_tA, R.id.s4_tA, R.id.s5_tA};
+    int[] blueCellIds = {R.id.s1_tB, R.id.s2_tB, R.id.s3_tB, R.id.s4_tB, R.id.s5_tB};
+    int setScoresOrange[] = new int[5];
+    int setScoresBlue[] = new int[5];
+    int orangeRowColors[] = new int[5];
+    int blueRowColors[] = new int[5];
+    public final static String SCORE_LEFT = "scoreLeft";
+    public final static String SCORE_RIGHT = "scoreRight";
+    public final static String SETS_WON_LEFT = "setsWonLeft";
+    public final static String SETS_WON_RIGHT = "setsWonRight";
+    public final static String SET_NUMBER = "setNumber";
+    public final static String MESSAGE = "message";
+    public final static String SET_SCORES_ORANGE = "SetScoresOrange";
+    public final static String SET_SCORES_BLUE = "SetScoresBlue";
+    public final static String ORANGE_ROW_COLORS = "OrangeRowColors";
+    public final static String BLUE_ROW_COLORS = "BlueRowColors";
+    public final static String TEAM_NAME_LEFT = "teamNameLeft";
+    public final static String TEAM_NAME_RIGHT = "teamNameRight";
+    public final static String INITIAL_NAME_LEFT = "initialNameLeft";
+    public final static String INITIAL_NAME_RIGHT= "initialNameRight";
+    public final static String SWITCHED = "switched";
+    public final static String STARTED = "started";
+    public final static String TIMEOFF_COUNT_LEFT = "timeoffCountLeft";
+    public final static String TIMEOFF_COUNT_RIGHT = "timeoffCountRight";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        scoreTeamLeft = 0;
-        scoreTeamRight = 0;
-        setsWonLeft = 0;
-        setsWonRight = 0;
-        message = " ";
-        teamNameLeft = getString(R.string.defaultTeamNameOnLeft);
-        teamNameRight = getString(R.string.defaultTeamNameOnRight);
-        setNumber = 1;
-        switched = false;
-        started = false;
-        firstSetScoreLeft = 0;
-        secondSetScoreLeft = 0;
-        thirdSetScoreLeft = 0;
-        fourthSetScoreLeft = 0;
-        fifthSetScoreLeft = 0;
-        firstSetScoreRight = 0;
-        secondSetScoreRight = 0;
-        thirdSetScoreRight = 0;
-        fourthSetScoreRight = 0;
-        fifthSetScoreRight = 0;
+        initialTeamNameOnLeft = teamNameLeft = getString(R.string.defaultTeamNameOnLeft);
+        initialTeamNameOnRight = teamNameRight = getString(R.string.defaultTeamNameOnRight);
         starter_team_id = R.id.optionOrange;
-        timeOffCountLeft = 0;
-        timeOffCountRight = 0;
     }
-
 
     //This methods saves an instance of the variable values during rotation
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("scoreTeamLeft", scoreTeamLeft);
-        outState.putInt("scoreTeamRight", scoreTeamRight);
-        outState.putInt("setsWonLeft", setsWonLeft);
-        outState.putInt("setsWonRight", setsWonRight);
-        outState.putString("teamNameLeft", teamNameLeft);
-        outState.putString("teamNameRight", teamNameRight);
-        outState.putString("initialTeamNameOnLeft", initialTeamNameOnLeft);
-        outState.putString("initialTeamNameOnRight", initialTeamNameOnRight);
-        outState.putString("message", message);
-        outState.putInt("firstSetScoreLeft", firstSetScoreLeft);
-        outState.putInt("secondSetScoreLeft", secondSetScoreLeft);
-        outState.putInt("thirdSetScoreLeft", thirdSetScoreLeft);
-        outState.putInt("fourthSetScoreLeft", fourthSetScoreLeft);
-        outState.putInt("fifthSetScoreLeft", fifthSetScoreLeft);
-        outState.putInt("firstSetScoreRight", firstSetScoreRight);
-        outState.putInt("secondSetScoreRight", secondSetScoreRight);
-        outState.putInt("thirdSetScoreRight", thirdSetScoreRight);
-        outState.putInt("fourthSetScoreRight", fourthSetScoreRight);
-        outState.putInt("fifthSetScoreRight", fifthSetScoreRight);
-        outState.putInt("setNumber", setNumber);
-        outState.putInt("starter_team_id", starter_team_id);
-        outState.putBoolean("switched", switched);
-        outState.putBoolean("started", started);
-        outState.putBoolean("s1_tA_is_yellow", s1_tA_is_yellow);
-        outState.putBoolean("s2_tA_is_yellow", s2_tA_is_yellow);
-        outState.putBoolean("s3_tA_is_yellow", s3_tA_is_yellow);
-        outState.putBoolean("s4_tA_is_yellow", s4_tA_is_yellow);
-        outState.putBoolean("s5_tA_is_yellow", s5_tA_is_yellow);
-        outState.putBoolean("s1_tB_is_yellow", s1_tB_is_yellow);
-        outState.putBoolean("s2_tB_is_yellow", s2_tB_is_yellow);
-        outState.putBoolean("s3_tB_is_yellow", s3_tB_is_yellow);
-        outState.putBoolean("s4_tB_is_yellow", s4_tB_is_yellow);
-        outState.putBoolean("s5_tB_is_yellow", s5_tB_is_yellow);
-        outState.putInt("timeOffCountLeft", timeOffCountLeft);
-        outState.putInt("timeOffCountRight", timeOffCountRight);
+        outState.putInt(SCORE_LEFT, scoreLeft);
+        outState.putInt(SCORE_RIGHT, scoreRight);
+        outState.putInt(SETS_WON_LEFT, setsWonLeft);
+        outState.putInt(SETS_WON_RIGHT, setsWonRight);
+        outState.putInt(SET_NUMBER, setNumber);
+        outState.putString(TEAM_NAME_LEFT, teamNameLeft);
+        outState.putString(TEAM_NAME_RIGHT, teamNameRight);
+        outState.putString(INITIAL_NAME_LEFT, initialTeamNameOnLeft);
+        outState.putString(INITIAL_NAME_RIGHT, initialTeamNameOnRight);
+        outState.putString(MESSAGE, message);
+        outState.putBoolean(SWITCHED, switched);
+        outState.putBoolean(STARTED, started);
+        outState.putInt(TIMEOFF_COUNT_LEFT, timeOffCountLeft);
+        outState.putInt(TIMEOFF_COUNT_RIGHT, timeOffCountRight);
+        outState.putIntArray(SET_SCORES_ORANGE, setScoresOrange);
+        outState.putIntArray(SET_SCORES_BLUE, setScoresBlue);
+        outState.putIntArray(ORANGE_ROW_COLORS, orangeRowColors);
+        outState.putIntArray(BLUE_ROW_COLORS, blueRowColors);
     }
 
-    //This method assigns back the saved values to variables after rotation
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        scoreTeamLeft = savedInstanceState.getInt("scoreTeamLeft");
-        scoreTeamRight = savedInstanceState.getInt("scoreTeamRight");
-        setsWonLeft = savedInstanceState.getInt("setsWonLeft");
-        setsWonRight = savedInstanceState.getInt("setsWonRight");
-        setNumber = savedInstanceState.getInt("setNumber");
-        message = savedInstanceState.getString("message");
-        teamNameLeft = savedInstanceState.getString("teamNameLeft");
-        teamNameRight = savedInstanceState.getString("teamNameRight");
-        initialTeamNameOnLeft = savedInstanceState.getString("initialTeamNameOnLeft");
-        initialTeamNameOnRight = savedInstanceState.getString("initialTeamNameOnRight");
-        firstSetScoreLeft = savedInstanceState.getInt("firstSetScoreLeft");
-        secondSetScoreLeft = savedInstanceState.getInt("secondSetScoreLeft");
-        thirdSetScoreLeft = savedInstanceState.getInt("thirdSetScoreLeft");
-        fourthSetScoreLeft = savedInstanceState.getInt("fourthSetScoreLeft");
-        fifthSetScoreLeft = savedInstanceState.getInt("fifthSetScoreLeft");
-        firstSetScoreRight = savedInstanceState.getInt("firstSetScoreRight");
-        secondSetScoreRight = savedInstanceState.getInt("secondSetScoreRight");
-        thirdSetScoreRight = savedInstanceState.getInt("thirdSetScoreRight");
-        fourthSetScoreRight = savedInstanceState.getInt("fourthSetScoreRight");
-        fifthSetScoreRight = savedInstanceState.getInt("fifthSetScoreRight");
-        timeOffCountLeft = savedInstanceState.getInt("timeOffCountLeft");
-        timeOffCountRight = savedInstanceState.getInt("timeOffCountRight");
-        displayScoreForTeamOnLeft(scoreTeamLeft);
-        displayScoreForTeamOnRight(scoreTeamRight);
+        scoreLeft = savedInstanceState.getInt(SCORE_LEFT);
+        scoreRight = savedInstanceState.getInt(SCORE_RIGHT);
+        setsWonLeft = savedInstanceState.getInt(SETS_WON_LEFT);
+        setsWonRight = savedInstanceState.getInt(SETS_WON_RIGHT);
+        setNumber = savedInstanceState.getInt(SET_NUMBER);
+        message = savedInstanceState.getString(MESSAGE);
+        teamNameLeft = savedInstanceState.getString(TEAM_NAME_LEFT);
+        teamNameRight = savedInstanceState.getString(TEAM_NAME_RIGHT);
+        initialTeamNameOnLeft = savedInstanceState.getString(INITIAL_NAME_LEFT);
+        initialTeamNameOnRight = savedInstanceState.getString(INITIAL_NAME_RIGHT);
+        setNumber = savedInstanceState.getInt(SET_NUMBER);
+        displayScoreForTeamOnLeft(scoreLeft);
+        displayScoreForTeamOnRight(scoreRight);
         displaySetsForTeamOnLeft(setsWonLeft);
         displaySetsForTeamOnRight(setsWonRight);
         displayMessage(message);
         displayTeamNameonLeft(teamNameLeft);
         displayTeamNameonRight(teamNameRight);
-        displayOnTableS1_TA(firstSetScoreLeft);
-        displayOnTableS1_TB(firstSetScoreRight);
-        displayOnTableS2_TA(secondSetScoreLeft);
-        displayOnTableS2_TB(secondSetScoreRight);
-        displayOnTableS3_TA(thirdSetScoreLeft);
-        displayOnTableS3_TB(thirdSetScoreRight);
-        displayOnTableS4_TA(fourthSetScoreLeft);
-        displayOnTableS4_TB(fourthSetScoreRight);
-        displayOnTableS5_TA(fifthSetScoreLeft);
-        displayOnTableS5_TB(fifthSetScoreRight);
-        s1_tA_is_yellow = savedInstanceState.getBoolean("s1_tA_is_yellow");
-        if (s1_tA_is_yellow) {
-            TextView tw = (TextView) findViewById(R.id.s1_tA);
-            tw.setBackgroundColor(Color.YELLOW);
-        }
-        s2_tA_is_yellow = savedInstanceState.getBoolean("s2_tA_is_yellow");
-        if (s2_tA_is_yellow) {
-            TextView tw = (TextView) findViewById(R.id.s2_tA);
-            tw.setBackgroundColor(Color.YELLOW);
-        }
-        s3_tA_is_yellow = savedInstanceState.getBoolean("s3_tA_is_yellow");
-        if (s3_tA_is_yellow) {
-            TextView tw = (TextView) findViewById(R.id.s3_tA);
-            tw.setBackgroundColor(Color.YELLOW);
-        }
-        s4_tA_is_yellow = savedInstanceState.getBoolean("s4_tA_is_yellow");
-        if (s4_tA_is_yellow) {
-            TextView tw = (TextView) findViewById(R.id.s4_tA);
-            tw.setBackgroundColor(Color.YELLOW);
-        }
-        s5_tA_is_yellow = savedInstanceState.getBoolean("s5_tA_is_yellow");
-        if (s5_tA_is_yellow) {
-            TextView tw = (TextView) findViewById(R.id.s5_tA);
-            tw.setBackgroundColor(Color.YELLOW);
-        }
-        s1_tB_is_yellow = savedInstanceState.getBoolean("s1_tB_is_yellow");
-        if (s1_tB_is_yellow) {
-            TextView tw = (TextView) findViewById(R.id.s1_tB);
-            tw.setBackgroundColor(Color.YELLOW);
-        }
-        s2_tB_is_yellow = savedInstanceState.getBoolean("s2_tB_is_yellow");
-        if (s2_tB_is_yellow) {
-            TextView tw = (TextView) findViewById(R.id.s2_tB);
-            tw.setBackgroundColor(Color.YELLOW);
-        }
-        s3_tB_is_yellow = savedInstanceState.getBoolean("s3_tB_is_yellow");
-        if (s3_tB_is_yellow) {
-            TextView tw = (TextView) findViewById(R.id.s3_tB);
-            tw.setBackgroundColor(Color.YELLOW);
-        }
-        s4_tB_is_yellow = savedInstanceState.getBoolean("s4_tB_is_yellow");
-        if (s4_tB_is_yellow) {
-            TextView tw = (TextView) findViewById(R.id.s4_tB);
-            tw.setBackgroundColor(Color.YELLOW);
-        }
-        s5_tB_is_yellow = savedInstanceState.getBoolean("s5_tB_is_yellow");
-        if (s5_tB_is_yellow) {
-            TextView tw = (TextView) findViewById(R.id.s5_tB);
-            tw.setBackgroundColor(Color.YELLOW);
-        }
-        started = savedInstanceState.getBoolean("started");
-        if (started) {
-            View startView = findViewById(R.id.startScreen);
-            startView.setVisibility(View.GONE);
-        }
-        switched = savedInstanceState.getBoolean("switched");
+        switched = savedInstanceState.getBoolean(SWITCHED);
         if (switched) {
             View view1 = findViewById(R.id.viewOrange);
-            view1.setBackgroundColor(Color.parseColor("#03A9F4"));
+            view1.setBackgroundColor(getResources().getColor(R.color.background_teamA));
             View view2 = findViewById(R.id.viewBlue);
-            view2.setBackgroundColor(Color.parseColor("#FF9800"));
+            view2.setBackgroundColor(getResources().getColor(R.color.background_teamB));
             TextView tw1 = (TextView) findViewById(R.id.team_on_left);
             tw1.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blueborder));
             TextView tw2 = (TextView) findViewById(R.id.team_on_right);
             tw2.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.cellborder));
         }
-
+        started = savedInstanceState.getBoolean(STARTED);
+        if (started) {
+            View startView = findViewById(R.id.startScreen);
+            startView.setVisibility(View.GONE);
+        }
+        setScoresOrange = savedInstanceState.getIntArray(SET_SCORES_ORANGE);
+        setScoresBlue = savedInstanceState.getIntArray(SET_SCORES_BLUE);
+        orangeRowColors = savedInstanceState.getIntArray(ORANGE_ROW_COLORS);
+        blueRowColors = savedInstanceState.getIntArray(BLUE_ROW_COLORS);
+        for(int i = 0; i<5 ; i++){
+            TextView orangeCell = findViewById(orangeCellIds[i]);
+            orangeCell.setText(String.valueOf(setScoresOrange[i]));
+            orangeCell.setBackgroundColor(orangeRowColors[i]);
+            TextView blueCell = findViewById(blueCellIds[i]);
+            blueCell.setText(String.valueOf(setScoresBlue[i]));
+            blueCell.setBackgroundColor(blueRowColors[i]);
+        }
     }
 
     public void startGame(View view) {
@@ -254,17 +148,17 @@ public class MainActivity extends AppCompatActivity {
         teamNameRight = initialTeamNameOnRight;
         displayOnTableTeamB(teamNameRight);
         displayTeamNameonRight(teamNameRight);
-        RadioGroup starter = (RadioGroup) findViewById(R.id.whoStarts);
-        if (starter.getCheckedRadioButtonId() == R.id.optionOrange) {
-            String message = teamNameLeft + " " + getString(com.example.android.volleyballscoreboard.R.string.serve);
+        RadioGroup starter = findViewById(R.id.whoStarts);
+        if (starter.getCheckedRadioButtonId() == R.id.optionBlue) {
+            String message = teamNameRight + " " + getString(R.string.serve);
+            displayMessage(message);
+            starter_team_id = R.id.optionBlue;
+        } else {
+            String message = teamNameLeft + " " + getString(R.string.serve);
             displayMessage(message);
             starter_team_id = R.id.optionOrange;
         }
-        if (starter.getCheckedRadioButtonId() == R.id.optionBlue) {
-            String message = teamNameRight + " " + getString(com.example.android.volleyballscoreboard.R.string.serve);
-            displayMessage(message);
-            starter_team_id = R.id.optionBlue;
-        }
+
         View startView = findViewById(R.id.startScreen);
         startView.setVisibility(View.GONE);
     }
@@ -273,471 +167,131 @@ public class MainActivity extends AppCompatActivity {
         double chance = Math.random();
         chance *= 2;
         if (chance < 1) { //heads
-            ImageView coin = (ImageView) findViewById(R.id.coin);
+            ImageView coin =  findViewById(R.id.coin);
             coin.setImageResource(R.drawable.heads);
         } else { //tails
-            ImageView coin = (ImageView) findViewById(R.id.coin);
+            ImageView coin = findViewById(R.id.coin);
             coin.setImageResource(R.drawable.one_euro);
         }
     }
 
-    public void displayScoreForTeamOnLeft(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.team_left_score);
-        scoreView.setText(String.valueOf(score));
-    }
 
-    public void displayScoreForTeamOnRight(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.team_right_score);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displaySetsForTeamOnLeft(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.setsForTeamOnLeft);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displaySetsForTeamOnRight(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.setsForTeamOnRight);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displayMessage(String message) {
-        TextView scoreView = (TextView) findViewById(R.id.message);
-        scoreView.setText(message);
-    }
-
-    public void displayTeamNameonLeft(String message) {
-        TextView scoreView = (TextView) findViewById(R.id.team_on_left);
-        scoreView.setText(message);
-    }
-
-    public void displayTeamNameonRight(String message) {
-        TextView scoreView = (TextView) findViewById(R.id.team_on_right);
-        scoreView.setText(message);
-    }
-
-    //Methods below are for displaying a summary of all set scores in a table.
-    // Each method is for one cell
-    public void displayOnTableTeamA(String message) {
-        TextView scoreView = (TextView) findViewById(R.id.teamA);
-        scoreView.setText(message);
-    }
-
-    public void displayOnTableTeamB(String message) {
-        TextView scoreView = (TextView) findViewById(R.id.teamB);
-        scoreView.setText(message);
-    }
-
-    public void displayOnTableS1_TA(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.s1_tA);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displayOnTableS1_TB(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.s1_tB);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displayOnTableS2_TA(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.s2_tA);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displayOnTableS2_TB(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.s2_tB);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displayOnTableS3_TA(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.s3_tA);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displayOnTableS3_TB(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.s3_tB);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displayOnTableS4_TA(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.s4_tA);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displayOnTableS4_TB(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.s4_tB);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displayOnTableS5_TA(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.s5_tA);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    public void displayOnTableS5_TB(int score) {
-        TextView scoreView = (TextView) findViewById(R.id.s5_tB);
-        scoreView.setText(String.valueOf(score));
-    }
-
-    //This method adds a point to the team on the left and shows it on the scoreboard.
-    //It shows the same value simultaneously on the set summary table as well.
     public void add1pointToTeamOnLeft(View view) {
-        if (started) {
-            scoreTeamLeft++;
-            displayScoreForTeamOnLeft(scoreTeamLeft);
-            //switch statement assures that the score is shown for the right team
-            //It also keeps a backup of current scoreteam for showing in the table after rotation
-            switch (setNumber) {
-                case 1: {
-                    if (!switched) {
-                        displayOnTableS1_TA(scoreTeamLeft);
-                        firstSetScoreLeft = scoreTeamLeft;
-                    } else {
-                        displayOnTableS1_TB(scoreTeamLeft);
-                        firstSetScoreRight = scoreTeamLeft;
-                    }
-                    break;
-                }
-                case 2: {
-                    if (!switched) {
-                        displayOnTableS2_TA(scoreTeamLeft);
-                        secondSetScoreLeft = scoreTeamLeft;
-                    } else {
-                        displayOnTableS2_TB(scoreTeamLeft);
-                        secondSetScoreRight = scoreTeamLeft;
-                    }
-                    break;
-                }
-                case 3: {
-                    if (!switched) {
-                        displayOnTableS3_TA(scoreTeamLeft);
-                        thirdSetScoreLeft = scoreTeamLeft;
-                    } else {
-                        displayOnTableS3_TB(scoreTeamLeft);
-                        thirdSetScoreRight = scoreTeamLeft;
-                    }
-                    break;
-                }
-                case 4: {
-                    if (!switched) {
-                        displayOnTableS4_TA(scoreTeamLeft);
-                        fourthSetScoreLeft = scoreTeamLeft;
-                    } else {
-                        displayOnTableS4_TB(scoreTeamLeft);
-                        fourthSetScoreRight = scoreTeamLeft;
-                    }
-                    break;
-                }
-                case 5: {
-                    if (!switched) {
-                        displayOnTableS5_TA(scoreTeamLeft);
-                        fifthSetScoreLeft = scoreTeamLeft;
-                    } else {
-                        displayOnTableS5_TB(scoreTeamLeft);
-                        fifthSetScoreRight = scoreTeamLeft;
-                    }
-                    break;
-                }
+        if(started) {
+            scoreLeft++;
+            displayScoreForTeamOnLeft(scoreLeft);
+            if (!switched) {
+                setScoresOrange[setNumber] = scoreLeft;
+                TextView scoreTable = findViewById(orangeCellIds[setNumber]);
+                scoreTable.setText(String.valueOf(setScoresOrange[setNumber]));
+            } else {
+                setScoresBlue[setNumber] = scoreLeft;
+                TextView scoreTable = findViewById(blueCellIds[setNumber]);
+                scoreTable.setText(String.valueOf(setScoresBlue[setNumber]));
             }
-            if (setNumber < 5) {
-                if ((scoreTeamLeft >= 25) && ((scoreTeamLeft - scoreTeamRight) >= 2)) {
-                    //if it is a set winning point..
-                    //Switch case takes a backup of final set score before reseting it; according to set number
-                    switch (setNumber) {
-                        case 1: {
-                            if (!switched) {
-                                firstSetScoreLeft = scoreTeamLeft;
-                                firstSetScoreRight = scoreTeamRight;
-                                TextView tw = (TextView) findViewById(R.id.s1_tA);
-                                tw.setBackgroundColor(Color.YELLOW);
-                                s1_tA_is_yellow = true;
-                            } else {
-                                firstSetScoreRight = scoreTeamLeft;
-                                firstSetScoreLeft = scoreTeamRight;
-                                TextView tw = (TextView) findViewById(R.id.s1_tB);
-                                tw.setBackgroundColor(Color.YELLOW);
-                                s1_tB_is_yellow = true;
-                            }
-                            break;
-                        }
-                        case 2: {
-                            if (!switched) {
-                                secondSetScoreLeft = scoreTeamLeft;
-                                secondSetScoreRight = scoreTeamRight;
-                                TextView tw = (TextView) findViewById(R.id.s2_tA);
-                                tw.setBackgroundColor(Color.YELLOW);
-                                s2_tA_is_yellow = true;
-                            } else {
-                                secondSetScoreRight = scoreTeamLeft;
-                                secondSetScoreLeft = scoreTeamRight;
-                                TextView tw = (TextView) findViewById(R.id.s2_tB);
-                                tw.setBackgroundColor(Color.YELLOW);
-                                s2_tB_is_yellow = true;
-                            }
-                            break;
-                        }
-                        case 3: {
-                            if (!switched) {
-                                thirdSetScoreLeft = scoreTeamLeft;
-                                thirdSetScoreRight = scoreTeamRight;
-                                TextView tw2 = (TextView) findViewById(R.id.s3_tA);
-                                tw2.setBackgroundColor(Color.YELLOW);
-                                s3_tA_is_yellow = true;
-                            } else {
-                                thirdSetScoreRight = scoreTeamLeft;
-                                thirdSetScoreLeft = scoreTeamRight;
-                                TextView tw2 = (TextView) findViewById(R.id.s3_tB);
-                                tw2.setBackgroundColor(Color.YELLOW);
-                                s3_tB_is_yellow = true;
-                            }
-                            break;
-                        }
-                        case 4: {
-                            if (!switched) {
-                                fourthSetScoreLeft = scoreTeamLeft;
-                                fourthSetScoreRight = scoreTeamRight;
-                                TextView tw2 = (TextView) findViewById(R.id.s4_tA);
-                                tw2.setBackgroundColor(Color.YELLOW);
-                                s4_tA_is_yellow = true;
-                            } else {
-                                fourthSetScoreRight = scoreTeamLeft;
-                                fourthSetScoreLeft = scoreTeamRight;
-                                TextView tw2 = (TextView) findViewById(R.id.s4_tB);
-                                tw2.setBackgroundColor(Color.YELLOW);
-                                s4_tB_is_yellow = true;
-                            }
-                            break;
-                        }
 
+            if (setNumber < 5) {
+                if ((scoreLeft >= 25) && ((scoreLeft - scoreRight) >= 2)) {
+                    //if it is a set winning point..
+                    if (!switched){
+                        TextView scoreTable = findViewById(orangeCellIds[setNumber]);
+                        scoreTable.setBackgroundColor(Color.YELLOW);
+                        orangeRowColors[setNumber] = Color.YELLOW;
+                        blueRowColors[setNumber] = Color.TRANSPARENT;
+                    } else {
+                        TextView scoreTable = findViewById(blueCellIds[setNumber]);
+                        scoreTable.setBackgroundColor(Color.YELLOW);
+                        blueRowColors[setNumber] = Color.YELLOW;
+                        orangeRowColors[setNumber] = Color.TRANSPARENT;
                     }
                     setsWonLeft++;
                     displaySetsForTeamOnLeft(setsWonLeft);
-
                     if (setsWonLeft == 3) { //if it a match winning set
                         String winner = teamNameLeft + " " + getString(R.string.wonMatch);
                         displayMessage(winner);
                     } else { //if it is not a match winning set
                         String message = teamNameLeft + " " + getString(R.string.wonSet);
                         displayMessage(message);
-
                         setNumber++;
-                        scoreTeamLeft = 0;
-                        scoreTeamRight = 0;
-                        displayScoreForTeamOnLeft(scoreTeamLeft);
-                        displayScoreForTeamOnRight(scoreTeamRight);
+                        scoreLeft = 0;
+                        scoreRight = 0;
+                        displayScoreForTeamOnLeft(scoreLeft);
+                        displayScoreForTeamOnRight(scoreRight);
                     }
                 } else { //if it is not a set winning point
                     String message = teamNameLeft + " " + getString(R.string.serve);
                     displayMessage(message);
                 }
             } else { // if it is the fifth set; it will switch to a tie break: the final set will be up to 15 points.
-                if ((scoreTeamLeft >= 15) && ((scoreTeamLeft - scoreTeamRight) >= 2)) {
+                if ((scoreLeft >= 15) && ((scoreLeft - scoreRight) >= 2)) {
                     String message = teamNameLeft + " " + getString(R.string.wonMatch);
                     displayMessage(message);
                     setsWonLeft++;
                     displaySetsForTeamOnLeft(setsWonLeft);
-                    scoreTeamLeft = 0;
-                    scoreTeamRight = 0;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    if (!switched) {
-                        fifthSetScoreLeft = scoreTeamLeft;
-                        fifthSetScoreRight = scoreTeamRight;
-                        TextView tw2 = (TextView) findViewById(R.id.s5_tA);
-                        tw2.setBackgroundColor(Color.YELLOW);
-                        s5_tA_is_yellow = true;
-                    } else {
-                        fifthSetScoreRight = scoreTeamLeft;
-                        fifthSetScoreLeft = scoreTeamRight;
-                        TextView tw2 = (TextView) findViewById(R.id.s5_tB);
-                        tw2.setBackgroundColor(Color.YELLOW);
-                        s5_tB_is_yellow = true;
-                    }
-                } else {
-                    Toast.makeText(this, getString(R.string.tieBreaker), Toast.LENGTH_SHORT).show();
-                    String message = teamNameLeft + " " + getString(R.string.serve);
-                    displayMessage(message);
+                    scoreLeft = 0;
+                    scoreRight = 0;
+                    displayScoreForTeamOnLeft(scoreLeft);
+                    displayScoreForTeamOnRight(scoreRight);
                 }
             }
         }
     }
 
-
-    //Same as the previous method, but for the opposite side.
     public void add1pointToTeamOnRight(View view) {
-        if (started) {
-            scoreTeamRight++;
-            displayScoreForTeamOnRight(scoreTeamRight);
-            switch (setNumber) {
-                case 1: {
-                    if (!switched) {
-                        displayOnTableS1_TB(scoreTeamRight);
-                        firstSetScoreRight = scoreTeamRight;
-                    } else {
-                        displayOnTableS1_TA(scoreTeamRight);
-                        firstSetScoreLeft = scoreTeamRight;
-                    }
-                    break;
-                }
-                case 2: {
-                    if (!switched) {
-                        displayOnTableS2_TB(scoreTeamRight);
-                        secondSetScoreRight = scoreTeamRight;
-                    } else {
-                        displayOnTableS2_TA(scoreTeamRight);
-                        secondSetScoreLeft = scoreTeamRight;
-                    }
-                    break;
-                }
-                case 3: {
-                    if (!switched) {
-                        displayOnTableS3_TB(scoreTeamRight);
-                        thirdSetScoreRight = scoreTeamRight;
-                    } else {
-                        displayOnTableS3_TA(scoreTeamRight);
-                        thirdSetScoreLeft = scoreTeamRight;
-                    }
-                    break;
-                }
-                case 4: {
-                    if (!switched) {
-                        displayOnTableS4_TB(scoreTeamRight);
-                        fourthSetScoreRight = scoreTeamRight;
-                    } else {
-                        displayOnTableS4_TA(scoreTeamRight);
-                        fourthSetScoreLeft = scoreTeamRight;
-                    }
-                    break;
-                }
-                case 5: {
-                    if (!switched) {
-                        displayOnTableS5_TB(scoreTeamRight);
-                        fifthSetScoreRight = scoreTeamRight;
-                    } else {
-                        displayOnTableS5_TA(scoreTeamRight);
-                        fifthSetScoreLeft = scoreTeamRight;
-                    }
-                    break;
-                }
+        if(started) {
+            scoreRight++;
+            displayScoreForTeamOnRight(scoreRight);
+            if (!switched) {
+                setScoresBlue[setNumber] = scoreRight;
+                TextView scoreTable = findViewById(blueCellIds[setNumber]);
+                scoreTable.setText(String.valueOf(setScoresBlue[setNumber]));
+            } else {
+                setScoresOrange[setNumber] = scoreRight;
+                TextView scoreTable = findViewById(orangeCellIds[setNumber]);
+                scoreTable.setText(String.valueOf(setScoresOrange[setNumber]));
             }
             if (setNumber < 5) {
-                if ((scoreTeamRight >= 25) && ((scoreTeamRight - scoreTeamLeft) >= 2)) {
-                    switch (setNumber) {
-                        case 1: {
-                            if (!switched) {
-                                firstSetScoreLeft = scoreTeamLeft;
-                                firstSetScoreRight = scoreTeamRight;
-                                TextView tw = (TextView) findViewById(R.id.s1_tB);
-                                tw.setBackgroundColor(Color.YELLOW);
-                                s1_tB_is_yellow = true;
-                            } else {
-                                firstSetScoreRight = scoreTeamLeft;
-                                firstSetScoreLeft = scoreTeamRight;
-                                TextView tw = (TextView) findViewById(R.id.s1_tA);
-                                tw.setBackgroundColor(Color.YELLOW);
-                                s1_tA_is_yellow = true;
-                            }
-                            break;
-                        }
-                        case 2: {
-                            if (!switched) {
-                                secondSetScoreLeft = scoreTeamLeft;
-                                secondSetScoreRight = scoreTeamRight;
-                                TextView tw = (TextView) findViewById(R.id.s2_tB);
-                                tw.setBackgroundColor(Color.YELLOW);
-                                s2_tB_is_yellow = true;
-                            } else {
-                                secondSetScoreRight = scoreTeamLeft;
-                                secondSetScoreLeft = scoreTeamRight;
-                                TextView tw = (TextView) findViewById(R.id.s2_tA);
-                                tw.setBackgroundColor(Color.YELLOW);
-                                s2_tA_is_yellow = true;
-                            }
-                            break;
-                        }
-                        case 3: {
-                            if (!switched) {
-                                thirdSetScoreLeft = scoreTeamLeft;
-                                thirdSetScoreRight = scoreTeamRight;
-                                TextView tw2 = (TextView) findViewById(R.id.s3_tB);
-                                tw2.setBackgroundColor(Color.YELLOW);
-                                s3_tB_is_yellow = true;
-                            } else {
-                                thirdSetScoreRight = scoreTeamLeft;
-                                thirdSetScoreLeft = scoreTeamRight;
-                                TextView tw2 = (TextView) findViewById(R.id.s3_tA);
-                                tw2.setBackgroundColor(Color.YELLOW);
-                                s3_tA_is_yellow = true;
-                            }
-                            break;
-                        }
-                        case 4: {
-                            if (!switched) {
-                                fourthSetScoreLeft = scoreTeamLeft;
-                                fourthSetScoreRight = scoreTeamRight;
-                                TextView tw2 = (TextView) findViewById(R.id.s4_tB);
-                                tw2.setBackgroundColor(Color.YELLOW);
-                                s4_tB_is_yellow = true;
-                            } else {
-                                fourthSetScoreRight = scoreTeamLeft;
-                                fourthSetScoreLeft = scoreTeamRight;
-                                TextView tw2 = (TextView) findViewById(R.id.s4_tA);
-                                tw2.setBackgroundColor(Color.YELLOW);
-                                s4_tA_is_yellow = true;
-                            }
-                            break;
-                        }
-
+                if ((scoreRight >= 25) && ((scoreRight - scoreLeft) >= 2)) {
+                    //if it is a set winning point..
+                    if (!switched){
+                        TextView scoreTable = findViewById(blueCellIds[setNumber]);
+                        scoreTable.setBackgroundColor(Color.YELLOW);
+                        blueRowColors[setNumber] = Color.YELLOW;
+                        orangeRowColors[setNumber] = Color.TRANSPARENT;
+                    } else {
+                        TextView scoreTable = findViewById(orangeCellIds[setNumber]);
+                        scoreTable.setBackgroundColor(Color.YELLOW);
+                        orangeRowColors[setNumber] = Color.YELLOW;
+                        blueRowColors[setNumber] = Color.TRANSPARENT;
                     }
                     setsWonRight++;
                     displaySetsForTeamOnRight(setsWonRight);
-                    if (setsWonRight == 3) {
+                    if (setsWonRight == 3) { //if it a match winning set
                         String winner = teamNameRight + " " + getString(R.string.wonMatch);
                         displayMessage(winner);
-                        setNumber++;
-                        scoreTeamLeft = 0;
-                        scoreTeamRight = 0;
-                        displayScoreForTeamOnLeft(scoreTeamLeft);
-                        displayScoreForTeamOnRight(scoreTeamRight);
-                    } else {
+                    } else { //if it is not a match winning set
                         String message = teamNameRight + " " + getString(R.string.wonSet);
                         displayMessage(message);
                         setNumber++;
-                        scoreTeamLeft = 0;
-                        scoreTeamRight = 0;
-                        displayScoreForTeamOnLeft(scoreTeamLeft);
-                        displayScoreForTeamOnRight(scoreTeamRight);
+                        scoreLeft = 0;
+                        scoreRight = 0;
+                        displayScoreForTeamOnLeft(scoreLeft);
+                        displayScoreForTeamOnRight(scoreRight);
                     }
-                } else {
+                } else { //if it is not a set winning point
                     String message = teamNameRight + " " + getString(R.string.serve);
                     displayMessage(message);
                 }
-            } else {
-                if ((scoreTeamRight >= 15) && ((scoreTeamRight - scoreTeamLeft) >= 2)) {
-                    String message = teamNameRight + " " + getString(R.string.wonMatch);
+            } else { // if it is the fifth set; it will switch to a tie break: the final set will be up to 15 points.
+                if ((scoreRight >= 15) && ((scoreRight - scoreLeft) >= 2)) {
+                    String message = teamNameLeft + " " + getString(R.string.wonMatch);
                     displayMessage(message);
                     setsWonRight++;
-                    displaySetsForTeamOnLeft(setsWonRight);
-                    scoreTeamLeft = 0;
-                    scoreTeamRight = 0;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    if (!switched) {
-                        fifthSetScoreLeft = scoreTeamLeft;
-                        fifthSetScoreRight = scoreTeamRight;
-                        TextView tw2 = (TextView) findViewById(R.id.s5_tB);
-                        tw2.setBackgroundColor(Color.YELLOW);
-                        s5_tB_is_yellow = true;
-                    } else {
-                        fifthSetScoreRight = scoreTeamLeft;
-                        fifthSetScoreLeft = scoreTeamRight;
-                        TextView tw2 = (TextView) findViewById(R.id.s5_tA);
-                        tw2.setBackgroundColor(Color.YELLOW);
-                        s5_tA_is_yellow = true;
-                    }
-                } else {
-                    Toast.makeText(this, getString(R.string.tieBreaker), Toast.LENGTH_SHORT).show();
-                    String message = teamNameRight + " " + getString(R.string.serve);
-                    displayMessage(message);
+                    displaySetsForTeamOnRight(setsWonRight);
+                    scoreLeft = 0;
+                    scoreRight = 0;
+                    displayScoreForTeamOnLeft(scoreLeft);
+                    displayScoreForTeamOnRight(scoreRight);
                 }
             }
         }
@@ -745,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
 
     //This method exchange sides up on users click on the exchange button
     public void exchangeSides(View view) {
-        if ((scoreTeamLeft == 0) && (scoreTeamRight == 0)) {
+        if ((scoreLeft == 0) && (scoreRight == 0)) {
             if (switched) switched = false;
             else switched = true;
             int temporary = setsWonLeft;
@@ -762,12 +316,12 @@ public class MainActivity extends AppCompatActivity {
                 teamNameRight = initialTeamNameOnLeft;
                 displayTeamNameonRight(teamNameRight);
                 View view1 = findViewById(R.id.viewOrange);
-                view1.setBackgroundColor(Color.parseColor("#03A9F4"));
+                view1.setBackgroundColor(getResources().getColor(R.color.background_teamB));
                 View view2 = findViewById(R.id.viewBlue);
-                view2.setBackgroundColor(Color.parseColor("#FF9800"));
-                TextView tw1 = (TextView) findViewById(R.id.team_on_left);
+                view2.setBackgroundColor(getResources().getColor(R.color.background_teamA));
+                TextView tw1 = findViewById(R.id.team_on_left);
                 tw1.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blueborder));
-                TextView tw2 = (TextView) findViewById(R.id.team_on_right);
+                TextView tw2 = findViewById(R.id.team_on_right);
                 tw2.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.cellborder));
             } else {
                 teamNameLeft = initialTeamNameOnLeft;
@@ -775,12 +329,12 @@ public class MainActivity extends AppCompatActivity {
                 teamNameRight = initialTeamNameOnRight;
                 displayTeamNameonRight(teamNameRight);
                 View view1 = findViewById(R.id.viewOrange);
-                view1.setBackgroundColor(Color.parseColor("#FF9800"));
+                view1.setBackgroundColor(getResources().getColor(R.color.background_teamA));
                 View view2 = findViewById(R.id.viewBlue);
-                view2.setBackgroundColor(Color.parseColor("#03A9F4"));
-                TextView tw1 = (TextView) findViewById(R.id.team_on_left);
+                view2.setBackgroundColor(getResources().getColor(R.color.background_teamB));
+                TextView tw1 = findViewById(R.id.team_on_left);
                 tw1.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.cellborder));
-                TextView tw2 = (TextView) findViewById(R.id.team_on_right);
+                TextView tw2 =  findViewById(R.id.team_on_right);
                 tw2.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blueborder));
             }
         } else {
@@ -824,223 +378,74 @@ public class MainActivity extends AppCompatActivity {
 
     //This is for correcting a point mistakenly given.
     public void correctionLeft(View view) {
-        if (scoreTeamLeft == 0 && setNumber == 1) return;
-        if (scoreTeamLeft > 0) {
-            scoreTeamLeft--;
-            displayScoreForTeamOnLeft(scoreTeamLeft);
+        if (scoreLeft == 0 && setNumber == 1) return;
+        if (scoreLeft > 0) {
+            scoreLeft--;
+            displayScoreForTeamOnLeft(scoreLeft);
             String message = getString(R.string.error);
             displayMessage(message);
-        }
-        if (scoreTeamLeft == 0 && setNumber > 1) {
-            setNumber--;
-            setsWonLeft--;
-            displaySetsForTeamOnLeft(setsWonLeft);
-            switch (setNumber) {
-                case 1: {
-                    scoreTeamLeft = firstSetScoreLeft - 1;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    displayOnTableS1_TA(scoreTeamLeft);
-                    scoreTeamRight = firstSetScoreRight;
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    TextView tw = (TextView) findViewById(R.id.s1_tA);
-                    tw.setBackgroundColor(Color.TRANSPARENT);
-                    s1_tA_is_yellow = false;
-                    break;
-                }
-                case 2: {
-                    scoreTeamLeft = secondSetScoreLeft - 1;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    displayOnTableS2_TA(scoreTeamLeft);
-                    scoreTeamRight = secondSetScoreRight;
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    TextView tw = (TextView) findViewById(R.id.s2_tA);
-                    tw.setBackgroundColor(Color.TRANSPARENT);
-                    s2_tA_is_yellow = false;
-                    break;
-                }
-                case 3: {
-                    scoreTeamLeft = thirdSetScoreLeft - 1;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    displayOnTableS3_TA(scoreTeamLeft);
-                    scoreTeamRight = thirdSetScoreRight;
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    TextView tw = (TextView) findViewById(R.id.s3_tA);
-                    tw.setBackgroundColor(Color.TRANSPARENT);
-                    s3_tA_is_yellow = false;
-                    break;
-                }
-                case 4: {
-                    scoreTeamLeft = fourthSetScoreLeft - 1;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    displayOnTableS4_TA(scoreTeamLeft);
-                    scoreTeamRight = fourthSetScoreRight;
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    TextView tw = (TextView) findViewById(R.id.s4_tA);
-                    tw.setBackgroundColor(Color.TRANSPARENT);
-                    s4_tA_is_yellow = false;
-                    break;
-                }
-                case 5: {
-                    scoreTeamLeft = fifthSetScoreLeft - 1;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    displayOnTableS5_TA(scoreTeamLeft);
-                    scoreTeamRight = fifthSetScoreRight;
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    TextView tw = (TextView) findViewById(R.id.s5_tA);
-                    tw.setBackgroundColor(Color.TRANSPARENT);
-                    s5_tA_is_yellow = false;
-                    break;
-                }
-            }
         }
     }
 
     //This is for correcting a point mistakenly given.
     public void correctionRight(View view) {
-        if (scoreTeamRight == 0 && setNumber == 1) return;
-        if (scoreTeamRight > 0) {
-            scoreTeamRight--;
-            displayScoreForTeamOnRight(scoreTeamRight);
+        if (scoreRight == 0 && setNumber == 1) return;
+        if (scoreRight > 0) {
+            scoreRight--;
+            displayScoreForTeamOnRight(scoreRight);
             String message = getString(R.string.error);
             displayMessage(message);
         }
-        if (scoreTeamLeft == 0 && setNumber > 1) {
-            setNumber--;
-            setsWonRight--;
-            displaySetsForTeamOnRight(setsWonRight);
-            switch (setNumber) {
-                case 1: {
-                    scoreTeamRight = firstSetScoreRight - 1;
-                    displayOnTableS1_TB(scoreTeamRight);
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    scoreTeamLeft = firstSetScoreLeft;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    TextView tw = (TextView) findViewById(R.id.s1_tB);
-                    tw.setBackgroundColor(Color.TRANSPARENT);
-                    s1_tB_is_yellow = false;
-                    break;
-                }
-                case 2: {
-                    scoreTeamRight = secondSetScoreRight - 1;
-                    displayOnTableS2_TB(scoreTeamRight);
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    scoreTeamLeft = secondSetScoreLeft;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    TextView tw = (TextView) findViewById(R.id.s2_tB);
-                    tw.setBackgroundColor(Color.TRANSPARENT);
-                    s2_tB_is_yellow = false;
-                    break;
-                }
-                case 3: {
-                    scoreTeamRight = thirdSetScoreRight - 1;
-                    displayOnTableS3_TB(scoreTeamRight);
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    scoreTeamLeft = thirdSetScoreLeft;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    TextView tw = (TextView) findViewById(R.id.s3_tB);
-                    tw.setBackgroundColor(Color.TRANSPARENT);
-                    s3_tB_is_yellow = false;
-                    break;
-                }
-                case 4: {
-                    scoreTeamRight = fourthSetScoreRight - 1;
-                    displayOnTableS4_TB(scoreTeamRight);
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    scoreTeamLeft = fourthSetScoreLeft;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    TextView tw = (TextView) findViewById(R.id.s4_tB);
-                    tw.setBackgroundColor(Color.TRANSPARENT);
-                    s4_tB_is_yellow = false;
-                    break;
-                }
-                case 5: {
-                    scoreTeamRight = fifthSetScoreRight - 1;
-                    displayOnTableS5_TB(scoreTeamRight);
-                    displayScoreForTeamOnRight(scoreTeamRight);
-                    scoreTeamLeft = fifthSetScoreLeft;
-                    displayScoreForTeamOnLeft(scoreTeamLeft);
-                    TextView tw = (TextView) findViewById(R.id.s5_tB);
-                    tw.setBackgroundColor(Color.TRANSPARENT);
-                    s5_tB_is_yellow = false;
-                    break;
-                }
-            }
-
-        }
     }
 
-    //This method resets everything up on clickof the user on the reset button.
-    public void reset(View view) {
-        scoreTeamLeft = 0;
-        scoreTeamRight = 0;
-        setsWonLeft = 0;
-        setsWonRight = 0;
-        setNumber = 1;
-        switched = false;
-        displayScoreForTeamOnLeft(scoreTeamLeft);
-        displayScoreForTeamOnRight(scoreTeamRight);
-        displaySetsForTeamOnLeft(setsWonLeft);
-        displaySetsForTeamOnRight(setsWonRight);
-        String message = "";
-        displayMessage(message);
-        teamNameLeft = initialTeamNameOnLeft;
-        displayTeamNameonLeft(teamNameLeft);
-        teamNameRight = initialTeamNameOnRight;
-        displayTeamNameonRight(teamNameRight);
-        displayOnTableS1_TA(0);
-        displayOnTableS1_TB(0);
-        displayOnTableS2_TA(0);
-        displayOnTableS2_TB(0);
-        displayOnTableS3_TA(0);
-        displayOnTableS3_TB(0);
-        displayOnTableS4_TA(0);
-        displayOnTableS4_TB(0);
-        displayOnTableS5_TA(0);
-        displayOnTableS5_TB(0);
-        firstSetScoreLeft = 0;
-        secondSetScoreLeft = 0;
-        thirdSetScoreLeft = 0;
-        fourthSetScoreLeft = 0;
-        fifthSetScoreLeft = 0;
-        firstSetScoreRight = 0;
-        secondSetScoreRight = 0;
-        thirdSetScoreRight = 0;
-        fourthSetScoreRight = 0;
-        fifthSetScoreRight = 0;
-        TextView tw1 = (TextView) findViewById(R.id.s1_tA);
-        tw1.setBackgroundColor(Color.TRANSPARENT);
-        TextView tw2 = (TextView) findViewById(R.id.s2_tA);
-        tw2.setBackgroundColor(Color.TRANSPARENT);
-        TextView tw3 = (TextView) findViewById(R.id.s3_tA);
-        tw3.setBackgroundColor(Color.TRANSPARENT);
-        TextView tw4 = (TextView) findViewById(R.id.s4_tA);
-        tw4.setBackgroundColor(Color.TRANSPARENT);
-        TextView tw5 = (TextView) findViewById(R.id.s5_tA);
-        tw5.setBackgroundColor(Color.TRANSPARENT);
-        TextView tw6 = (TextView) findViewById(R.id.s1_tB);
-        tw6.setBackgroundColor(Color.TRANSPARENT);
-        TextView tw7 = (TextView) findViewById(R.id.s2_tB);
-        tw7.setBackgroundColor(Color.TRANSPARENT);
-        TextView tw8 = (TextView) findViewById(R.id.s3_tB);
-        tw8.setBackgroundColor(Color.TRANSPARENT);
-        TextView tw9 = (TextView) findViewById(R.id.s4_tB);
-        tw9.setBackgroundColor(Color.TRANSPARENT);
-        TextView tw10 = (TextView) findViewById(R.id.s5_tB);
-        tw10.setBackgroundColor(Color.TRANSPARENT);
-        View startView = findViewById(R.id.startScreen);
-        startView.setVisibility(View.VISIBLE);
-        started = false;
-        timeOffCountRight = 0;
-        timeOffCountLeft = 0;
-        s1_tA_is_yellow = false;
-        s2_tA_is_yellow = false;
-        s3_tA_is_yellow = false;
-        s4_tA_is_yellow = false;
-        s5_tA_is_yellow = false;
-        s1_tB_is_yellow = false;
-        s2_tB_is_yellow = false;
-        s3_tB_is_yellow = false;
-        s4_tB_is_yellow = false;
-        s5_tB_is_yellow = false;
+    public void displayScoreForTeamOnLeft(int score) {
+        TextView scoreView = findViewById(R.id.team_left_score);
+        scoreView.setText(String.valueOf(score));
+    }
+
+    public void displayScoreForTeamOnRight(int score) {
+        TextView scoreView = findViewById(R.id.team_right_score);
+        scoreView.setText(String.valueOf(score));
+    }
+
+    public void displaySetsForTeamOnLeft(int score) {
+        TextView scoreView = findViewById(R.id.setsForTeamOnLeft);
+        scoreView.setText(String.valueOf(score));
+    }
+
+    public void displaySetsForTeamOnRight(int score) {
+        TextView scoreView = findViewById(R.id.setsForTeamOnRight);
+        scoreView.setText(String.valueOf(score));
+    }
+
+    public void displayTeamNameonLeft(String message) {
+        TextView scoreView = findViewById(R.id.team_on_left);
+        scoreView.setText(message);
+    }
+
+    public void displayTeamNameonRight(String message) {
+        TextView scoreView = findViewById(R.id.team_on_right);
+        scoreView.setText(message);
+    }
+
+    public void displayMessage(String message) {
+        TextView scoreView = findViewById(R.id.message);
+        scoreView.setText(message);
+    }
+
+    public void displayOnTableTeamA(String message) {
+        TextView scoreView = findViewById(R.id.teamA);
+        scoreView.setText(message);
+    }
+
+    public void displayOnTableTeamB(String message) {
+        TextView scoreView = findViewById(R.id.teamB);
+        scoreView.setText(message);
+    }
+
+    public void reset(View view){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }
