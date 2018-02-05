@@ -239,6 +239,7 @@
         <Button
             android:id="@+id/undoLeft"
             style="@style/undo_left_style"
+            android:layout_below="@id/message"
             android:onClick="correctionLeft"
             android:text="@string/_" />
 
@@ -255,6 +256,7 @@
         <Button
             android:id="@+id/undoRight"
             style="@style/undo_right_style"
+            android:layout_below="@id/message"
             android:onClick="correctionRight"
             android:text="@string/_" />
 

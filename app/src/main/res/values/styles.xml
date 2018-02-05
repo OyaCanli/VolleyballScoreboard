@@ -19,9 +19,9 @@
     <style name="undo_style">
         <item name="android:layout_width">@dimen/undo_width</item>
         <item name="android:layout_height">@dimen/button_height</item>
-        <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_marginBottom">@dimen/margin_large</item>
         <item name="android:background">@drawable/buttonborders</item>
+        <item name="android:layout_below">@id/message</item>
     </style>
 
     <style name="pause_style">
@@ -124,15 +124,13 @@
     </style>
 
     <style name="undo_left_style" parent="undo_style">
-        <item name="android:layout_below">@id/message</item>
         <item name="android:layout_marginLeft">@dimen/margin_standart</item>
         <item name="android:layout_marginStart">@dimen/margin_standart</item>
     </style>
 
     <style name="undo_right_style" parent="undo_style">
         <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_below">@id/message</item>
+        <item name="android:layout_alignParentEnd">true</item>
         <item name="android:layout_marginRight">@dimen/margin_standart</item>
         <item name="android:layout_marginEnd">@dimen/margin_standart</item>
     </style>
