@@ -8,4 +8,166 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="cell_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/cell_padding</item>
+    </style>
+
+    <style name="undo_style">
+        <item name="android:layout_width">@dimen/undo_width</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_marginBottom">@dimen/margin_large</item>
+        <item name="android:background">@drawable/buttonborders</item>
+    </style>
+
+    <style name="pause_style">
+        <item name="android:layout_width">@dimen/pause_height</item>
+        <item name="android:layout_height">@dimen/pause_height</item>
+        <item name="android:layout_above">@id/undoLeft</item>
+        <item name="android:layout_marginBottom">@dimen/margin_standart</item>
+        <item name="android:background">@drawable/alarm</item>
+    </style>
+
+    <style name="pause_right_style" parent="pause_style">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_marginRight">@dimen/margin_standart</item>
+        <item name="android:layout_marginEnd">@dimen/margin_standart</item>
+    </style>
+
+    <style name="edittext_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">textCapWords</item>
+        <item name="android:layout_marginLeft">@dimen/margin_standart</item>
+        <item name="android:layout_marginRight">@dimen/margin_standart</item>
+    </style>
+
+    <style name="edittext_orange_style" parent="edittext_style">
+        <item name="android:textColorHint">@color/background_teamA</item>
+        <item name="android:textColor">@color/background_teamA</item>
+    </style>
+
+    <style name="edittext_blue_style" parent="edittext_style">
+        <item name="android:textColorHint">@color/background_teamB</item>
+        <item name="android:textColor">@color/background_teamB</item>
+    </style>
+
+    <style name="team_name_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">sans-serif_medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/team_name_textsize</item>
+        <item name="android:padding">@dimen/padding_standart</item>
+    </style>
+
+    <style name="exchange_button_style">
+        <item name="android:layout_width">@dimen/exchange_button_height</item>
+        <item name="android:layout_height">@dimen/exchange_button_height</item>
+        <item name="android:layout_marginLeft">@dimen/margin_half</item>
+        <item name="android:layout_marginRight">@dimen/margin_half</item>
+        <item name="android:background">@drawable/restart</item>
+    </style>
+
+    <style name="score_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:fontFamily">sans-serif_light</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/score_buttons_textsize</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="set_score_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">sans-serif_medium</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/setscore_textsize</item>
+        <item name="android:background">@android:color/black</item>
+    </style>
+
+    <style name="tablelayout_style">
+        <item name="android:layout_width">@dimen/table_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/scoreboard</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginLeft">@dimen/margin_standart</item>
+        <item name="android:layout_marginRight">@dimen/margin_standart</item>
+        <item name="android:layout_marginTop">@dimen/margin_standart</item>
+    </style>
+
+    <style name="message_style">
+        <item name="android:layout_width">@dimen/message_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textSize">@dimen/message_textsize</item>
+        <item name="android:layout_margin">@dimen/margin_standart</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="pause_left_style" parent="pause_style">
+        <item name="android:layout_marginStart">@dimen/margin_standart</item>
+        <item name="android:layout_marginLeft">@dimen/margin_standart</item>
+    </style>
+
+    <style name="undo_left_style" parent="undo_style">
+        <item name="android:layout_below">@id/message</item>
+        <item name="android:layout_marginLeft">@dimen/margin_standart</item>
+        <item name="android:layout_marginStart">@dimen/margin_standart</item>
+    </style>
+
+    <style name="undo_right_style" parent="undo_style">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_below">@id/message</item>
+        <item name="android:layout_marginRight">@dimen/margin_standart</item>
+        <item name="android:layout_marginEnd">@dimen/margin_standart</item>
+    </style>
+
+    <style name="start_screen_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/start_screen_height</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_margin">@dimen/margin_half</item>
+        <item name="android:background">@color/start_background</item>
+    </style>
+
+    <style name="radiobutton_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="flip_coin_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@drawable/buttonborders</item>
+        <item name="android:layout_marginLeft">@dimen/margin_standart</item>
+        <item name="android:layout_marginRight">@dimen/margin_standart</item>
+        <item name="android:layout_marginTop">@dimen/margin_half</item>
+    </style>
+
+    <style name="start_button_style">
+        <item name="android:layout_width">@dimen/start_button_height</item>
+        <item name="android:layout_height">@dimen/start_button_height</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/start</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 </resources>

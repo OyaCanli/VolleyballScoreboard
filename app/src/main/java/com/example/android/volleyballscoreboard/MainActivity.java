@@ -1,4 +1,4 @@
-package com.example.android.newvolleyballscoreboard;
+package com.example.android.volleyballscoreboard;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.android.volleyballscoreboard.R;
 
 public class MainActivity extends AppCompatActivity {
 

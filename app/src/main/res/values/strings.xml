@@ -14,4 +14,14 @@
     <string name="s3">S3</string>
     <string name="s4">S4</string>
     <string name="s5">S5</string>
+    <string name="ex">EX</string>
+    <string name="enter_team_name_1">Enter team name 1</string>
+    <string name="enter_team_name_2">Enter team name 2</string>
+    <string name="which_team_will_start_the_game">Which team will start the game?</string>
+    <string name="oranges">Oranges</string>
+    <string name="blues">Blues</string>
+    <string name="flip_a_coin">Flip a coin</string>
+    <string name="start_the_game">Start the game</string>
+    <string name="cd_a_coin">A coin</string>
+    <string name="_">-</string>
 </resources>

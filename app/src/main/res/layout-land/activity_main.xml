@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -10,90 +8,58 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_standart">
 
         <LinearLayout
             android:id="@+id/teamNames"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/team_names_height"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/team_on_left"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/cellborder"
-                android:fontFamily="sans-serif_medium"
-                android:gravity="center"
-                android:padding="8dp"
                 android:text="@string/defaultTeamNameOnLeft"
-                android:textColor="#000000"
-                android:textSize="24sp" />
+                android:background="@drawable/cellborder"
+                style="@style/team_name_style" />
 
             <Button
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginHorizontal="8dp"
-                android:background="@drawable/restart"
                 android:onClick="exchangeSides"
-                android:text="EX" />
+                android:text = "@string/ex"
+                style="@style/exchange_button_style" />
 
             <TextView
                 android:id="@+id/team_on_right"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/blueborder"
-                android:fontFamily="sans-serif_medium"
-                android:gravity="center"
-                android:padding="8dp"
                 android:text="@string/defaultTeamNameOnRight"
-                android:textColor="#000000"
-                android:textSize="24sp" />
+                android:background="@drawable/blueborder"
+                style="@style/team_name_style" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/scoreboard"
             android:layout_width="wrap_content"
-            android:layout_height="140dp"
+            android:layout_height="@dimen/scoreboard_height"
             android:layout_below="@id/teamNames"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/team_left_score"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:background="@android:color/white"
-                android:fontFamily="sans-serif_light"
-                android:gravity="center"
-                android:onClick="add1pointToTeamOnLeft"
                 android:text="@string/zero"
-                android:textColor="#000000"
-                android:textSize="100sp" />
+                android:onClick="add1pointToTeamOnLeft"
+                style="@style/score_style" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/margin_half">
 
                 <TextView
                     android:id="@+id/setsForTeamOnLeft"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@android:color/black"
-                    android:fontFamily="sans-serif_medium"
-                    android:gravity="center_horizontal"
-                    android:padding="10dp"
                     android:text="@string/zero"
-                    android:textColor="@android:color/white"
-                    android:textSize="40sp" />
+                    style="@style/set_score_style" />
 
                 <View
                     android:id="@+id/viewOrange"
@@ -112,22 +78,14 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/margin_half">
 
                 <TextView
                     android:id="@+id/setsForTeamOnRight"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@android:color/black"
-                    android:fontFamily="sans-serif_medium"
-                    android:gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:text="@string/zero"
-                    android:textColor="@android:color/white"
-                    android:textSize="40sp" />
+                    style="@style/set_score_style"
+                    android:text="@string/zero" />
 
                 <View
                     android:id="@+id/viewBlue"
@@ -140,27 +98,14 @@
 
             <Button
                 android:id="@+id/team_right_score"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:background="@android:color/white"
-                android:fontFamily="sans-serif_light"
-                android:gravity="center"
-                android:onClick="add1pointToTeamOnRight"
                 android:text="@string/zero"
-                android:textColor="#000000"
-                android:textSize="100sp" />
+                android:onClick="add1pointToTeamOnRight"
+                style="@style/score_style" />
 
         </LinearLayout>
 
-        <TableLayout
-            android:id="@+id/summaryTable"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/scoreboard"
-            android:layout_centerHorizontal="true"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp">
+        <TableLayout android:id="@+id/summaryTable"
+            style="@style/tablelayout_style">
 
             <View
                 android:layout_width="match_parent"
@@ -171,57 +116,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/grey">
-
-                <TextView
+                <Space
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="" />
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/s1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/s1"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
+                    android:text = "@string/s1"
+                    style="@style/cell_style" />
                 <TextView
                     android:id="@+id/s2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/s2"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
+                    android:text = "@string/s2"
+                    style="@style/cell_style" />
                 <TextView
                     android:id="@+id/s3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/s3"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
+                    android:text = "@string/s3"
+                    style="@style/cell_style" />
                 <TextView
                     android:id="@+id/s4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/s4"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
+                    android:text = "@string/s4"
+                    style="@style/cell_style" />
                 <TextView
                     android:id="@+id/s5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/s5"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
+                    android:text = "@string/s5"
+                    style="@style/cell_style" />
             </TableRow>
 
             <View
@@ -233,50 +151,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/background_teamA">
-
                 <TextView
                     android:id="@+id/teamA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/defaultTeamNameOnLeft"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
+                    style="@style/cell_style"
+                    android:text = "@string/defaultTeamNameOnLeft" />
                 <TextView
                     android:id="@+id/s1_tA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/zero" />
-
+                    style="@style/cell_style"
+                    android:text = "@string/zero" />
                 <TextView
                     android:id="@+id/s2_tA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/zero" />
-
+                    style="@style/cell_style"
+                    android:text = "@string/zero" />
                 <TextView
                     android:id="@+id/s3_tA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/zero" />
-
+                    style="@style/cell_style"
+                    android:text = "@string/zero" />
                 <TextView
                     android:id="@+id/s4_tA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/zero" />
-
+                    style="@style/cell_style"
+                    android:text = "@string/zero" />
                 <TextView
                     android:id="@+id/s5_tA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/zero" />
+                    style="@style/cell_style"
+                    android:text = "@string/zero" />
             </TableRow>
 
             <View
@@ -288,52 +186,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/background_teamB">
-
                 <TextView
                     android:id="@+id/teamB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/defaultTeamNameOnRight"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold" />
-
+                    style="@style/cell_style"
+                    android:text = "@string/defaultTeamNameOnRight" />
                 <TextView
                     android:id="@+id/s1_tB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/zero" />
-
+                    style="@style/cell_style"
+                    android:text = "@string/zero" />
                 <TextView
                     android:id="@+id/s2_tB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/zero" />
-
+                    style="@style/cell_style"
+                    android:text = "@string/zero" />
                 <TextView
                     android:id="@+id/s3_tB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="0" />
-
+                    style="@style/cell_style"
+                    android:text = "@string/zero" />
                 <TextView
                     android:id="@+id/s4_tB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/zero" />
-
+                    style="@style/cell_style"
+                    android:text = "@string/zero" />
                 <TextView
                     android:id="@+id/s5_tB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/zero" />
+                    style="@style/cell_style"
+                    android:text = "@string/zero" />
             </TableRow>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -342,48 +219,28 @@
 
         <TextView
             android:id="@+id/message"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            style="@style/message_style"
             android:layout_below="@id/summaryTable"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="16dp"
-            android:gravity="center_horizontal"
-            android:text=""
-            android:textSize="24dp" />
+            android:text="" />
 
         <Button
             android:id="@+id/pauseLeft"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_above="@id/undoLeft"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/alarm"
             android:onClick="pauseLeft"
-            android:textSize="12sp" />
+            style="@style/pause_left_style" />
 
         <Button
             android:id="@+id/pauseRight"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            style="@style/pause_right_style"
             android:layout_above="@id/undoRight"
             android:layout_alignParentRight="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/alarm"
-            android:onClick="pauseRight"
-            android:textSize="12sp" />
+            android:layout_alignParentEnd="true"
+            android:onClick="pauseRight" />
 
         <Button
             android:id="@+id/undoLeft"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/message"
-            android:layout_marginBottom="32dp"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/buttonborders"
+            style="@style/undo_left_style"
             android:onClick="correctionLeft"
-            android:text="-" />
+            android:text="@string/_" />
 
         <Button
             android:id="@+id/reset"
@@ -397,120 +254,80 @@
 
         <Button
             android:id="@+id/undoRight"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/message"
-            android:layout_marginBottom="32dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/buttonborders"
+            style="@style/undo_right_style"
             android:onClick="correctionRight"
-            android:text="-" />
+            android:text="@string/_" />
 
         <LinearLayout
             android:id="@+id/startScreen"
-            android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:layout_alignParentTop="true"
-            android:layout_margin="8dp"
-            android:background="#DD212121"
-            android:orientation="vertical">
+            style="@style/start_screen_layout">
 
             <EditText
                 android:id="@+id/usersTeamName1"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginHorizontal="16dp"
-                android:hint="Enter team name 1"
-                android:inputType="textCapWords"
-                android:textColor="@color/background_teamA"
-                android:textColorHint="@color/background_teamA" />
+                android:hint="@string/enter_team_name_1"
+                style="@style/edittext_orange_style" />
 
             <EditText
                 android:id="@+id/usersTeamName2"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginHorizontal="16dp"
-                android:hint="Enter team name 2"
-                android:inputType="textCapWords"
-                android:textColor="@color/background_teamB"
-                android:textColorHint="@color/background_teamB" />
+                android:hint="@string/enter_team_name_2"
+                style="@style/edittext_blue_style" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginHorizontal="16dp"
-                android:padding="5dp"
-                android:text="Which team will start the game?"
-                android:textColor="#FFF"
-                android:textSize="18sp" />
+                android:text="@string/which_team_will_start_the_game"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:layout_marginLeft="@dimen/margin_standart"
+                android:layout_marginRight="@dimen/margin_standart"
+                android:padding="@dimen/padding_standart"/>
 
             <RadioGroup
                 android:id="@+id/whoStarts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:orientation="horizontal">
-
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/margin_standart"
+                android:layout_marginRight="@dimen/margin_standart">
                 <RadioButton
                     android:id="@+id/optionOrange"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Oranges"
-                    android:textColor="@color/background_teamA" />
-
+                    android:text="@string/oranges"
+                    android:textColor="@color/background_teamA"
+                    style="@style/radiobutton_style" />
                 <RadioButton
                     android:id="@+id/optionBlue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Blues"
-                    android:textColor="@color/background_teamB" />
+                    android:text="@string/blues"
+                    android:textColor="@color/background_teamB"
+                    style="@style/radiobutton_style" />
             </RadioGroup>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/buttonborders"
+                    android:text="@string/flip_a_coin"
                     android:onClick="flipCoin"
-                    android:text="Flip a coin"
-                    android:textAllCaps="false" />
-
+                    style="@style/flip_coin_style" />
                 <ImageView
                     android:id="@+id/coin"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="8dp"/>
+                    android:contentDescription="@string/cd_a_coin"
+                    android:layout_width="@dimen/coin_height"
+                    android:layout_height="@dimen/coin_height"
+                    android:layout_marginTop="@dimen/margin_half"/>
             </LinearLayout>
 
             <Button
                 android:id="@+id/startButton"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-
-                android:layout_gravity="center"
-
-                android:background="@drawable/start"
                 android:onClick="startGame"
-                android:textAllCaps="true" />
+                style="@style/start_button_style" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/start_the_game"
                 android:layout_gravity="center_horizontal"
-                android:text="Start the game"
-                android:textColor="#FFF" />
+                android:textColor="@android:color/white"/>
 
         </LinearLayout>
 
