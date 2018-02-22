@@ -19,9 +19,7 @@ import java.math.BigDecimal;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    EditText eText1, eText2;
     String teamNameLeft, teamNameRight;
-    RadioGroup starter;
     int numbersOfTotalSets, setFinishingScore, tieBreakerScore;
     public final static String TEAM_NAME_LEFT = "teamNameLeft";
     public final static String TEAM_NAME_RIGHT = "teamNameRight";
@@ -35,46 +33,45 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         setContentView(R.layout.activity_settings);
         //Initialize spinner 1
         Spinner spin1 = findViewById(R.id.spin1);
-        String[] numberOfSets = getResources().getStringArray(R.array.numberOfSets);
-        ArrayAdapter<String> spinAdapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, numberOfSets);
+        ArrayAdapter<CharSequence> spinAdapter1 = ArrayAdapter.createFromResource(this,
+                R.array.numberOfSets, R.layout.spinner_item);
         spinAdapter1.setDropDownViewResource(R.layout.spinner_dropdown);
         spin1.setAdapter(spinAdapter1);
         spin1.setOnItemSelectedListener(this);
         //Initialize spinner 2
         Spinner spin2 = findViewById(R.id.spin2);
-        String[] setFinishingScores = getResources().getStringArray(R.array.setFinishingScore);
-        ArrayAdapter<String> spinAdapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, setFinishingScores);
+        ArrayAdapter<CharSequence> spinAdapter2 = ArrayAdapter.createFromResource(this,
+                R.array.setFinishingScore, R.layout.spinner_item);
         spinAdapter2.setDropDownViewResource(R.layout.spinner_dropdown);
         spin2.setAdapter(spinAdapter2);
         spin2.setOnItemSelectedListener(this);
         //Initialize spinner 3
         Spinner spin3 = findViewById(R.id.spin3);
-        String[] tieBreakerScore = getResources().getStringArray(R.array.tieBreakerScore);
-        ArrayAdapter<String> spinAdapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, tieBreakerScore);
+        ArrayAdapter<CharSequence> spinAdapter3 = ArrayAdapter.createFromResource(this,
+                R.array.tieBreakerScore, R.layout.spinner_item);
         spinAdapter3.setDropDownViewResource(R.layout.spinner_dropdown);
         spin3.setAdapter(spinAdapter3);
         spin3.setOnItemSelectedListener(this);
-
-        eText1 = findViewById(R.id.usersTeamName1);
-        eText2 = findViewById(R.id.usersTeamName2);
-        starter = findViewById(R.id.whoStarts);
     }
 
     public void onItemSelected(AdapterView<?> spinner, View arg1, int position, long row_id) {
+        //the method is used by all spinners.
+        //Switch statement differentiate which spinners is selected
+        //Then if-else statements capture user's choises
         switch (spinner.getId()) {
             case R.id.spin1: {
-                if(position == 0) numbersOfTotalSets = 3;
-                else if (position == 1) numbersOfTotalSets = 5;
+                if(position == 0) numbersOfTotalSets = 5;
+                else numbersOfTotalSets = 3;
                 break;
             }
             case R.id.spin2: {
-                if(position == 0) setFinishingScore = 15;
-                else if (position == 1) setFinishingScore = 25;
+                if(position == 0) setFinishingScore = 25;
+                else setFinishingScore = 15;
                 break;
             }
             case R.id.spin3: {
                 if(position == 0) tieBreakerScore = 15;
-                else if (position == 1) tieBreakerScore = 25;
+                else tieBreakerScore = 25;
                 break;
             }
         }
@@ -86,6 +83,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     }
 
     public void startGame(View view) {
+        EditText eText1 = findViewById(R.id.usersTeamName1);
+        EditText eText2 = findViewById(R.id.usersTeamName2);
+        RadioGroup starter = findViewById(R.id.whoStarts);
         teamNameLeft = eText1.getText().toString();
         if (teamNameLeft.equals("")) {
             teamNameLeft = getString(R.string.defaultTeamNameOnLeft);

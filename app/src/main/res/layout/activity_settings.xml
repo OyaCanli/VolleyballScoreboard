@@ -73,17 +73,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_standart"
-            android:textColor="@android:color/white"
-            android:text="Number of sets to play:" />
+            android:text="Number of sets to play:"
+            style="@style/spinner_text_style" />
 
         <Spinner
             android:id="@+id/spin1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
             android:entries="@array/numberOfSets"/>
     </LinearLayout>
 
@@ -92,17 +88,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_standart"
-                android:textColor="@android:color/white"
-                android:text="Sets will finish at the score: "/>
+                android:text="Sets will finish at the score: "
+                style="@style/spinner_text_style" />
 
             <Spinner
                 android:id="@+id/spin2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
                 android:entries="@array/setFinishingScore"/>
         </LinearLayout>
 
@@ -111,17 +103,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_standart"
-                android:textColor="@android:color/white"
-                android:text="Tie breaker set will end at: "/>
+                android:text="Tie breaker set will end at: "
+                style="@style/spinner_text_style" />
 
             <Spinner
                 android:id="@+id/spin3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
                 android:entries="@array/tieBreakerScore"/>
         </LinearLayout>
 

@@ -6,9 +6,6 @@ import android.provider.AlarmClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -124,10 +121,10 @@ public class MainActivity extends AppCompatActivity {
             view1.setBackgroundColor(getResources().getColor(R.color.background_teamA));
             View view2 = findViewById(R.id.viewBlue);
             view2.setBackgroundColor(getResources().getColor(R.color.background_teamB));
-            TextView tw1 = (TextView) findViewById(R.id.team_on_left);
-            tw1.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blueborder));
-            TextView tw2 = (TextView) findViewById(R.id.team_on_right);
-            tw2.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.cellborder));
+            TextView tw1 = findViewById(R.id.team_on_left);
+            tw1.setBackground(this.getResources().getDrawable(R.drawable.blueborder));
+            TextView tw2 = findViewById(R.id.team_on_right);
+            tw2.setBackground(this.getResources().getDrawable(R.drawable.cellborder));
         }
         setScoresOrange = savedInstanceState.getIntArray(SET_SCORES_ORANGE);
         setScoresBlue = savedInstanceState.getIntArray(SET_SCORES_BLUE);
@@ -263,8 +260,7 @@ public class MainActivity extends AppCompatActivity {
     //This method exchange sides up on users click on the exchange button
     public void exchangeSides(View view) {
         if ((scoreLeft == 0) && (scoreRight == 0)) {
-            if (switched) switched = false;
-            else switched = true;
+            switched ^= true;
             int temporary = setsWonLeft;
             setsWonLeft = setsWonRight;
             setsWonRight = temporary;
@@ -283,9 +279,9 @@ public class MainActivity extends AppCompatActivity {
                 View view2 = findViewById(R.id.viewBlue);
                 view2.setBackgroundColor(getResources().getColor(R.color.background_teamA));
                 TextView tw1 = findViewById(R.id.team_on_left);
-                tw1.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blueborder));
+                tw1.setBackground(this.getResources().getDrawable(R.drawable.blueborder));
                 TextView tw2 = findViewById(R.id.team_on_right);
-                tw2.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.cellborder));
+                tw2.setBackground(this.getResources().getDrawable(R.drawable.cellborder));
             } else {
                 teamNameLeft = initialTeamNameOnLeft;
                 displayTeamNameonLeft(teamNameLeft);
@@ -296,9 +292,9 @@ public class MainActivity extends AppCompatActivity {
                 View view2 = findViewById(R.id.viewBlue);
                 view2.setBackgroundColor(getResources().getColor(R.color.background_teamB));
                 TextView tw1 = findViewById(R.id.team_on_left);
-                tw1.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.cellborder));
+                tw1.setBackground(this.getResources().getDrawable(R.drawable.cellborder));
                 TextView tw2 =  findViewById(R.id.team_on_right);
-                tw2.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.blueborder));
+                tw2.setBackground(this.getResources().getDrawable(R.drawable.blueborder));
             }
         } else {
             Toast.makeText(this, "You can exchange sides only between the sets.", Toast.LENGTH_SHORT).show();
@@ -310,12 +306,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "You have used all your time-offs.", Toast.LENGTH_SHORT).show();
             return;
         }
-        Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
-        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Time left:");
-        intent.putExtra(AlarmClock.EXTRA_LENGTH, 60);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
+        openCountDownTimer();
         timeOffCountLeft++;
         int rest = 2 - timeOffCountLeft;
         String message = "You have used " + timeOffCountLeft + " timeoffs. You have " + rest + " time-off left.";
@@ -327,16 +318,20 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "You have used all your time-offs.", Toast.LENGTH_SHORT).show();
             return;
         }
-        Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
-        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Time left:");
-        intent.putExtra(AlarmClock.EXTRA_LENGTH, 60);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
+        openCountDownTimer();
         timeOffCountRight++;
         int rest = 2 - timeOffCountRight;
         String message = "You have used " + timeOffCountRight + " timeoffs. You have " + rest + " time-off left.";
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void openCountDownTimer(){
+        Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Time left:");
+        intent.putExtra(AlarmClock.EXTRA_LENGTH, 30);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     //This is for correcting a point mistakenly given.
