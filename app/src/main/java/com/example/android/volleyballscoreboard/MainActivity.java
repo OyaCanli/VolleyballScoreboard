@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     int scoreLeft, scoreRight, setsWonLeft, setsWonRight, setNumber;
     String teamNameLeft, teamNameRight, initialTeamNameOnLeft, initialTeamNameOnRight;
     String message;
-    boolean switched, started;
+    boolean switched;
     int timeOffCountLeft, timeOffCountRight, starter_team_id;;
     int[] orangeCellIds = {R.id.s1_tA, R.id.s2_tA, R.id.s3_tA, R.id.s4_tA, R.id.s5_tA};
     int[] blueCellIds = {R.id.s1_tB, R.id.s2_tB, R.id.s3_tB, R.id.s4_tB, R.id.s5_tB};
@@ -40,17 +40,31 @@ public class MainActivity extends AppCompatActivity {
     public final static String INITIAL_NAME_LEFT = "initialNameLeft";
     public final static String INITIAL_NAME_RIGHT= "initialNameRight";
     public final static String SWITCHED = "switched";
-    public final static String STARTED = "started";
     public final static String TIMEOFF_COUNT_LEFT = "timeoffCountLeft";
     public final static String TIMEOFF_COUNT_RIGHT = "timeoffCountRight";
+    public final static String STARTING_TEAM = "startingTeam";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initialTeamNameOnLeft = teamNameLeft = getString(R.string.defaultTeamNameOnLeft);
-        initialTeamNameOnRight = teamNameRight = getString(R.string.defaultTeamNameOnRight);
-        starter_team_id = R.id.optionOrange;
+        Bundle userChoise = getIntent().getExtras();
+        initialTeamNameOnLeft = teamNameLeft = userChoise.getString(TEAM_NAME_LEFT);
+        initialTeamNameOnRight = teamNameRight = userChoise.getString(TEAM_NAME_RIGHT);
+        displayOnTableTeamA(teamNameLeft);
+        displayTeamNameonLeft(teamNameLeft);
+        displayOnTableTeamB(teamNameRight);
+        displayTeamNameonRight(teamNameRight);
+        starter_team_id = userChoise.getInt(STARTING_TEAM);
+        if (starter_team_id == R.id.optionBlue) {
+            String message = teamNameRight + " " + getString(R.string.serve);
+            displayMessage(message);
+            starter_team_id = R.id.optionBlue;
+        } else {
+            String message = teamNameLeft + " " + getString(R.string.serve);
+            displayMessage(message);
+            starter_team_id = R.id.optionOrange;
+        }
     }
 
     //This methods saves an instance of the variable values during rotation
@@ -68,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         outState.putString(INITIAL_NAME_RIGHT, initialTeamNameOnRight);
         outState.putString(MESSAGE, message);
         outState.putBoolean(SWITCHED, switched);
-        outState.putBoolean(STARTED, started);
         outState.putInt(TIMEOFF_COUNT_LEFT, timeOffCountLeft);
         outState.putInt(TIMEOFF_COUNT_RIGHT, timeOffCountRight);
         outState.putIntArray(SET_SCORES_ORANGE, setScoresOrange);
@@ -109,11 +122,6 @@ public class MainActivity extends AppCompatActivity {
             TextView tw2 = (TextView) findViewById(R.id.team_on_right);
             tw2.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.cellborder));
         }
-        started = savedInstanceState.getBoolean(STARTED);
-        if (started) {
-            View startView = findViewById(R.id.startScreen);
-            startView.setVisibility(View.GONE);
-        }
         setScoresOrange = savedInstanceState.getIntArray(SET_SCORES_ORANGE);
         setScoresBlue = savedInstanceState.getIntArray(SET_SCORES_BLUE);
         orangeRowColors = savedInstanceState.getIntArray(ORANGE_ROW_COLORS);
@@ -128,54 +136,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void startGame(View view) {
-        started = true;
-        EditText eText1 = (EditText) findViewById(R.id.usersTeamName1);
-        initialTeamNameOnLeft = eText1.getText().toString();
-        if (initialTeamNameOnLeft.equals("")) {
-            initialTeamNameOnLeft = getString(R.string.defaultTeamNameOnLeft);
-        }
-        teamNameLeft = initialTeamNameOnLeft;
-        displayOnTableTeamA(teamNameLeft);
-        displayTeamNameonLeft(teamNameLeft);
-        EditText eText2 = (EditText) findViewById(R.id.usersTeamName2);
-        initialTeamNameOnRight = eText2.getText().toString();
-        if (initialTeamNameOnRight.equals("")) {
-            initialTeamNameOnRight = getString(R.string.defaultTeamNameOnRight);
-        }
-        teamNameRight = initialTeamNameOnRight;
-        displayOnTableTeamB(teamNameRight);
-        displayTeamNameonRight(teamNameRight);
-        RadioGroup starter = findViewById(R.id.whoStarts);
-        if (starter.getCheckedRadioButtonId() == R.id.optionBlue) {
-            String message = teamNameRight + " " + getString(R.string.serve);
-            displayMessage(message);
-            starter_team_id = R.id.optionBlue;
-        } else {
-            String message = teamNameLeft + " " + getString(R.string.serve);
-            displayMessage(message);
-            starter_team_id = R.id.optionOrange;
-        }
-
-        View startView = findViewById(R.id.startScreen);
-        startView.setVisibility(View.GONE);
-    }
-
-    public void flipCoin(View view) {
-        double chance = Math.random();
-        chance *= 2;
-        if (chance < 1) { //heads
-            ImageView coin =  findViewById(R.id.coin);
-            coin.setImageResource(R.drawable.heads);
-        } else { //tails
-            ImageView coin = findViewById(R.id.coin);
-            coin.setImageResource(R.drawable.one_euro);
-        }
-    }
-
-
     public void add1pointToTeamOnLeft(View view) {
-        if(started) {
             scoreLeft++;
             displayScoreForTeamOnLeft(scoreLeft);
             if (!switched) {
@@ -233,10 +194,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-    }
 
     public void add1pointToTeamOnRight(View view) {
-        if(started) {
             scoreRight++;
             displayScoreForTeamOnRight(scoreRight);
             if (!switched) {
@@ -292,7 +251,6 @@ public class MainActivity extends AppCompatActivity {
                     displayScoreForTeamOnRight(scoreRight);
                 }
             }
-        }
     }
 
     //This method exchange sides up on users click on the exchange button

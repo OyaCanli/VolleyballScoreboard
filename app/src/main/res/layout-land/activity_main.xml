@@ -239,7 +239,6 @@
         <Button
             android:id="@+id/undoLeft"
             style="@style/undo_left_style"
-            android:layout_below="@id/message"
             android:onClick="correctionLeft"
             android:text="@string/_" />
 
@@ -255,83 +254,9 @@
 
         <Button
             android:id="@+id/undoRight"
-            style="@style/undo_right_style"
-            android:layout_below="@id/message"
             android:onClick="correctionRight"
-            android:text="@string/_" />
-
-        <LinearLayout
-            android:id="@+id/startScreen"
-            style="@style/start_screen_layout">
-
-            <EditText
-                android:id="@+id/usersTeamName1"
-                android:hint="@string/enter_team_name_1"
-                style="@style/edittext_orange_style" />
-
-            <EditText
-                android:id="@+id/usersTeamName2"
-                android:hint="@string/enter_team_name_2"
-                style="@style/edittext_blue_style" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/which_team_will_start_the_game"
-                android:textSize="18sp"
-                android:textColor="@android:color/white"
-                android:layout_marginLeft="@dimen/margin_standart"
-                android:layout_marginRight="@dimen/margin_standart"
-                android:padding="@dimen/padding_standart"/>
-
-            <RadioGroup
-                android:id="@+id/whoStarts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="@dimen/margin_standart"
-                android:layout_marginRight="@dimen/margin_standart">
-                <RadioButton
-                    android:id="@+id/optionOrange"
-                    android:text="@string/oranges"
-                    android:textColor="@color/background_teamA"
-                    style="@style/radiobutton_style" />
-                <RadioButton
-                    android:id="@+id/optionBlue"
-                    android:text="@string/blues"
-                    android:textColor="@color/background_teamB"
-                    style="@style/radiobutton_style" />
-            </RadioGroup>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
-                    android:text="@string/flip_a_coin"
-                    android:onClick="flipCoin"
-                    style="@style/flip_coin_style" />
-                <ImageView
-                    android:id="@+id/coin"
-                    android:contentDescription="@string/cd_a_coin"
-                    android:layout_width="@dimen/coin_height"
-                    android:layout_height="@dimen/coin_height"
-                    android:layout_marginTop="@dimen/margin_half"/>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/startButton"
-                android:onClick="startGame"
-                style="@style/start_button_style" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/start_the_game"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@android:color/white"/>
-
-        </LinearLayout>
+            android:text="@string/_"
+            style="@style/undo_right_style"/>
 
     </RelativeLayout>
 

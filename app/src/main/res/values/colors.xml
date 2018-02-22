@@ -6,5 +6,5 @@
     <color name="background_teamB">#03A9F4</color>
     <color name="background_teamA">#FF9800</color>
     <color name="grey">#BDBDBD</color>
-    <color name="start_background">#DD212121</color>
+    <color name="start_background">#212121</color>
 </resources>

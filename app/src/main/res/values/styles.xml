@@ -24,6 +24,18 @@
         <item name="android:layout_below">@id/message</item>
     </style>
 
+    <style name="undo_left_style" parent="undo_style">
+        <item name="android:layout_marginLeft">@dimen/margin_standart</item>
+        <item name="android:layout_marginStart">@dimen/margin_standart</item>
+    </style>
+
+    <style name="undo_right_style" parent="undo_style">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_marginRight">@dimen/margin_standart</item>
+        <item name="android:layout_marginEnd">@dimen/margin_standart</item>
+    </style>
+
     <style name="pause_style">
         <item name="android:layout_width">@dimen/pause_height</item>
         <item name="android:layout_height">@dimen/pause_height</item>
@@ -48,6 +60,7 @@
     </style>
 
     <style name="edittext_orange_style" parent="edittext_style">
+        <item name="android:layout_marginTop">@dimen/margin_standart</item>
         <item name="android:textColorHint">@color/background_teamA</item>
         <item name="android:textColor">@color/background_teamA</item>
     </style>
@@ -123,24 +136,10 @@
         <item name="android:layout_marginLeft">@dimen/margin_standart</item>
     </style>
 
-    <style name="undo_left_style" parent="undo_style">
-        <item name="android:layout_marginLeft">@dimen/margin_standart</item>
-        <item name="android:layout_marginStart">@dimen/margin_standart</item>
-    </style>
-
-    <style name="undo_right_style" parent="undo_style">
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_alignParentEnd">true</item>
-        <item name="android:layout_marginRight">@dimen/margin_standart</item>
-        <item name="android:layout_marginEnd">@dimen/margin_standart</item>
-    </style>
-
     <style name="start_screen_layout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/start_screen_height</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:layout_alignParentTop">true</item>
-        <item name="android:layout_margin">@dimen/margin_half</item>
         <item name="android:background">@color/start_background</item>
     </style>
 
