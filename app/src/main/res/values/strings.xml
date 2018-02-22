@@ -24,4 +24,20 @@
     <string name="start_the_game">Start the game</string>
     <string name="cd_a_coin">A coin</string>
     <string name="_">-</string>
+
+    <string-array name="numberOfSets">
+        <item>Best of 3</item>
+        <item>Best of 5</item>
+    </string-array>
+
+    <string-array name="setFinishingScore">
+        <item>15</item>
+        <item>25</item>
+    </string-array>
+
+    <string-array name="tieBreakerScore">
+        <item>15</item>
+        <item>25</item>
+    </string-array>
+
 </resources>

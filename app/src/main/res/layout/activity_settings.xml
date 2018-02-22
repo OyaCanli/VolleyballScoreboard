@@ -1,73 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/startScreen"
-    style="@style/start_screen_layout">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbarStyle="insideInset">
 
-    <EditText
-        android:id="@+id/usersTeamName1"
-        android:hint="@string/enter_team_name_1"
-        style="@style/edittext_orange_style" />
+    <LinearLayout
+        android:id="@+id/startScreen"
+        style="@style/start_screen_layout">
 
-    <EditText
-        android:id="@+id/usersTeamName2"
-        android:hint="@string/enter_team_name_2"
-        style="@style/edittext_blue_style" />
+        <EditText
+            android:id="@+id/usersTeamName1"
+            style="@style/edittext_orange_style"
+            android:hint="@string/enter_team_name_1" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/which_team_will_start_the_game"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="@dimen/margin_standart"
-        android:layout_marginRight="@dimen/margin_standart"
-        android:padding="@dimen/padding_standart"/>
+        <EditText
+            android:id="@+id/usersTeamName2"
+            style="@style/edittext_blue_style"
+            android:hint="@string/enter_team_name_2" />
 
-    <RadioGroup
-        android:id="@+id/whoStarts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="@dimen/margin_standart"
-        android:layout_marginRight="@dimen/margin_standart">
-        <RadioButton
-            android:id="@+id/optionOrange"
-            android:text="@string/oranges"
-            android:textColor="@color/background_teamA"
-            style="@style/radiobutton_style" />
-        <RadioButton
-            android:id="@+id/optionBlue"
-            android:text="@string/blues"
-            android:textColor="@color/background_teamB"
-            style="@style/radiobutton_style" />
-    </RadioGroup>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_standart"
+            android:layout_marginRight="@dimen/margin_standart"
+            android:padding="@dimen/padding_standart"
+            android:text="@string/which_team_will_start_the_game"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/whoStarts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_standart"
+            android:layout_marginRight="@dimen/margin_standart"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/optionOrange"
+                style="@style/radiobutton_style"
+                android:text="@string/oranges"
+                android:textColor="@color/background_teamA" />
+
+            <RadioButton
+                android:id="@+id/optionBlue"
+                style="@style/radiobutton_style"
+                android:text="@string/blues"
+                android:textColor="@color/background_teamB" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/flip_coin_style"
+                android:onClick="flipCoin"
+                android:text="@string/flip_a_coin" />
+
+            <ImageView
+                android:id="@+id/coin"
+                android:layout_width="@dimen/coin_height"
+                android:layout_height="@dimen/coin_height"
+                android:layout_marginTop="@dimen/margin_half"
+                android:contentDescription="@string/cd_a_coin" />
+        </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
-            android:text="@string/flip_a_coin"
-            android:onClick="flipCoin"
-            style="@style/flip_coin_style" />
-        <ImageView
-            android:id="@+id/coin"
-            android:contentDescription="@string/cd_a_coin"
-            android:layout_width="@dimen/coin_height"
-            android:layout_height="@dimen/coin_height"
-            android:layout_marginTop="@dimen/margin_half"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_standart"
+            android:textColor="@android:color/white"
+            android:text="Number of sets to play:" />
+
+        <Spinner
+            android:id="@+id/spin1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:entries="@array/numberOfSets"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/startButton"
-        android:onClick="startGame"
-        style="@style/start_button_style" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_standart"
+                android:textColor="@android:color/white"
+                android:text="Sets will finish at the score: "/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start_the_game"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@android:color/white"/>
+            <Spinner
+                android:id="@+id/spin2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:entries="@array/setFinishingScore"/>
+        </LinearLayout>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_standart"
+                android:textColor="@android:color/white"
+                android:text="Tie breaker set will end at: "/>
+
+            <Spinner
+                android:id="@+id/spin3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:entries="@array/tieBreakerScore"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/startButton"
+            style="@style/start_button_style"
+            android:onClick="startGame" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/start_the_game"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>

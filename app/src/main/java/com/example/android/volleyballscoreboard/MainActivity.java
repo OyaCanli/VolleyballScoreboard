@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     String teamNameLeft, teamNameRight, initialTeamNameOnLeft, initialTeamNameOnRight;
     String message;
     boolean switched;
+    int totalSetsToPlay, setFinishingScore, tieBreakerScore;
     int timeOffCountLeft, timeOffCountRight, starter_team_id;;
     int[] orangeCellIds = {R.id.s1_tA, R.id.s2_tA, R.id.s3_tA, R.id.s4_tA, R.id.s5_tA};
     int[] blueCellIds = {R.id.s1_tB, R.id.s2_tB, R.id.s3_tB, R.id.s4_tB, R.id.s5_tB};
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     public final static String TIMEOFF_COUNT_LEFT = "timeoffCountLeft";
     public final static String TIMEOFF_COUNT_RIGHT = "timeoffCountRight";
     public final static String STARTING_TEAM = "startingTeam";
+    public final static String NUMBER_OF_TOTAL_SETS = "numberOfTotalSets";
+    public final static String SET_FINISHING_SCORE = "setFinishingScore";
+    public final static String TIE_BREAKER_SCORE = "tieBreakerScore";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +59,16 @@ public class MainActivity extends AppCompatActivity {
         displayTeamNameonLeft(teamNameLeft);
         displayOnTableTeamB(teamNameRight);
         displayTeamNameonRight(teamNameRight);
+        totalSetsToPlay = userChoise.getInt(NUMBER_OF_TOTAL_SETS);
+        setFinishingScore = userChoise.getInt(SET_FINISHING_SCORE);
+        tieBreakerScore = userChoise.getInt(TIE_BREAKER_SCORE);
         starter_team_id = userChoise.getInt(STARTING_TEAM);
         if (starter_team_id == R.id.optionBlue) {
-            String message = teamNameRight + " " + getString(R.string.serve);
+            message = teamNameRight + " " + getString(R.string.serve);
             displayMessage(message);
             starter_team_id = R.id.optionBlue;
         } else {
-            String message = teamNameLeft + " " + getString(R.string.serve);
+            message = teamNameLeft + " " + getString(R.string.serve);
             displayMessage(message);
             starter_team_id = R.id.optionOrange;
         }
@@ -149,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
                 scoreTable.setText(String.valueOf(setScoresBlue[setNumber]));
             }
 
-            if (setNumber < 5) {
-                if ((scoreLeft >= 25) && ((scoreLeft - scoreRight) >= 2)) {
+            if (setNumber < totalSetsToPlay) {
+                if ((scoreLeft >= setFinishingScore) && ((scoreLeft - scoreRight) >= 2)) {
                     //if it is a set winning point..
                     if (!switched){
                         TextView scoreTable = findViewById(orangeCellIds[setNumber]);
@@ -165,11 +172,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                     setsWonLeft++;
                     displaySetsForTeamOnLeft(setsWonLeft);
-                    if (setsWonLeft == 3) { //if it a match winning set
-                        String winner = teamNameLeft + " " + getString(R.string.wonMatch);
-                        displayMessage(winner);
+                    if (setsWonLeft == (totalSetsToPlay+1)/2) { //if it a match winning set
+                        message = teamNameLeft + " " + getString(R.string.wonMatch);
+                        displayMessage(message);
                     } else { //if it is not a match winning set
-                        String message = teamNameLeft + " " + getString(R.string.wonSet);
+                        message = teamNameLeft + " " + getString(R.string.wonSet);
                         displayMessage(message);
                         setNumber++;
                         scoreLeft = 0;
@@ -178,12 +185,12 @@ public class MainActivity extends AppCompatActivity {
                         displayScoreForTeamOnRight(scoreRight);
                     }
                 } else { //if it is not a set winning point
-                    String message = teamNameLeft + " " + getString(R.string.serve);
+                    message = teamNameLeft + " " + getString(R.string.serve);
                     displayMessage(message);
                 }
-            } else { // if it is the fifth set; it will switch to a tie break: the final set will be up to 15 points.
-                if ((scoreLeft >= 15) && ((scoreLeft - scoreRight) >= 2)) {
-                    String message = teamNameLeft + " " + getString(R.string.wonMatch);
+            } else { // if it is the tiebreaker set
+                if ((scoreLeft >= tieBreakerScore) && ((scoreLeft - scoreRight) >= 2)) {
+                    message = teamNameLeft + " " + getString(R.string.wonMatch);
                     displayMessage(message);
                     setsWonLeft++;
                     displaySetsForTeamOnLeft(setsWonLeft);
@@ -207,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
                 TextView scoreTable = findViewById(orangeCellIds[setNumber]);
                 scoreTable.setText(String.valueOf(setScoresOrange[setNumber]));
             }
-            if (setNumber < 5) {
-                if ((scoreRight >= 25) && ((scoreRight - scoreLeft) >= 2)) {
+            if (setNumber < totalSetsToPlay) {
+                if ((scoreRight >= setFinishingScore) && ((scoreRight - scoreLeft) >= 2)) {
                     //if it is a set winning point..
                     if (!switched){
                         TextView scoreTable = findViewById(blueCellIds[setNumber]);
@@ -223,11 +230,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                     setsWonRight++;
                     displaySetsForTeamOnRight(setsWonRight);
-                    if (setsWonRight == 3) { //if it a match winning set
-                        String winner = teamNameRight + " " + getString(R.string.wonMatch);
-                        displayMessage(winner);
+                    if (setsWonRight == (totalSetsToPlay+1)/2) { //if it a match winning set
+                        message = teamNameRight + " " + getString(R.string.wonMatch);
+                        displayMessage(message);
                     } else { //if it is not a match winning set
-                        String message = teamNameRight + " " + getString(R.string.wonSet);
+                        message = teamNameRight + " " + getString(R.string.wonSet);
                         displayMessage(message);
                         setNumber++;
                         scoreLeft = 0;
@@ -236,12 +243,12 @@ public class MainActivity extends AppCompatActivity {
                         displayScoreForTeamOnRight(scoreRight);
                     }
                 } else { //if it is not a set winning point
-                    String message = teamNameRight + " " + getString(R.string.serve);
+                    message = teamNameRight + " " + getString(R.string.serve);
                     displayMessage(message);
                 }
             } else { // if it is the fifth set; it will switch to a tie break: the final set will be up to 15 points.
-                if ((scoreRight >= 15) && ((scoreRight - scoreLeft) >= 2)) {
-                    String message = teamNameLeft + " " + getString(R.string.wonMatch);
+                if ((scoreRight >= tieBreakerScore) && ((scoreRight - scoreLeft) >= 2)) {
+                    message = teamNameLeft + " " + getString(R.string.wonMatch);
                     displayMessage(message);
                     setsWonRight++;
                     displaySetsForTeamOnRight(setsWonRight);
@@ -338,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
         if (scoreLeft > 0) {
             scoreLeft--;
             displayScoreForTeamOnLeft(scoreLeft);
-            String message = getString(R.string.error);
+            message = getString(R.string.error);
             displayMessage(message);
         }
     }
@@ -349,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
         if (scoreRight > 0) {
             scoreRight--;
             displayScoreForTeamOnRight(scoreRight);
-            String message = getString(R.string.error);
+            message = getString(R.string.error);
             displayMessage(message);
         }
     }
