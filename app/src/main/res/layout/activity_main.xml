@@ -17,7 +17,7 @@
             style="@style/team_name_style" />
 
         <Button
-            android:onClick="exchangeSides"
+            android:id="@+id/exchange_button"
             android:text = "@string/ex"
             style="@style/exchange_button_style" />
 
@@ -39,7 +39,6 @@
         <Button
             android:id="@+id/team_left_score"
             android:text="@string/zero"
-            android:onClick="add1pointToTeamOnLeft"
             style="@style/score_style" />
 
         <LinearLayout
@@ -59,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/background_teamA" />
+                android:background="@color/orange_background" />
 
         </LinearLayout>
 
@@ -85,14 +84,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/background_teamB" />
+                android:background="@color/blue_background" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/team_right_score"
             android:text="@string/zero"
-            android:onClick="add1pointToTeamOnRight"
             style="@style/score_style" />
 
     </LinearLayout>
@@ -143,7 +141,7 @@
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/background_teamA">
+            android:background="@color/orange_background">
             <TextView
                 android:id="@+id/teamA"
                 style="@style/cell_style"
@@ -178,7 +176,7 @@
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/background_teamB">
+            android:background="@color/blue_background">
             <TextView
                 android:id="@+id/teamB"
                 style="@style/cell_style"
@@ -219,42 +217,42 @@
     <Button
         android:id="@+id/pauseLeft"
         android:layout_marginStart="@dimen/margin_standart"
-        android:layout_marginLeft="@dimen/margin_standart"
-        android:onClick="pauseLeft"
         style="@style/pause_style" />
 
     <Button
         android:id="@+id/pauseRight"
-        android:onClick="pauseRight"
         style="@style/pause_right_style" />
 
-    <Button
-        android:id="@+id/undoLeft"
-        android:layout_marginLeft="@dimen/margin_standart"
-        android:layout_marginStart="@dimen/margin_standart"
-        android:onClick="correctionLeft"
-        android:text="@string/_"
-        style="@style/undo_left_style" />
+    <LinearLayout
+        android:id="@+id/bottom_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/message">
 
-    <Button
-        android:id="@+id/reset"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/button_height"
-        android:layout_alignBottom="@+id/undoLeft"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/buttonborders"
-        android:onClick="reset"
-        android:text="@string/reset" />
+        <Button
+            android:id="@+id/undo"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/margin_standart"
+            android:text="@string/undo"
+            android:enabled="false"
+            style="@style/undo_style" />
 
-    <Button
-        android:id="@+id/undoRight"
-        style="@style/undo_right_style"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="@dimen/margin_standart"
-        android:layout_marginEnd="@dimen/margin_standart"
-        android:onClick="correctionRight"
-        android:text="@string/_" />
+        <android.support.v4.widget.Space
+            android:layout_width="@dimen/space_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/margin_standart"
+            android:background="@drawable/buttonborders"
+            android:text="@string/reset" />
+
+    </LinearLayout>
+
 
 
 

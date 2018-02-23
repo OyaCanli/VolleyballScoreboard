@@ -111,7 +111,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         chance *= 2;
         if (chance < 1) { //heads
             ImageView coin =  findViewById(R.id.coin);
-            coin.setImageResource(R.drawable.heads);
+            coin.setImageResource(R.drawable.eurohead);
         } else { //tails
             ImageView coin = findViewById(R.id.coin);
             coin.setImageResource(R.drawable.one_euro);

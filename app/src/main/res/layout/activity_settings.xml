@@ -41,13 +41,13 @@
                 android:id="@+id/optionOrange"
                 style="@style/radiobutton_style"
                 android:text="@string/oranges"
-                android:textColor="@color/background_teamA" />
+                android:textColor="@color/orange_background" />
 
             <RadioButton
                 android:id="@+id/optionBlue"
                 style="@style/radiobutton_style"
                 android:text="@string/blues"
-                android:textColor="@color/background_teamB" />
+                android:textColor="@color/blue_background" />
         </RadioGroup>
 
         <LinearLayout
@@ -71,6 +71,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_half"
         android:orientation="horizontal">
         <TextView
             android:text="Number of sets to play:"

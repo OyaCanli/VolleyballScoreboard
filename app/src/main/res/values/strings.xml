@@ -24,6 +24,10 @@
     <string name="start_the_game">Start the game</string>
     <string name="cd_a_coin">A coin</string>
     <string name="_">-</string>
+    <string name="undo">Undo</string>
+    <string name="cancel">Cancel</string>
+    <string name="settings">SETTINGS</string>
+    <string name="reset_warning">Are you sure you want to reset all the scores to 0? If you want to change the settings as well, click settings to go first to the settings page.</string>
 
     <string-array name="numberOfSets">
         <item>5</item>

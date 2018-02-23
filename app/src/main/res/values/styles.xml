@@ -17,29 +17,18 @@
     </style>
 
     <style name="undo_style">
-        <item name="android:layout_width">@dimen/undo_width</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:layout_marginBottom">@dimen/margin_large</item>
         <item name="android:background">@drawable/buttonborders</item>
-        <item name="android:layout_below">@id/message</item>
-    </style>
-
-    <style name="undo_left_style" parent="undo_style">
         <item name="android:layout_marginLeft">@dimen/margin_standart</item>
         <item name="android:layout_marginStart">@dimen/margin_standart</item>
-    </style>
-
-    <style name="undo_right_style" parent="undo_style">
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_alignParentEnd">true</item>
-        <item name="android:layout_marginRight">@dimen/margin_standart</item>
-        <item name="android:layout_marginEnd">@dimen/margin_standart</item>
     </style>
 
     <style name="pause_style">
         <item name="android:layout_width">@dimen/pause_height</item>
         <item name="android:layout_height">@dimen/pause_height</item>
-        <item name="android:layout_above">@id/undoLeft</item>
+        <item name="android:layout_above">@id/bottom_buttons</item>
         <item name="android:layout_marginBottom">@dimen/margin_standart</item>
         <item name="android:background">@drawable/alarm</item>
     </style>
@@ -61,13 +50,13 @@
 
     <style name="edittext_orange_style" parent="edittext_style">
         <item name="android:layout_marginTop">@dimen/margin_standart</item>
-        <item name="android:textColorHint">@color/background_teamA</item>
-        <item name="android:textColor">@color/background_teamA</item>
+        <item name="android:textColorHint">@color/orange_background</item>
+        <item name="android:textColor">@color/orange_background</item>
     </style>
 
     <style name="edittext_blue_style" parent="edittext_style">
-        <item name="android:textColorHint">@color/background_teamB</item>
-        <item name="android:textColor">@color/background_teamB</item>
+        <item name="android:textColorHint">@color/blue_background</item>
+        <item name="android:textColor">@color/blue_background</item>
     </style>
 
     <style name="team_name_style">
@@ -171,9 +160,9 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/margin_standart</item>
-        <item name="android:layout_marginBottom">@dimen/margin_half</item>
+        <item name="android:layout_marginBottom">@dimen/margin_standart</item>
         <item name="android:layout_marginRight">@dimen/margin_half</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">#9E9E9E</item>
         <item name="android:textSize">18sp</item>
     </style>
 

@@ -3,8 +3,8 @@
     <color name="colorPrimary">#37474F</color>
     <color name="colorPrimaryDark">#263238</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="background_teamB">#03A9F4</color>
-    <color name="background_teamA">#FF9800</color>
+    <color name="blue_background">#03A9F4</color>
+    <color name="orange_background">#FF9800</color>
     <color name="grey">#BDBDBD</color>
     <color name="start_background">#212121</color>
 </resources>
