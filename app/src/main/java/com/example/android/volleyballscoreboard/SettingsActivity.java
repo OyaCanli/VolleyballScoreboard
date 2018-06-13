@@ -21,12 +21,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     String teamNameLeft, teamNameRight;
     int numbersOfTotalSets, setFinishingScore, tieBreakerScore;
-    public final static String TEAM_NAME_LEFT = "teamNameLeft";
-    public final static String TEAM_NAME_RIGHT = "teamNameRight";
-    public final static String STARTING_TEAM = "startingTeam";
-    public final static String NUMBER_OF_TOTAL_SETS = "numberOfTotalSets";
-    public final static String SET_FINISHING_SCORE = "setFinishingScore";
-    public final static String TIE_BREAKER_SCORE = "tieBreakerScore";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,12 +91,12 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         }
 
         Intent userChoices = new Intent(SettingsActivity.this, MainActivity.class);
-        userChoices.putExtra(TEAM_NAME_LEFT, teamNameLeft);
-        userChoices.putExtra(TEAM_NAME_RIGHT, teamNameRight);
-        userChoices.putExtra(STARTING_TEAM, starter.getCheckedRadioButtonId());
-        userChoices.putExtra(NUMBER_OF_TOTAL_SETS, numbersOfTotalSets);
-        userChoices.putExtra(SET_FINISHING_SCORE, setFinishingScore);
-        userChoices.putExtra(TIE_BREAKER_SCORE, tieBreakerScore);
+        userChoices.putExtra(Constants.TEAM_NAME_LEFT, teamNameLeft);
+        userChoices.putExtra(Constants.TEAM_NAME_RIGHT, teamNameRight);
+        userChoices.putExtra(Constants.STARTING_TEAM, starter.getCheckedRadioButtonId());
+        userChoices.putExtra(Constants.NUMBER_OF_TOTAL_SETS, numbersOfTotalSets);
+        userChoices.putExtra(Constants.SET_FINISHING_SCORE, setFinishingScore);
+        userChoices.putExtra(Constants.TIE_BREAKER_SCORE, tieBreakerScore);
         startActivity(userChoices);
     }
 

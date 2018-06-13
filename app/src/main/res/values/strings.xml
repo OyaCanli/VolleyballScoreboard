@@ -2,9 +2,9 @@
     <string name="app_name">Volleyball Scoreboard</string>
     <string name="defaultTeamNameOnLeft">Oranges</string>
     <string name="defaultTeamNameOnRight">Blues</string>
-    <string name="wonMatch"> won the match! Congratulations! </string>
-    <string name="wonSet"> won the set!</string>
-    <string name="serve"> will serve the ball.</string>
+    <string name="wonMatch">%1$s won the match! Congratulations! </string>
+    <string name="wonSet">%1$s won the set!</string>
+    <string name="serve">%1$s will serve the ball.</string>
     <string name="tieBreaker">Tie breaker!</string>
     <string name="reset">reset</string>
     <string name="error">Oops! Sorry, that was an error.</string>
@@ -23,11 +23,14 @@
     <string name="flip_a_coin">Flip a coin</string>
     <string name="start_the_game">Start the game</string>
     <string name="cd_a_coin">A coin</string>
-    <string name="_">-</string>
+    <string name="tire">-</string>
     <string name="undo">Undo</string>
     <string name="cancel">Cancel</string>
     <string name="settings">SETTINGS</string>
     <string name="reset_warning">Are you sure you want to reset all the scores to 0? If you want to change the settings as well, click settings to go first to the settings page.</string>
+    <string name="exchange_only_between_sets">You can exchange sides only between the sets.</string>
+    <string name="all_timeoffs_used">You have used all your time-offs.</string>
+    <string name="used_timeoffs">You have used %1$d time-offs. You have %2$d time-off left.</string>
 
     <string-array name="numberOfSets">
         <item>5</item>
