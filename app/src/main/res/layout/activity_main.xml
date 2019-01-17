@@ -1,259 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_standart">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:id="@+id/teamNames"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/team_names_height"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/team_on_left"
-            android:text="@string/defaultTeamNameOnLeft"
-            android:background="@drawable/cellborder"
-            style="@style/team_name_style" />
-
-        <Button
-            android:id="@+id/exchange_button"
-            android:text = "@string/ex"
-            style="@style/exchange_button_style" />
-
-        <TextView
-            android:id="@+id/team_on_right"
-            android:text="@string/defaultTeamNameOnRight"
-            android:background="@drawable/blueborder"
-            style="@style/team_name_style" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id = "@+id/scoreboard"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/scoreboard_height"
-        android:orientation="horizontal"
-        android:layout_below="@id/teamNames">
-
-        <Button
-            android:id="@+id/team_left_score"
-            android:text="@string/zero"
-            style="@style/score_style" />
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_standart">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/margin_half">
+            android:id="@+id/teamNames"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/team_names_height"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/setsForTeamOnLeft"
-                android:text="@string/zero"
-                style="@style/set_score_style" />
+                android:id="@+id/team_on_left"
+                style="@style/team_name_style"
+                android:background="@drawable/cellborder"
+                android:text="@string/defaultTeamNameOnLeft" />
 
-            <View
-                android:id="@+id/viewOrange"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/orange_background" />
+            <Button
+                android:id="@+id/exchange_button"
+                style="@style/exchange_button_style"
+                android:text="@string/ex" />
+
+            <TextView
+                android:id="@+id/team_on_right"
+                style="@style/team_name_style"
+                android:background="@drawable/blueborder"
+                android:text="@string/defaultTeamNameOnRight" />
 
         </LinearLayout>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/darker_gray" />
-
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/margin_half">
+            android:id="@+id/scoreboard"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/scoreboard_height"
+            android:layout_below="@id/teamNames"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/setsForTeamOnRight"
-                style="@style/set_score_style"
+            <Button
+                android:id="@+id/team_left_score"
+                style="@style/score_style"
                 android:text="@string/zero" />
 
-            <View
-                android:id="@+id/viewBlue"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_half"
                 android:layout_weight="1"
-                android:background="@color/blue_background" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/setsForTeamOnLeft"
+                    style="@style/set_score_style"
+                    android:text="@string/zero" />
+
+                <View
+                    android:id="@+id/viewOrange"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/orange_background" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_half"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/setsForTeamOnRight"
+                    style="@style/set_score_style"
+                    android:text="@string/zero" />
+
+                <View
+                    android:id="@+id/viewBlue"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/blue_background" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/team_right_score"
+                style="@style/score_style"
+                android:text="@string/zero" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/team_right_score"
-            android:text="@string/zero"
-            style="@style/score_style" />
+        <TableLayout
+            android:id="@+id/summaryTable"
+            style="@style/tablelayout_style">
 
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/background_dark" />
 
-    <TableLayout android:id="@+id/summaryTable"
-        style="@style/tablelayout_style">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/background_dark" />
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/grey">
-            <Space
+            <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@color/grey">
 
-            <TextView
-                android:id="@+id/s1"
-                android:text = "@string/s1"
-                style="@style/cell_style" />
-            <TextView
-                android:id="@+id/s2"
-                android:text = "@string/s2"
-                style="@style/cell_style" />
-            <TextView
-                android:id="@+id/s3"
-                android:text = "@string/s3"
-                style="@style/cell_style" />
-            <TextView
-                android:id="@+id/s4"
-                android:text = "@string/s4"
-                style="@style/cell_style" />
-            <TextView
-                android:id="@+id/s5"
-                android:text = "@string/s5"
-                style="@style/cell_style" />
-        </TableRow>
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/background_dark" />
+                <TextView
+                    android:id="@+id/s1"
+                    style="@style/cell_style"
+                    android:text="@string/s1" />
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/orange_background">
-            <TextView
-                android:id="@+id/teamA"
-                style="@style/cell_style"
-                android:text = "@string/defaultTeamNameOnLeft" />
-            <TextView
-                android:id="@+id/s1_tA"
-                style="@style/cell_style"
-                android:text = "@string/zero" />
-            <TextView
-                android:id="@+id/s2_tA"
-                style="@style/cell_style"
-                android:text = "@string/zero" />
-            <TextView
-                android:id="@+id/s3_tA"
-                style="@style/cell_style"
-                android:text = "@string/zero" />
-            <TextView
-                android:id="@+id/s4_tA"
-                style="@style/cell_style"
-                android:text = "@string/zero" />
-            <TextView
-                android:id="@+id/s5_tA"
-                style="@style/cell_style"
-                android:text = "@string/zero" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/s2"
+                    style="@style/cell_style"
+                    android:text="@string/s2" />
 
-        <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/background_dark" />
+                <TextView
+                    android:id="@+id/s3"
+                    style="@style/cell_style"
+                    android:text="@string/s3" />
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/blue_background">
-            <TextView
-                android:id="@+id/teamB"
-                style="@style/cell_style"
-                android:text = "@string/defaultTeamNameOnRight" />
-            <TextView
-                android:id="@+id/s1_tB"
-                style="@style/cell_style"
-                android:text = "@string/zero" />
-            <TextView
-                android:id="@+id/s2_tB"
-                style="@style/cell_style"
-                android:text = "@string/zero" />
-            <TextView
-                android:id="@+id/s3_tB"
-                style="@style/cell_style"
-                android:text = "@string/zero" />
-            <TextView
-                android:id="@+id/s4_tB"
-                style="@style/cell_style"
-                android:text = "@string/zero" />
-            <TextView
-                android:id="@+id/s5_tB"
-                style="@style/cell_style"
-                android:text = "@string/zero" />
-        </TableRow>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/background_dark" />
-    </TableLayout>
+                <TextView
+                    android:id="@+id/s4"
+                    style="@style/cell_style"
+                    android:text="@string/s4" />
 
-    <TextView
-        android:id="@+id/message"
-        android:text = ""
-        android:layout_below="@id/summaryTable"
-        style="@style/message_style" />
+                <TextView
+                    android:id="@+id/s5"
+                    style="@style/cell_style"
+                    android:text="@string/s5" />
+            </TableRow>
 
-    <Button
-        android:id="@+id/pauseLeft"
-        android:layout_marginStart="@dimen/margin_standart"
-        style="@style/pause_style" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/background_dark" />
 
-    <Button
-        android:id="@+id/pauseRight"
-        style="@style/pause_right_style" />
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/orange_background">
 
-    <LinearLayout
-        android:id="@+id/bottom_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/message">
+                <TextView
+                    android:id="@+id/teamA"
+                    style="@style/cell_style"
+                    android:text="@string/defaultTeamNameOnLeft" />
 
-        <Button
-            android:id="@+id/undo"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/margin_standart"
-            android:text="@string/undo"
-            android:enabled="false"
-            style="@style/undo_style" />
+                <TextView
+                    android:id="@+id/s1_tA"
+                    style="@style/cell_style"
+                    android:text="@string/zero" />
 
-        <android.support.v4.widget.Space
-            android:layout_width="@dimen/space_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/s2_tA"
+                    style="@style/cell_style"
+                    android:text="@string/zero" />
+
+                <TextView
+                    android:id="@+id/s3_tA"
+                    style="@style/cell_style"
+                    android:text="@string/zero" />
+
+                <TextView
+                    android:id="@+id/s4_tA"
+                    style="@style/cell_style"
+                    android:text="@string/zero" />
+
+                <TextView
+                    android:id="@+id/s5_tA"
+                    style="@style/cell_style"
+                    android:text="@string/zero" />
+            </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/background_dark" />
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_background">
+
+                <TextView
+                    android:id="@+id/teamB"
+                    style="@style/cell_style"
+                    android:text="@string/defaultTeamNameOnRight" />
+
+                <TextView
+                    android:id="@+id/s1_tB"
+                    style="@style/cell_style"
+                    android:text="@string/zero" />
+
+                <TextView
+                    android:id="@+id/s2_tB"
+                    style="@style/cell_style"
+                    android:text="@string/zero" />
+
+                <TextView
+                    android:id="@+id/s3_tB"
+                    style="@style/cell_style"
+                    android:text="@string/zero" />
+
+                <TextView
+                    android:id="@+id/s4_tB"
+                    style="@style/cell_style"
+                    android:text="@string/zero" />
+
+                <TextView
+                    android:id="@+id/s5_tB"
+                    style="@style/cell_style"
+                    android:text="@string/zero" />
+            </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/background_dark" />
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/message"
+            style="@style/message_style"
+            android:layout_below="@id/summaryTable"
+            android:text="" />
 
         <Button
-            android:id="@+id/reset"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/button_height"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/margin_standart"
-            android:background="@drawable/buttonborders"
-            android:text="@string/reset" />
+            android:id="@+id/pauseLeft"
+            style="@style/pause_style"
+            android:layout_marginStart="@dimen/margin_standart" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/pauseRight"
+            style="@style/pause_right_style" />
 
+        <LinearLayout
+            android:id="@+id/bottom_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/message">
 
+            <Button
+                android:id="@+id/undo"
+                style="@style/undo_style"
+                android:layout_margin="@dimen/margin_standart"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="@string/undo" />
 
+            <android.support.v4.widget.Space
+                android:layout_width="@dimen/space_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_weight="1" />
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/reset"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:layout_margin="@dimen/margin_standart"
+                android:layout_weight="1"
+                android:background="@drawable/buttonborders"
+                android:text="@string/reset" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

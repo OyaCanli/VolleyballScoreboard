@@ -4,47 +4,39 @@ import android.app.AlertDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.provider.AlarmClock;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.volleyballscoreboard.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ScoreViewModel mViewModel;
-    Button scoreLeftButton, scoreRightButton, pauseLeftButton, pauseRightButton;
-    Button undoButton, resetButton, exchangeButton;
-    int[] orangeCellIds = {R.id.s1_tA, R.id.s2_tA, R.id.s3_tA, R.id.s4_tA, R.id.s5_tA};
-    int[] blueCellIds = {R.id.s1_tB, R.id.s2_tB, R.id.s3_tB, R.id.s4_tB, R.id.s5_tB};
+    private ScoreViewModel mViewModel;
+    private int[] orangeCellIds = {R.id.s1_tA, R.id.s2_tA, R.id.s3_tA, R.id.s4_tA, R.id.s5_tA};
+    private int[] blueCellIds = {R.id.s1_tB, R.id.s2_tB, R.id.s3_tB, R.id.s4_tB, R.id.s5_tB};
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         //Initialize view model
         mViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
 
-        //initialize buttons
-        scoreLeftButton = findViewById(R.id.team_left_score);
-        scoreRightButton = findViewById(R.id.team_right_score);
-        exchangeButton = findViewById(R.id.exchange_button);
-        pauseLeftButton = findViewById(R.id.pauseLeft);
-        pauseRightButton = findViewById(R.id.pauseRight);
-        undoButton = findViewById(R.id.undo);
-        resetButton = findViewById(R.id.reset);
-
         //set click listeners on buttons
-        scoreLeftButton.setOnClickListener(this);
-        scoreRightButton.setOnClickListener(this);
-        exchangeButton.setOnClickListener(this);
-        pauseLeftButton.setOnClickListener(this);
-        pauseRightButton.setOnClickListener(this);
-        undoButton.setOnClickListener(this);
-        resetButton.setOnClickListener(this);
+        binding.teamLeftScore.setOnClickListener(this);
+        binding.teamRightScore.setOnClickListener(this);
+        binding.exchangeButton.setOnClickListener(this);
+        binding.pauseLeft.setOnClickListener(this);
+        binding.pauseRight.setOnClickListener(this);
+        binding.undo.setOnClickListener(this);
+        binding.reset.setOnClickListener(this);
 
         //get user choices from the previous activity and display
         Bundle userChoise = getIntent().getExtras();
@@ -74,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 blueCell.setBackgroundColor(mViewModel.getBlueRowColors()[i]);
             }
             if(mViewModel.isUndoEnabled()) {
-                undoButton.setEnabled(true);
+                binding.undo.setEnabled(true);
             }
         }
 
@@ -90,14 +82,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         displayScoreForTeamOnRight(mViewModel.getScoreRight());
 
         if(mViewModel.isSwitched()){
-            View view1 = findViewById(R.id.viewOrange);
-            view1.setBackgroundColor(getResources().getColor(R.color.orange_background));
-            View view2 = findViewById(R.id.viewBlue);
-            view2.setBackgroundColor(getResources().getColor(R.color.blue_background));
-            TextView tw1 = findViewById(R.id.team_on_left);
-            tw1.setBackground(this.getResources().getDrawable(R.drawable.blueborder));
-            TextView tw2 = findViewById(R.id.team_on_right);
-            tw2.setBackground(this.getResources().getDrawable(R.drawable.cellborder));
+            binding.viewOrange.setBackgroundColor(getResources().getColor(R.color.orange_background));
+            binding.viewBlue.setBackgroundColor(getResources().getColor(R.color.blue_background));
+            binding.teamOnLeft.setBackground(this.getResources().getDrawable(R.drawable.blueborder));
+            binding.teamOnRight.setBackground(this.getResources().getDrawable(R.drawable.cellborder));
         }
     }
 
@@ -140,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mViewModel.setScoreLeft(mViewModel.getScoreLeft() + 1);
             displayScoreForTeamOnLeft(mViewModel.getScoreLeft());
             mViewModel.setLastPointer(Constants.TEAM_LEFT);
-            undoButton.setEnabled(true);
+        binding.undo.setEnabled(true);
             mViewModel.setUndoEnabled(true);
             //same score is shown in the score summary table as well.
             //if sides are switched blue team is on the left
@@ -205,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mViewModel.setScoreRight(mViewModel.getScoreRight() + 1);
             displayScoreForTeamOnRight(mViewModel.getScoreRight());
             mViewModel.setLastPointer(Constants.TEAM_RIGHT);
-            undoButton.setEnabled(true);
+        binding.undo.setEnabled(true);
             mViewModel.setUndoEnabled(true);
         //same score is shown in the score summary table as well.
         //if sides are switched blue team is on the left
@@ -288,27 +276,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 displayTeamNameonLeft(mViewModel.getTeamNameLeft());
                 mViewModel.setTeamNameRight(mViewModel.getInitialTeamNameOnLeft());
                 displayTeamNameonRight(mViewModel.getTeamNameRight());
-                View view1 = findViewById(R.id.viewOrange);
-                view1.setBackgroundColor(getResources().getColor(R.color.blue_background));
-                View view2 = findViewById(R.id.viewBlue);
-                view2.setBackgroundColor(getResources().getColor(R.color.orange_background));
-                TextView tw1 = findViewById(R.id.team_on_left);
-                tw1.setBackground(this.getResources().getDrawable(R.drawable.blueborder));
-                TextView tw2 = findViewById(R.id.team_on_right);
-                tw2.setBackground(this.getResources().getDrawable(R.drawable.cellborder));
+                binding.viewOrange.setBackgroundColor(getResources().getColor(R.color.blue_background));
+                binding.viewBlue.setBackgroundColor(getResources().getColor(R.color.orange_background));
+                binding.teamOnLeft.setBackground(this.getResources().getDrawable(R.drawable.blueborder));
+                binding.teamOnRight.setBackground(this.getResources().getDrawable(R.drawable.cellborder));
             } else {
                 mViewModel.setTeamNameLeft(mViewModel.getInitialTeamNameOnLeft());
                 displayTeamNameonLeft(mViewModel.getTeamNameLeft());
                 mViewModel.setTeamNameRight(mViewModel.getInitialTeamNameOnRight());
                 displayTeamNameonRight(mViewModel.getTeamNameRight() );
-                View view1 = findViewById(R.id.viewOrange);
-                view1.setBackgroundColor(getResources().getColor(R.color.orange_background));
-                View view2 = findViewById(R.id.viewBlue);
-                view2.setBackgroundColor(getResources().getColor(R.color.blue_background));
-                TextView tw1 = findViewById(R.id.team_on_left);
-                tw1.setBackground(this.getResources().getDrawable(R.drawable.cellborder));
-                TextView tw2 =  findViewById(R.id.team_on_right);
-                tw2.setBackground(this.getResources().getDrawable(R.drawable.blueborder));
+                binding.viewOrange.setBackgroundColor(getResources().getColor(R.color.orange_background));
+                binding.viewBlue.setBackgroundColor(getResources().getColor(R.color.blue_background));
+                binding.teamOnLeft.setBackground(this.getResources().getDrawable(R.drawable.cellborder));
+                binding.teamOnRight.setBackground(this.getResources().getDrawable(R.drawable.blueborder));
             }
         } else {
             Toast.makeText(this, R.string.exchange_only_between_sets, Toast.LENGTH_SHORT).show();
@@ -356,13 +336,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             case Constants.TEAM_LEFT:{
                 correctionLeft();
-                undoButton.setEnabled(false);
+                binding.undo.setEnabled(false);
                 mViewModel.setUndoEnabled(false);
                 break;
             }
             case Constants.TEAM_RIGHT:{
                 correctionRight();
-                undoButton.setEnabled(false);
+                binding.undo.setEnabled(false);
                 mViewModel.setUndoEnabled(false);
                 break;
             }
@@ -447,48 +427,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void displayScoreForTeamOnLeft(int score) {
-        TextView scoreView = findViewById(R.id.team_left_score);
-        scoreView.setText(String.valueOf(score));
+        binding.teamLeftScore.setText(String.valueOf(score));
     }
 
     public void displayScoreForTeamOnRight(int score) {
-        TextView scoreView = findViewById(R.id.team_right_score);
-        scoreView.setText(String.valueOf(score));
+        binding.teamRightScore.setText(String.valueOf(score));
     }
 
     public void displaySetsForTeamOnLeft(int score) {
-        TextView scoreView = findViewById(R.id.setsForTeamOnLeft);
-        scoreView.setText(String.valueOf(score));
+        binding.setsForTeamOnLeft.setText(String.valueOf(score));
     }
 
     public void displaySetsForTeamOnRight(int score) {
-        TextView scoreView = findViewById(R.id.setsForTeamOnRight);
-        scoreView.setText(String.valueOf(score));
+        binding.setsForTeamOnRight.setText(String.valueOf(score));
     }
 
     public void displayTeamNameonLeft(String message) {
-        TextView scoreView = findViewById(R.id.team_on_left);
-        scoreView.setText(message);
+        binding.teamOnLeft.setText(message);
     }
 
     public void displayTeamNameonRight(String message) {
-        TextView scoreView = findViewById(R.id.team_on_right);
-        scoreView.setText(message);
+        binding.teamOnRight.setText(message);
     }
 
     public void displayMessage(String message) {
-        TextView scoreView = findViewById(R.id.message);
-        scoreView.setText(message);
+        binding.message.setText(message);
     }
 
     public void displayOnTableTeamA(String message) {
-        TextView scoreView = findViewById(R.id.teamA);
-        scoreView.setText(message);
+        binding.teamA.setText(message);
     }
 
     public void displayOnTableTeamB(String message) {
-        TextView scoreView = findViewById(R.id.teamB);
-        scoreView.setText(message);
+        binding.teamB.setText(message);
     }
 
     public void reset(){
