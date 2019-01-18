@@ -11,20 +11,21 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-import java.math.BigDecimal;
-
 /**
  * Created by Oya on 22-02-18.
  */
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    String teamNameLeft, teamNameRight;
-    int numbersOfTotalSets, setFinishingScore, tieBreakerScore;
+    private int numbersOfTotalSets, setFinishingScore, tieBreakerScore;
+    private ImageView coin;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        coin = findViewById(R.id.coin);
+
         //Initialize spinner 1
         Spinner spin1 = findViewById(R.id.spin1);
         ArrayAdapter<CharSequence> spinAdapter1 = ArrayAdapter.createFromResource(this,
@@ -32,6 +33,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinAdapter1.setDropDownViewResource(R.layout.spinner_dropdown);
         spin1.setAdapter(spinAdapter1);
         spin1.setOnItemSelectedListener(this);
+
         //Initialize spinner 2
         Spinner spin2 = findViewById(R.id.spin2);
         ArrayAdapter<CharSequence> spinAdapter2 = ArrayAdapter.createFromResource(this,
@@ -39,6 +41,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinAdapter2.setDropDownViewResource(R.layout.spinner_dropdown);
         spin2.setAdapter(spinAdapter2);
         spin2.setOnItemSelectedListener(this);
+
         //Initialize spinner 3
         Spinner spin3 = findViewById(R.id.spin3);
         ArrayAdapter<CharSequence> spinAdapter3 = ArrayAdapter.createFromResource(this,
@@ -80,19 +83,19 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         EditText eText1 = findViewById(R.id.usersTeamName1);
         EditText eText2 = findViewById(R.id.usersTeamName2);
         RadioGroup starter = findViewById(R.id.whoStarts);
-        teamNameLeft = eText1.getText().toString();
-        if (teamNameLeft.equals("")) {
-            teamNameLeft = getString(R.string.defaultTeamNameOnLeft);
+        String teamNameOranges = eText1.getText().toString();
+        if (teamNameOranges.equals("")) {
+            teamNameOranges = getString(R.string.defaultTeamNameOnLeft);
         }
 
-        teamNameRight = eText2.getText().toString();
-        if (teamNameRight.equals("")) {
-            teamNameRight = getString(R.string.defaultTeamNameOnRight);
+        String teamNameBlues = eText2.getText().toString();
+        if (teamNameBlues.equals("")) {
+            teamNameBlues = getString(R.string.defaultTeamNameOnRight);
         }
 
         Intent userChoices = new Intent(SettingsActivity.this, MainActivity.class);
-        userChoices.putExtra(Constants.TEAM_NAME_LEFT, teamNameLeft);
-        userChoices.putExtra(Constants.TEAM_NAME_RIGHT, teamNameRight);
+        userChoices.putExtra(Constants.TEAM_NAME_ORANGE, teamNameOranges);
+        userChoices.putExtra(Constants.TEAM_NAME_BLUE, teamNameBlues);
         userChoices.putExtra(Constants.STARTING_TEAM, starter.getCheckedRadioButtonId());
         userChoices.putExtra(Constants.NUMBER_OF_TOTAL_SETS, numbersOfTotalSets);
         userChoices.putExtra(Constants.SET_FINISHING_SCORE, setFinishingScore);
@@ -104,10 +107,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         double chance = Math.random();
         chance *= 2;
         if (chance < 1) { //heads
-            ImageView coin =  findViewById(R.id.coin);
             coin.setImageResource(R.drawable.eurohead);
         } else { //tails
-            ImageView coin = findViewById(R.id.coin);
             coin.setImageResource(R.drawable.one_euro);
         }
     }

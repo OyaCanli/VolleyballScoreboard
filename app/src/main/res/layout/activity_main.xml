@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.android.volleyballscoreboard.ScoreViewModel" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,8 +21,8 @@
             <TextView
                 android:id="@+id/team_on_left"
                 style="@style/team_name_style"
-                android:background="@drawable/cellborder"
-                android:text="@string/defaultTeamNameOnLeft" />
+                android:background="@{viewmodel.isSwitched ? @drawable/blueborder : @drawable/orangeborder, default = @drawable/orangeborder }"
+                android:text="@{viewmodel.isSwitched ? viewmodel.getTeamNameForBlue : viewmodel.getTeamNameForOrange, default = @string/defaultTeamNameOnLeft}" />
 
             <Button
                 android:id="@+id/exchange_button"
@@ -26,8 +32,8 @@
             <TextView
                 android:id="@+id/team_on_right"
                 style="@style/team_name_style"
-                android:background="@drawable/blueborder"
-                android:text="@string/defaultTeamNameOnRight" />
+                android:background="@{!viewmodel.isSwitched ? @drawable/blueborder : @drawable/orangeborder, default = @drawable/blueborder }"
+                android:text="@{!viewmodel.isSwitched ? viewmodel.getTeamNameForBlue : viewmodel.getTeamNameForOrange, default = @string/defaultTeamNameOnRight}" />
 
         </LinearLayout>
 
@@ -41,7 +47,7 @@
             <Button
                 android:id="@+id/team_left_score"
                 style="@style/score_style"
-                android:text="@string/zero" />
+                android:text="@{viewmodel.isSwitched ? String.valueOf(viewmodel.scoreBlues) : String.valueOf(viewmodel.scoreOranges), default = 0}" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -53,14 +59,14 @@
                 <TextView
                     android:id="@+id/setsForTeamOnLeft"
                     style="@style/set_score_style"
-                    android:text="@string/zero" />
+                    android:text="@{viewmodel.isSwitched ? String.valueOf(viewmodel.setsWonBlue) : String.valueOf(viewmodel.setsWonOrange), default = 0}" />
 
                 <View
                     android:id="@+id/viewOrange"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@color/orange_background" />
+                    android:background="@{viewmodel.isSwitched ? @color/blue_background : @color/orange_background, default = @color/orange_background }" />
 
             </LinearLayout>
 
@@ -79,21 +85,23 @@
                 <TextView
                     android:id="@+id/setsForTeamOnRight"
                     style="@style/set_score_style"
-                    android:text="@string/zero" />
+                    android:text="@{viewmodel.isSwitched ? String.valueOf(viewmodel.setsWonOrange) : String.valueOf(viewmodel.setsWonBlue), default = 0}" />
+
 
                 <View
                     android:id="@+id/viewBlue"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@color/blue_background" />
+                    android:background="@{!viewmodel.isSwitched ? @color/blue_background :@color/orange_background, default = @color/blue_background }" />
 
             </LinearLayout>
 
             <Button
                 android:id="@+id/team_right_score"
                 style="@style/score_style"
-                android:text="@string/zero" />
+                android:text="@{viewmodel.isSwitched ? String.valueOf(viewmodel.scoreOranges) : String.valueOf(viewmodel.scoreBlues), default = 0}" />
+
 
         </LinearLayout>
 
@@ -159,27 +167,27 @@
                 <TextView
                     android:id="@+id/s1_tA"
                     style="@style/cell_style"
-                    android:text="@string/zero" />
+                    android:text="@{String.valueOf(viewmodel.setScoresOrange[0]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s2_tA"
                     style="@style/cell_style"
-                    android:text="@string/zero" />
+                    android:text="@{String.valueOf(viewmodel.setScoresOrange[1]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s3_tA"
                     style="@style/cell_style"
-                    android:text="@string/zero" />
+                    android:text="@{String.valueOf(viewmodel.setScoresOrange[2]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s4_tA"
                     style="@style/cell_style"
-                    android:text="@string/zero" />
+                    android:text="@{String.valueOf(viewmodel.setScoresOrange[3]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s5_tA"
                     style="@style/cell_style"
-                    android:text="@string/zero" />
+                    android:text="@{String.valueOf(viewmodel.setScoresOrange[4]), default = 0}" />
             </TableRow>
 
             <View
@@ -200,27 +208,27 @@
                 <TextView
                     android:id="@+id/s1_tB"
                     style="@style/cell_style"
-                    android:text="@string/zero" />
+                    android:text="@{String.valueOf(viewmodel.setScoresBlue[0]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s2_tB"
                     style="@style/cell_style"
-                    android:text="@string/zero" />
+                    android:text="@{String.valueOf(viewmodel.setScoresBlue[1]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s3_tB"
                     style="@style/cell_style"
-                    android:text="@string/zero" />
+                    android:text="@{String.valueOf(viewmodel.setScoresBlue[2]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s4_tB"
                     style="@style/cell_style"
-                    android:text="@string/zero" />
+                    android:text="@{String.valueOf(viewmodel.setScoresBlue[3]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s5_tB"
                     style="@style/cell_style"
-                    android:text="@string/zero" />
+                    android:text="@{String.valueOf(viewmodel.setScoresBlue[4]), default = 0}" />
             </TableRow>
 
             <View
@@ -233,7 +241,7 @@
             android:id="@+id/message"
             style="@style/message_style"
             android:layout_below="@id/summaryTable"
-            android:text="" />
+            android:text="@{viewmodel.message}" />
 
         <Button
             android:id="@+id/pauseLeft"
@@ -255,7 +263,7 @@
                 style="@style/undo_style"
                 android:layout_margin="@dimen/margin_standart"
                 android:layout_weight="1"
-                android:enabled="false"
+                android:enabled="@{viewmodel.undoEnabled, default = false}"
                 android:text="@string/undo" />
 
             <android.support.v4.widget.Space

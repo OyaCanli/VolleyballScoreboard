@@ -29,8 +29,8 @@
     <string name="settings">SETTINGS</string>
     <string name="reset_warning">Are you sure you want to reset all the scores to 0? If you want to change the settings as well, click settings to go first to the settings page.</string>
     <string name="exchange_only_between_sets">You can exchange sides only between the sets.</string>
-    <string name="all_timeoffs_used">You have used all your time-offs.</string>
-    <string name="used_timeoffs">You have used %1$d time-offs. You have %2$d time-off left.</string>
+    <string name="all_timeoffs_used">The team has used all their time-offs.</string>
+    <string name="used_timeoffs">The team has used %1$d time-offs. They have %2$d time-off left.</string>
 
     <string-array name="numberOfSets">
         <item>5</item>

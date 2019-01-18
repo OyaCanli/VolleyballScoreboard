@@ -1,166 +1,87 @@
 package com.example.android.volleyballscoreboard;
 
 import android.arch.lifecycle.ViewModel;
+import android.databinding.ObservableArrayList;
+import android.databinding.ObservableBoolean;
+import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 
 public class ScoreViewModel extends ViewModel {
 
-    private int scoreLeft = 0;
-    private int scoreRight = 0;
-    private int setsWonLeft = 0;
-    private int setsWonRight = 0;
-    private int setNumber = 0;
-    private String teamNameLeft;
-    private String teamNameRight;
-    private String initialTeamNameOnLeft;
-    private String initialTeamNameOnRight;
+    public final ObservableInt scoreOranges = new ObservableInt(0);
+    public final ObservableInt scoreBlues = new ObservableInt(0);
+    public final ObservableInt setsWonOrange = new ObservableInt(0);
+    public final ObservableInt setsWonBlue = new ObservableInt(0);
+    public final ObservableInt setNumber = new ObservableInt(0);
+    public final ObservableBoolean isSwitched = new ObservableBoolean(false);
+    public final ObservableBoolean undoEnabled = new ObservableBoolean(false);
+    public final ObservableArrayList<Integer> setScoresOrange = new ObservableArrayList<>();
+    public final ObservableArrayList<Integer> setScoresBlue = new ObservableArrayList<>();
+    public final ObservableField<String> message = new ObservableField<>();
+
+    private String teamNameForOrange = "Oranges";
+    private String teamNameForBlue = "Blues";
     private int totalSetsToPlay = 0;
     private int setFinishingScore = 0;
     private int tieBreakerScore = 0;
-    private int timeOffCountLeft = 0;
-    private int timeOffCountRight = 0;
     private int starterTeamId = 0;
-    private boolean switched;
-    private boolean undoEnabled = false;
-    private int setScoresOrange[] = new int[5];
-    private int setScoresBlue[] = new int[5];
-    private int orangeRowColors[] = new int[5];
-    private int blueRowColors[] = new int[5];
     private String lastPointer = Constants.START;
-    private String message;
+    private int timeOffCountOrange = 0;
+    private int timeOffCountBlue = 0;
+
+    public ScoreViewModel() {
+        //Initialize lists with Os
+        for (int i = 0; i < 5; i++) {
+            setScoresOrange.add(0);
+            setScoresBlue.add(0);
+        }
+    }
 
     ////////////// Getters ///////////////////////
 
-    public int getScoreLeft() {
-        return scoreLeft;
+    public String getTeamNameForOrange() {
+        return teamNameForOrange;
     }
 
-    public int getScoreRight() {
-        return scoreRight;
+    public String getTeamNameForBlue() {
+        return teamNameForBlue;
     }
 
-    public int getSetsWonLeft() {
-        return setsWonLeft;
-    }
-
-    public int getSetsWonRight() {
-        return setsWonRight;
-    }
-
-    public int getSetNumber() {
-        return setNumber;
-    }
-
-    public String getTeamNameLeft() {
-        return teamNameLeft;
-    }
-
-    public String getTeamNameRight() {
-        return teamNameRight;
-    }
-
-    public String getInitialTeamNameOnLeft() {
-        return initialTeamNameOnLeft;
-    }
-
-    public String getInitialTeamNameOnRight() {
-        return initialTeamNameOnRight;
-    }
-
-    public int getTotalSetsToPlay() {
+    int getTotalSetsToPlay() {
         return totalSetsToPlay;
     }
 
-    public int getSetFinishingScore() {
-        return setFinishingScore;
-    }
-
-    public int getTieBreakerScore() {
-        return tieBreakerScore;
-    }
-
-    public int getTimeOffCountLeft() {
-        return timeOffCountLeft;
-    }
-
-    public int getTimeOffCountRight() {
-        return timeOffCountRight;
-    }
-
-    public int getStarterTeamId() {
+    int getStarterTeamId() {
         return starterTeamId;
     }
 
-    public boolean isSwitched() {
-        return switched;
-    }
-
-    public String getLastPointer() {
+    String getLastPointer() {
         return lastPointer;
     }
 
-    public String getMessage() {
-        return message;
+    public int getTimeOffCountOrange() {
+        return timeOffCountOrange;
     }
 
-    public boolean isUndoEnabled() {
-        return undoEnabled;
+    public int getTimeOffCountBlue() {
+        return timeOffCountBlue;
     }
 
-    public int[] getSetScoresOrange() {
-        return setScoresOrange;
-    }
-
-    public int[] getSetScoresBlue() {
-        return setScoresBlue;
-    }
-
-    public int[] getOrangeRowColors() {
-        return orangeRowColors;
-    }
-
-    public int[] getBlueRowColors() {
-        return blueRowColors;
+    int getSetFinishingScoreForCurrentSet() {
+        return setNumber.get() < totalSetsToPlay ? setFinishingScore : tieBreakerScore;
     }
 
     /////////////// Setters //////////////////////
 
-    public void setScoreLeft(int scoreLeft) {
-        this.scoreLeft = scoreLeft;
+    public void setTeamNameForOrange(String teamNameForOrange) {
+        this.teamNameForOrange = teamNameForOrange;
     }
 
-    public void setScoreRight(int scoreRight) {
-        this.scoreRight = scoreRight;
+    public void setTeamNameForBlue(String teamNameForBlue) {
+        this.teamNameForBlue = teamNameForBlue;
     }
 
-    public void setSetsWonLeft(int setsWonLeft) {
-        this.setsWonLeft = setsWonLeft;
-    }
-
-    public void setSetsWonRight(int setsWonRight) {
-        this.setsWonRight = setsWonRight;
-    }
-
-    public void setSetNumber(int setNumber) {
-        this.setNumber = setNumber;
-    }
-
-    public void setTeamNameLeft(String teamNameLeft) {
-        this.teamNameLeft = teamNameLeft;
-    }
-
-    public void setTeamNameRight(String teamNameRight) {
-        this.teamNameRight = teamNameRight;
-    }
-
-    public void setInitialTeamNameOnLeft(String initialTeamNameOnLeft) {
-        this.initialTeamNameOnLeft = initialTeamNameOnLeft;
-    }
-
-    public void setInitialTeamNameOnRight(String initialTeamNameOnRight) {
-        this.initialTeamNameOnRight = initialTeamNameOnRight;
-    }
-
-    public void setTotalSetsToPlay(int totalSetsToPlay) {
+    void setTotalSetsToPlay(int totalSetsToPlay) {
         this.totalSetsToPlay = totalSetsToPlay;
     }
 
@@ -172,47 +93,20 @@ public class ScoreViewModel extends ViewModel {
         this.tieBreakerScore = tieBreakerScore;
     }
 
-    public void setTimeOffCountLeft(int timeOffCountLeft) {
-        this.timeOffCountLeft = timeOffCountLeft;
-    }
-
-    public void setTimeOffCountRight(int timeOffCountRight) {
-        this.timeOffCountRight = timeOffCountRight;
-    }
-
     public void setStarterTeamId(int starterTeamId) {
         this.starterTeamId = starterTeamId;
-    }
-
-    public void setSwitched(boolean switched) {
-        this.switched = switched;
-    }
-
-    public void setUndoEnabled(boolean undoEnabled) {
-        this.undoEnabled = undoEnabled;
-    }
-
-    public void setSetScoresOrange(int setNumber, int setScoreOrange) {
-        this.setScoresOrange[setNumber] = setScoreOrange;
-    }
-
-    public void setSetScoresBlue(int setNumber, int setScoreBlue) {
-        this.setScoresBlue[setNumber] = setScoreBlue;
-    }
-
-    public void setOrangeRowColors(int setNumber, int orangeRowColor) {
-        this.orangeRowColors[setNumber] = orangeRowColor;
-    }
-
-    public void setBlueRowColors(int setNumber, int blueRowColor) {
-        this.blueRowColors[setNumber] = blueRowColor;
     }
 
     public void setLastPointer(String lastPointer) {
         this.lastPointer = lastPointer;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setTimeOffCountOrange(int timeOffCountOrange) {
+        this.timeOffCountOrange = timeOffCountOrange;
     }
+
+    public void setTimeOffCountBlue(int timeOffCountBlue) {
+        this.timeOffCountBlue = timeOffCountBlue;
+    }
+
 }
