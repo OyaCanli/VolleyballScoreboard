@@ -15,14 +15,14 @@ import com.example.android.volleyballscoreboard.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ScoreViewModel mViewModel;
+    private MainViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         //Initialize view model
-        mViewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         binding.setViewmodel(mViewModel);
 
         //set click listeners on buttons

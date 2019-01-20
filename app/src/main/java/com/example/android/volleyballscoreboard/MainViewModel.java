@@ -6,7 +6,7 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 
-public class ScoreViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
 
     public final ObservableInt scoreOranges = new ObservableInt(0);
     public final ObservableInt scoreBlues = new ObservableInt(0);
@@ -29,7 +29,7 @@ public class ScoreViewModel extends ViewModel {
     private int timeOffCountOrange = 0;
     private int timeOffCountBlue = 0;
 
-    public ScoreViewModel() {
+    public MainViewModel() {
         //Initialize lists with Os
         for (int i = 0; i < 5; i++) {
             setScoresOrange.add(0);
@@ -69,6 +69,10 @@ public class ScoreViewModel extends ViewModel {
 
     int getSetFinishingScoreForCurrentSet() {
         return setNumber.get() < totalSetsToPlay ? setFinishingScore : tieBreakerScore;
+    }
+
+    public int getTieBreakerScore() {
+        return tieBreakerScore;
     }
 
     /////////////// Setters //////////////////////

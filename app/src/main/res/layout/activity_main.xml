@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.example.android.volleyballscoreboard.ScoreViewModel" />
+            type="com.example.android.volleyballscoreboard.MainViewModel" />
     </data>
 
     <RelativeLayout
