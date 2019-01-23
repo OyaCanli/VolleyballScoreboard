@@ -57,16 +57,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.team_left_score -> {
                 if (!mViewModel.isSwitched.get()) {
-                    add1pointToOranges()
+                    mViewModel.add1pointToOranges()
                 } else {
-                    add1pointToBlues()
+                    mViewModel.add1pointToBlues()
                 }
             }
             R.id.team_right_score -> {
                 if (mViewModel.isSwitched.get()) {
-                    add1pointToOranges()
+                    mViewModel.add1pointToOranges()
                 } else {
-                    add1pointToBlues()
+                    mViewModel.add1pointToBlues()
                 }
             }
             R.id.pauseLeft -> {
@@ -90,52 +90,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.reset -> {
                 reset()
             }
-        }
-    }
-
-    private fun add1pointToOranges() {
-        val newScore = mViewModel.scoreOranges.get() + 1
-        mViewModel.scoreOranges.set(newScore)
-        mViewModel.lastPointer = TEAM_ORANGE
-        mViewModel.undoEnabled.set(true)
-        mViewModel.setScoresOrange[mViewModel.setNumber.get()] = newScore
-        if (newScore >= mViewModel.setFinishingScoreForCurrentSet && newScore - mViewModel.scoreBlues.get() >= 2) {
-            //if it is a set winning point..
-            mViewModel.setsWonOrange.set(mViewModel.setsWonOrange.get() + 1)
-            if (mViewModel.setsWonOrange.get() == (mViewModel.totalSetsToPlay + 1) / 2) {
-                //if it is a match winning set
-                mViewModel.message.set(getString(R.string.wonMatch, mViewModel.teamNameForOrange))
-            } else { //if it is not a match winning set
-                mViewModel.message.set(getString(R.string.wonSet, mViewModel.teamNameForOrange))
-                mViewModel.setNumber.set(mViewModel.setNumber.get() + 1)
-                mViewModel.scoreOranges.set(0)
-                mViewModel.scoreBlues.set(0)
-            }
-        } else { //if it is not a set winning point
-            mViewModel.message.set(getString(R.string.serve, mViewModel.teamNameForOrange))
-        }
-    }
-
-    private fun add1pointToBlues() {
-        val newScore = mViewModel.scoreBlues.get() + 1
-        mViewModel.scoreBlues.set(newScore)
-        mViewModel.lastPointer = TEAM_BLUE
-        mViewModel.undoEnabled.set(true)
-        mViewModel.setScoresBlue[mViewModel.setNumber.get()] = newScore
-        if (newScore >= mViewModel.setFinishingScoreForCurrentSet && newScore - mViewModel.scoreOranges.get() >= 2) {
-            //if it is a set winning point..
-            mViewModel.setsWonBlue.set(mViewModel.setsWonBlue.get() + 1)
-            if (mViewModel.setsWonBlue.get() == (mViewModel.totalSetsToPlay + 1) / 2) {
-                //if it is a match winning set
-                mViewModel.message.set(getString(R.string.wonMatch, mViewModel.teamNameForBlue))
-            } else { //if it is not a match winning set
-                mViewModel.message.set(getString(R.string.wonSet, mViewModel.teamNameForBlue))
-                mViewModel.setNumber.set(mViewModel.setNumber.get() + 1)
-                mViewModel.scoreOranges.set(0)
-                mViewModel.scoreBlues.set(0)
-            }
-        } else { //if it is not a set winning point
-            mViewModel.message.set(getString(R.string.serve, mViewModel.teamNameForBlue))
         }
     }
 
@@ -188,47 +142,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             START -> {
             }//Do nothing
             TEAM_ORANGE -> {
-                correctionOrange()
+                mViewModel.correctionOrange()
                 mViewModel.undoEnabled.set(false)
             }
             TEAM_BLUE -> {
-                correctionBlue()
+                mViewModel.correctionBlue()
                 mViewModel.undoEnabled.set(false)
             }
-        }
-    }
-
-    //This is for correcting a point mistakenly given.
-    private fun correctionOrange() {
-        mViewModel.message.set(getString(R.string.error))
-        if (mViewModel.scoreOranges.get() > 0) {
-            mViewModel.scoreOranges.set(mViewModel.scoreOranges.get() - 1)
-            mViewModel.setScoresOrange[mViewModel.setNumber.get()] = mViewModel.scoreOranges.get()
-        } else if (mViewModel.setNumber.get() > 0) {
-            //It is was a set winning point
-            mViewModel.setNumber.set(mViewModel.setNumber.get() - 1)
-            mViewModel.setsWonOrange.set(mViewModel.setsWonOrange.get() - 1)
-            val previousScoreOfOranges = mViewModel.setScoresOrange[mViewModel.setNumber.get()] - 1
-            mViewModel.scoreOranges.set(previousScoreOfOranges)
-            mViewModel.setScoresOrange[mViewModel.setNumber.get()] = previousScoreOfOranges
-            mViewModel.scoreBlues.set(mViewModel.setScoresBlue[mViewModel.setNumber.get()])
-        }
-    }
-
-    //This is for correcting a point mistakenly given.
-    private fun correctionBlue() {
-        mViewModel.message.set(getString(R.string.error))
-        if (mViewModel.scoreBlues.get() > 0) {
-            mViewModel.scoreBlues.set(mViewModel.scoreBlues.get() - 1)
-            mViewModel.setScoresBlue[mViewModel.setNumber.get()] = mViewModel.scoreBlues.get()
-        } else if (mViewModel.setNumber.get() > 0) {
-            //It is was a set winning point
-            mViewModel.setNumber.set(mViewModel.setNumber.get() - 1)
-            mViewModel.setsWonBlue.set(mViewModel.setsWonBlue.get() - 1)
-            val previousScoreOfBlues = mViewModel.setScoresBlue[mViewModel.setNumber.get()] - 1
-            mViewModel.scoreBlues.set(previousScoreOfBlues)
-            mViewModel.setScoresBlue[mViewModel.setNumber.get()] = previousScoreOfBlues
-            mViewModel.scoreOranges.set(mViewModel.setScoresOrange[mViewModel.setNumber.get()])
         }
     }
 
