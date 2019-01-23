@@ -95,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/numberOfSets"
-                    android:onItemSelected="@{viewModel.onItemSelected}" />
+                    android:onItemSelected="@{viewModel.spinnerListener}" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/setFinishingScore"
-                    android:onItemSelected="@{viewModel.onItemSelected}" />
+                    android:onItemSelected="@{viewModel.spinnerListener}" />
             </LinearLayout>
 
             <LinearLayout
@@ -129,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:entries="@array/tieBreakerScore"
-                    android:onItemSelected="@{viewModel.onItemSelected}" />
+                    android:onItemSelected="@{viewModel.spinnerListener}" />
             </LinearLayout>
 
             <Button
