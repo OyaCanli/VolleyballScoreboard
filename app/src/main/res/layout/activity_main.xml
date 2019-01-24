@@ -5,6 +5,10 @@
         <variable
             name="viewmodel"
             type="com.example.android.volleyballscoreboard.MainViewModel" />
+
+        <import type="java.util.ArrayList" />
+
+        <import type="android.databinding.ObservableMap" />
     </data>
 
     <RelativeLayout
@@ -22,7 +26,7 @@
                 android:id="@+id/team_on_left"
                 style="@style/team_name_style"
                 android:background="@{viewmodel.isSwitched ? @drawable/blueborder : @drawable/orangeborder, default = @drawable/orangeborder }"
-                android:text="@{viewmodel.isSwitched ? viewmodel.getTeamNameForBlue : viewmodel.getTeamNameForOrange, default = @string/defaultTeamNameOnLeft}" />
+                android:text="@{viewmodel.isSwitched ? viewmodel.mapOfBlues.teamName : viewmodel.mapOfOranges.teamName, default = @string/defaultTeamNameOnLeft}" />
 
             <Button
                 android:id="@+id/exchange_button"
@@ -33,7 +37,7 @@
                 android:id="@+id/team_on_right"
                 style="@style/team_name_style"
                 android:background="@{!viewmodel.isSwitched ? @drawable/blueborder : @drawable/orangeborder, default = @drawable/blueborder }"
-                android:text="@{!viewmodel.isSwitched ? viewmodel.getTeamNameForBlue : viewmodel.getTeamNameForOrange, default = @string/defaultTeamNameOnRight}" />
+                android:text="@{!viewmodel.isSwitched ? viewmodel.mapOfBlues.teamName : viewmodel.mapOfOranges.teamName, default = @string/defaultTeamNameOnRight}" />
 
         </LinearLayout>
 
@@ -47,7 +51,8 @@
             <Button
                 android:id="@+id/team_left_score"
                 style="@style/score_style"
-                android:text="@{viewmodel.isSwitched ? String.valueOf(viewmodel.scoreBlues) : String.valueOf(viewmodel.scoreOranges), default = 0}" />
+                android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.mapOfOranges.score) : String.valueOf(viewmodel.mapOfBlues.score)}"
+                android:onClick="@{!viewmodel.isSwitched() ? viewmodel::add1pointToOranges : viewmodel::add1pointToBlues}" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -59,7 +64,7 @@
                 <TextView
                     android:id="@+id/setsForTeamOnLeft"
                     style="@style/set_score_style"
-                    android:text="@{viewmodel.isSwitched ? String.valueOf(viewmodel.setsWonBlue) : String.valueOf(viewmodel.setsWonOrange), default = 0}" />
+                    android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.mapOfOranges.setsWon) : String.valueOf(viewmodel.mapOfOranges.setsWon)}" />
 
                 <View
                     android:id="@+id/viewOrange"
@@ -85,8 +90,7 @@
                 <TextView
                     android:id="@+id/setsForTeamOnRight"
                     style="@style/set_score_style"
-                    android:text="@{viewmodel.isSwitched ? String.valueOf(viewmodel.setsWonOrange) : String.valueOf(viewmodel.setsWonBlue), default = 0}" />
-
+                    android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.mapOfBlues.setsWon) : String.valueOf(viewmodel.mapOfOranges.setsWon)}" />
 
                 <View
                     android:id="@+id/viewBlue"
@@ -100,8 +104,8 @@
             <Button
                 android:id="@+id/team_right_score"
                 style="@style/score_style"
-                android:text="@{viewmodel.isSwitched ? String.valueOf(viewmodel.scoreOranges) : String.valueOf(viewmodel.scoreBlues), default = 0}" />
-
+                android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.mapOfBlues.score) : String.valueOf(viewmodel.mapOfOranges.score)}"
+                android:onClick="@{!viewmodel.isSwitched() ? viewmodel::add1pointToBlues : viewmodel::add1pointToOranges}" />
 
         </LinearLayout>
 
@@ -264,7 +268,8 @@
                 android:layout_margin="@dimen/margin_standart"
                 android:layout_weight="1"
                 android:enabled="@{viewmodel.undoEnabled, default = false}"
-                android:text="@string/undo" />
+                android:text="@string/undo"
+                android:onClick="@{viewmodel::undo}" />
 
             <android.support.v4.widget.Space
                 android:layout_width="@dimen/space_width"

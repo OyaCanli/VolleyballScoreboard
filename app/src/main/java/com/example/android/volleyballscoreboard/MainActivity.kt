@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.viewmodel = mViewModel
         //set click listeners on buttons
-        binding.teamLeftScore.setOnClickListener(this)
-        binding.teamRightScore.setOnClickListener(this)
         binding.exchangeButton.setOnClickListener(this)
         binding.pauseLeft.setOnClickListener(this)
         binding.pauseRight.setOnClickListener(this)
@@ -37,38 +35,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (savedInstanceState == null) {
             //Set these values in the view model
             with(mViewModel) {
-                teamNameForOrange = userChoice?.getString(TEAM_NAME_ORANGE) ?: "Oranges"
-                teamNameForBlue = userChoice?.getString(TEAM_NAME_BLUE) ?: "Blues"
-                totalSetsToPlay = userChoice?.getInt(NUMBER_OF_TOTAL_SETS) ?: 5
-                setFinishingScore = userChoice?.getInt(SET_FINISHING_SCORE) ?: 25
-                tieBreakerScore = userChoice?.getInt(TIE_BREAKER_SCORE) ?: 15
-                starterTeamId = userChoice?.getInt(STARTING_TEAM) ?: R.id.optionOrange
+                mapOfOranges[TEAM_NAME] = userChoice?.getString(KEY_TEAM_NAME_ORANGE) ?: "Oranges"
+                mapOfBlues[TEAM_NAME] = userChoice?.getString(KEY_TEAM_NAME_BLUE) ?: "Blues"
+                totalSetsToPlay = userChoice?.getInt(KEY_NUMBER_OF_TOTAL_SETS) ?: 5
+                setFinishingScore = userChoice?.getInt(KEY_SET_FINISHING_SCORE) ?: 25
+                tieBreakerScore = userChoice?.getInt(KEY_TIE_BREAKER_SCORE) ?: 15
+                starterTeamId = userChoice?.getInt(KEY_STARTING_TEAM) ?: R.id.optionOrange
                 message.set(getString(R.string.serve,
-                        if (starterTeamId == R.id.optionBlue) teamNameForBlue
-                        else teamNameForOrange))
+                        if (starterTeamId == R.id.optionBlue) mapOfBlues[TEAM_NAME]
+                        else mapOfOranges[TEAM_NAME]))
             }
         }
     }
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.exchange_button -> {
-                exchangeSides()
-            }
-            R.id.team_left_score -> {
-                if (!mViewModel.isSwitched.get()) {
-                    mViewModel.add1pointToOranges()
-                } else {
-                    mViewModel.add1pointToBlues()
-                }
-            }
-            R.id.team_right_score -> {
-                if (mViewModel.isSwitched.get()) {
-                    mViewModel.add1pointToOranges()
-                } else {
-                    mViewModel.add1pointToBlues()
-                }
-            }
+            R.id.exchange_button -> exchangeSides()
             R.id.pauseLeft -> {
                 if (!mViewModel.isSwitched.get()) {
                     pauseOrange()
@@ -83,19 +65,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     pauseBlue()
                 }
             }
-            R.id.undo -> {
-                undo()
-            }
-
-            R.id.reset -> {
-                reset()
-            }
+            R.id.reset -> reset()
         }
     }
 
     //This method exchange sides up on users click on the exchange button
     private fun exchangeSides() {
-        if (mViewModel.scoreOranges.get() == 0 && mViewModel.scoreBlues.get() == 0) {
+        if (mViewModel.mapOfOranges[SCORE] == 0 && mViewModel.mapOfBlues[SCORE] == 0) {
             mViewModel.isSwitched.set(!mViewModel.isSwitched.get())
         } else {
             Toast.makeText(this, R.string.exchange_only_between_sets, Toast.LENGTH_SHORT).show()
@@ -134,21 +110,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         intent.putExtra(AlarmClock.EXTRA_LENGTH, 30)
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
-        }
-    }
-
-    private fun undo() {
-        when (mViewModel.lastPointer) {
-            START -> {
-            }//Do nothing
-            TEAM_ORANGE -> {
-                mViewModel.correctionOrange()
-                mViewModel.undoEnabled.set(false)
-            }
-            TEAM_BLUE -> {
-                mViewModel.correctionBlue()
-                mViewModel.undoEnabled.set(false)
-            }
         }
     }
 

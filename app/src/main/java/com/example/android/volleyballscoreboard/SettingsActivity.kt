@@ -43,12 +43,12 @@ class SettingsActivity : AppCompatActivity() {
     fun startGame(view: View) {
         val userChoices = Intent(this@SettingsActivity, MainActivity::class.java)
         with(mViewModel) {
-            userChoices.putExtra(TEAM_NAME_ORANGE, orangeTeamName)
-            userChoices.putExtra(TEAM_NAME_BLUE, blueTeamName)
-            userChoices.putExtra(STARTING_TEAM, starterTeamId)
-            userChoices.putExtra(NUMBER_OF_TOTAL_SETS, numbersOfTotalSets)
-            userChoices.putExtra(SET_FINISHING_SCORE, setFinishingScore)
-            userChoices.putExtra(TIE_BREAKER_SCORE, tieBreakerScore)
+            userChoices.putExtra(KEY_TEAM_NAME_ORANGE, orangeTeamName)
+            userChoices.putExtra(KEY_TEAM_NAME_BLUE, blueTeamName)
+            userChoices.putExtra(KEY_STARTING_TEAM, starterTeamId)
+            userChoices.putExtra(KEY_NUMBER_OF_TOTAL_SETS, numbersOfTotalSets)
+            userChoices.putExtra(KEY_SET_FINISHING_SCORE, setFinishingScore)
+            userChoices.putExtra(KEY_TIE_BREAKER_SCORE, tieBreakerScore)
         }
         startActivity(userChoices)
     }
