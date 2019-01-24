@@ -3,10 +3,12 @@ package com.example.android.volleyballscoreboard
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.content.Context
+import android.content.Intent
 import android.databinding.ObservableArrayList
 import android.databinding.ObservableArrayMap
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
+import android.provider.AlarmClock
 import android.util.Log
 import android.view.View
 
@@ -14,6 +16,7 @@ const val TEAM_NAME = "teamName"
 const val SCORE = "score"
 const val SETS_WON = "setsWon"
 const val LIST_OF_SET_SCORES = "listOfSetScores"
+const val TIME_OFF_COUNT = "timeOffCount"
 const val START = "start"
 const val TEAM_ORANGE = "Oranges"
 const val TEAM_BLUE = "Blues"
@@ -30,8 +33,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     internal var tieBreakerScore = 15
     internal var starterTeamId = R.id.optionOrange
     private var lastPointer = START
-    var timeOffCountOrange = 0
-    var timeOffCountBlue = 0
 
     val mapOfOranges = ObservableArrayMap<String, Any>().apply {
         put(TEAM_NAME, TEAM_ORANGE)
@@ -40,6 +41,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         put(LIST_OF_SET_SCORES, ObservableArrayList<Int>().apply {
             repeat(5) { add(0) }
         })
+        put(TIME_OFF_COUNT, 2)
     }
 
     val mapOfBlues = ObservableArrayMap<String, Any>().apply {
@@ -49,6 +51,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         put(LIST_OF_SET_SCORES, ObservableArrayList<Int>().apply {
             repeat(5) { add(0) }
         })
+        put(TIME_OFF_COUNT, 2)
     }
 
     val setScoresOrange: ObservableArrayList<Int>
@@ -93,8 +96,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun undo(view: View) {
         Log.d("UNDO", "lastPointer: $lastPointer")
         when (lastPointer) {
-            START -> {
-            } //Do nothing
+            START -> return //Do nothing
             TEAM_ORANGE -> correction(mapOfOranges, mapOfBlues)
             TEAM_BLUE -> correction(mapOfBlues, mapOfOranges)
         }
@@ -111,6 +113,39 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             mapOfPointMaker[SETS_WON] = (mapOfPointMaker[SETS_WON] as Int) - 1
             mapOfPointMaker[SCORE] = (mapOfPointMaker[LIST_OF_SET_SCORES] as ArrayList<Int>)[setNumber] - 1
             mapOfOpponent[SCORE] = (mapOfOpponent[LIST_OF_SET_SCORES] as ArrayList<Int>)[setNumber]
+        }
+    }
+
+    fun pauseOrange(view: View) = pause(mapOfOranges)
+    fun pauseBlue(view: View) = pause(mapOfBlues)
+
+    private fun pause(mapOfPauser: ObservableArrayMap<String, Any>) {
+        var timeOffCount = mapOfPauser[TIME_OFF_COUNT] as Int
+        if (timeOffCount == 0) {
+            context.toast(R.string.all_timeoffs_used)
+            return
+        }
+        openCountDownTimer()
+        mapOfPauser[TIME_OFF_COUNT] = timeOffCount--
+        val message = context.getString(R.string.used_timeoffs, 2 - timeOffCount, timeOffCount)
+        context.toast(message)
+    }
+
+    private fun openCountDownTimer() {
+        val intent = Intent(AlarmClock.ACTION_SET_TIMER)
+        intent.putExtra(AlarmClock.EXTRA_MESSAGE, "Time left:")
+        intent.putExtra(AlarmClock.EXTRA_LENGTH, 30)
+        if (intent.resolveActivity(context.packageManager) != null) {
+            context.startActivity(intent)
+        }
+    }
+
+    //This method exchange sides up on users click on the exchange button
+    fun exchangeSides(view: View) {
+        if (mapOfOranges[SCORE] == 0 && mapOfBlues[SCORE] == 0) {
+            isSwitched.set(!isSwitched.get())
+        } else {
+            context.toast(R.string.exchange_only_between_sets)
         }
     }
 }
