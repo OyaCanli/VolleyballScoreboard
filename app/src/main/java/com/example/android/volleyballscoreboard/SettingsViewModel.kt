@@ -1,7 +1,7 @@
 package com.example.android.volleyballscoreboard
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.adapters.AdapterViewBindingAdapter
+import androidx.databinding.adapters.AdapterViewBindingAdapter
+import androidx.lifecycle.ViewModel
 
 class SettingsViewModel : ViewModel() {
 

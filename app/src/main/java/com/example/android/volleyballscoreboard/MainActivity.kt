@@ -1,11 +1,10 @@
 package com.example.android.volleyballscoreboard
 
 import android.app.AlertDialog
-import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.example.android.volleyballscoreboard.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +15,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
+                this, R.layout.activity_main)
         binding.viewmodel = mViewModel
         binding.reset.setOnClickListener {
             reset()
@@ -42,19 +42,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun reset() {
         val builder = AlertDialog.Builder(this@MainActivity, R.style.Theme_AppCompat_DayNight_Dialog)
-        builder.setMessage(R.string.reset_warning)
-        builder.setPositiveButton(R.string.reset) { _, _ ->
-            val intent = intent
-            finish()
-            startActivity(intent)
+        with(builder) {
+            setMessage(R.string.reset_warning)
+            setPositiveButton(R.string.reset) { _, _ -> launchActivity<MainActivity>() }
+            setNeutralButton(R.string.settings) { _, _ -> launchActivity<SettingsActivity>() }
+            setNegativeButton(R.string.cancel) { _, _ -> }
+            create()
+            show()
         }
-        builder.setNeutralButton(R.string.settings) { _, _ ->
-            val intent = Intent(this@MainActivity, SettingsActivity::class.java)
-            finish()
-            startActivity(intent)
-        }
-        builder.setNegativeButton(R.string.cancel) { _, _ -> }
-        builder.create()
-        builder.show()
     }
 }
