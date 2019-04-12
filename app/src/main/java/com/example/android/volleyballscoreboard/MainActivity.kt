@@ -21,21 +21,23 @@ class MainActivity : AppCompatActivity() {
         binding.reset.setOnClickListener {
             reset()
         }
-        //get user choices from the previous activity and display
+        //get user choices from the previous activity
         val userChoice = intent.extras
 
         if (savedInstanceState == null) {
             //Set these values in the view model
-            with(mViewModel) {
-                mapOfOranges[TEAM_NAME] = userChoice?.getString(KEY_TEAM_NAME_ORANGE) ?: "Oranges"
-                mapOfBlues[TEAM_NAME] = userChoice?.getString(KEY_TEAM_NAME_BLUE) ?: "Blues"
-                totalSetsToPlay = userChoice?.getInt(KEY_NUMBER_OF_TOTAL_SETS) ?: 5
-                setFinishingScore = userChoice?.getInt(KEY_SET_FINISHING_SCORE) ?: 25
-                tieBreakerScore = userChoice?.getInt(KEY_TIE_BREAKER_SCORE) ?: 15
-                starterTeamId = userChoice?.getInt(KEY_STARTING_TEAM) ?: R.id.optionOrange
-                message.set(getString(R.string.serve,
-                        if (starterTeamId == R.id.optionBlue) mapOfBlues[TEAM_NAME]
-                        else mapOfOranges[TEAM_NAME]))
+            userChoice?.run {
+                with(mViewModel) {
+                    orangeTeam.teamName = getString(KEY_TEAM_NAME_ORANGE) ?: "Oranges"
+                    blueTeam.teamName = getString(KEY_TEAM_NAME_BLUE) ?: "Blues"
+                    totalSetsToPlay = getInt(KEY_NUMBER_OF_TOTAL_SETS)
+                    setFinishingScore = getInt(KEY_SET_FINISHING_SCORE)
+                    tieBreakerScore = getInt(KEY_TIE_BREAKER_SCORE)
+                    starterTeamId = getInt(KEY_STARTING_TEAM)
+                    message.set(getString(R.string.serve,
+                            if (starterTeamId == R.id.optionBlue) blueTeam.teamName
+                            else orangeTeam.teamName))
+                }
             }
         }
     }

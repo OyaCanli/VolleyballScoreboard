@@ -26,7 +26,7 @@
                 android:id="@+id/team_on_left"
                 style="@style/team_name_style"
                 android:background="@{viewmodel.isSwitched ? @drawable/blueborder : @drawable/orangeborder, default = @drawable/orangeborder }"
-                android:text="@{viewmodel.isSwitched ? viewmodel.mapOfBlues.teamName : viewmodel.mapOfOranges.teamName, default = @string/defaultTeamNameOnLeft}" />
+                android:text="@{viewmodel.isSwitched ? viewmodel.blueTeam.teamName : viewmodel.orangeTeam.teamName, default = @string/defaultTeamNameOnLeft}" />
 
             <Button
                 android:id="@+id/exchange_button"
@@ -38,7 +38,7 @@
                 android:id="@+id/team_on_right"
                 style="@style/team_name_style"
                 android:background="@{!viewmodel.isSwitched ? @drawable/blueborder : @drawable/orangeborder, default = @drawable/blueborder }"
-                android:text="@{!viewmodel.isSwitched ? viewmodel.mapOfBlues.teamName : viewmodel.mapOfOranges.teamName, default = @string/defaultTeamNameOnRight}" />
+                android:text="@{!viewmodel.isSwitched ? viewmodel.blueTeam.teamName : viewmodel.orangeTeam.teamName, default = @string/defaultTeamNameOnRight}" />
 
         </LinearLayout>
 
@@ -52,7 +52,7 @@
             <Button
                 android:id="@+id/team_left_score"
                 style="@style/score_style"
-                android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.mapOfOranges.score) : String.valueOf(viewmodel.mapOfBlues.score)}"
+                android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.orangeTeam.score) : String.valueOf(viewmodel.blueTeam.score)}"
                 android:onClick="@{!viewmodel.isSwitched() ? viewmodel::add1pointToOranges : viewmodel::add1pointToBlues}" />
 
             <LinearLayout
@@ -65,7 +65,7 @@
                 <TextView
                     android:id="@+id/setsForTeamOnLeft"
                     style="@style/set_score_style"
-                    android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.mapOfOranges.setsWon) : String.valueOf(viewmodel.mapOfOranges.setsWon)}" />
+                    android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.orangeTeam.setsWon) : String.valueOf(viewmodel.blueTeam.setsWon)}" />
 
                 <View
                     android:id="@+id/viewOrange"
@@ -91,7 +91,7 @@
                 <TextView
                     android:id="@+id/setsForTeamOnRight"
                     style="@style/set_score_style"
-                    android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.mapOfBlues.setsWon) : String.valueOf(viewmodel.mapOfOranges.setsWon)}" />
+                    android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.blueTeam.setsWon) : String.valueOf(viewmodel.orangeTeam.setsWon)}" />
 
                 <View
                     android:id="@+id/viewBlue"
@@ -105,7 +105,7 @@
             <Button
                 android:id="@+id/team_right_score"
                 style="@style/score_style"
-                android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.mapOfBlues.score) : String.valueOf(viewmodel.mapOfOranges.score)}"
+                android:text="@{!viewmodel.isSwitched ? String.valueOf(viewmodel.blueTeam.score) : String.valueOf(viewmodel.orangeTeam.score)}"
                 android:onClick="@{!viewmodel.isSwitched() ? viewmodel::add1pointToBlues : viewmodel::add1pointToOranges}" />
 
         </LinearLayout>
@@ -172,27 +172,27 @@
                 <TextView
                     android:id="@+id/s1_tA"
                     style="@style/cell_style"
-                    android:text="@{String.valueOf(viewmodel.setScoresOrange[0]), default = 0}" />
+                    android:text="@{String.valueOf(viewmodel.orangeTeam.listOfSetScores[0]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s2_tA"
                     style="@style/cell_style"
-                    android:text="@{String.valueOf(viewmodel.setScoresOrange[1]), default = 0}" />
+                    android:text="@{String.valueOf(viewmodel.orangeTeam.listOfSetScores[1]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s3_tA"
                     style="@style/cell_style"
-                    android:text="@{String.valueOf(viewmodel.setScoresOrange[2]), default = 0}" />
+                    android:text="@{String.valueOf(viewmodel.orangeTeam.listOfSetScores[2]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s4_tA"
                     style="@style/cell_style"
-                    android:text="@{String.valueOf(viewmodel.setScoresOrange[3]), default = 0}" />
+                    android:text="@{String.valueOf(viewmodel.orangeTeam.listOfSetScores[3]), default = 0}" />
 
                 <TextView
                     android:id="@+id/s5_tA"
                     style="@style/cell_style"
-                    android:text="@{String.valueOf(viewmodel.setScoresOrange[4]), default = 0}" />
+                    android:text="@{String.valueOf(viewmodel.orangeTeam.listOfSetScores[4]), default = 0}" />
             </TableRow>
 
             <View
@@ -213,27 +213,27 @@
                 <TextView
                     android:id="@+id/s1_tB"
                     style="@style/cell_style"
-                    android:text="@{String.valueOf(viewmodel.setScoresBlue[0]), default = 0}" />
+                    android:text="@{String.valueOf(viewmodel.blueTeam.listOfSetScores[0])}" />
 
                 <TextView
                     android:id="@+id/s2_tB"
                     style="@style/cell_style"
-                    android:text="@{String.valueOf(viewmodel.setScoresBlue[1]), default = 0}" />
+                    android:text="@{String.valueOf(viewmodel.blueTeam.listOfSetScores[1])}" />
 
                 <TextView
                     android:id="@+id/s3_tB"
                     style="@style/cell_style"
-                    android:text="@{String.valueOf(viewmodel.setScoresBlue[2]), default = 0}" />
+                    android:text="@{String.valueOf(viewmodel.blueTeam.listOfSetScores[2])}" />
 
                 <TextView
                     android:id="@+id/s4_tB"
                     style="@style/cell_style"
-                    android:text="@{String.valueOf(viewmodel.setScoresBlue[3]), default = 0}" />
+                    android:text="@{String.valueOf(viewmodel.blueTeam.listOfSetScores[3])}" />
 
                 <TextView
                     android:id="@+id/s5_tB"
                     style="@style/cell_style"
-                    android:text="@{String.valueOf(viewmodel.setScoresBlue[4]), default = 0}" />
+                    android:text="@{String.valueOf(viewmodel.blueTeam.listOfSetScores[4])}" />
             </TableRow>
 
             <View
